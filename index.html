@@ -845,132 +845,6 @@ d{dx}w(u(x))=w&#39;(u(x))u&#39;(x)\)</span></p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ysz.asia/2024/03/16/%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B-Poisson%E5%88%86%E5%B8%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_6179.JPG">
-      <meta itemprop="name" content="哲">
-      <meta itemprop="description" content="我很懒">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="哲の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/03/16/%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B-Poisson%E5%88%86%E5%B8%83/" class="post-title-link" itemprop="url">常用概率模型-Poisson分布</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-03-16 00:55:50" itemprop="dateCreated datePublished" datetime="2024-03-16T00:55:50+08:00">2024-03-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-03-23 12:05:57" itemprop="dateModified" datetime="2024-03-23T12:05:57+08:00">2024-03-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8D%AB%E7%94%9F%E7%BB%9F%E8%AE%A1%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">卫生统计学</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>895</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="引入">引入</h2>
-<p>让我们通过一个具体的问题来深入理解泊松分布：</p>
-<h3 id="问题0">问题0</h3>
-<p>假设你管理着一个小型的呼叫中心。经过长时间的记录，你发现该中心平均每小时接到10个电话。使用泊松分布，我们想计算在下一个小时内接到不同数量电话的概率。</p>
-<blockquote>
-<p>在解决问题0前，你需要意识到数学领域里的两个重要概念<a href="#fn1"
-class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<ol type="1">
-<li>数学家们将e定义为<span class="math inline">\(lim_{n \to
-\infty}({1+\frac 1
-n})^n\)</span>,就像是牛顿第一大定律，我称它为e的定义，为你无需证明它的由来，你可以认为，e是一个代表对于复利问题结果的无限正确的合理推测</li>
-<li>数学家们将<span class="math inline">\(e^x\)</span>定义为<span
-class="math inline">\(lim_{n \to \infty}({1+\frac x
-n})^n\)</span>，像是牛顿第二定律，我称它为<span
-class="math inline">\(e^x\)</span>的定义，你同样不需要证明它的由来，你同样可以认为,<span
-class="math inline">\(e^x\)</span>这个数学符号，代表了对于复利问题里，利率进化至x而不是1时，复利问题的结果的无限正确的合理推测</li>
-</ol>
-</blockquote>
-<p><a
-target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26263743">泊松分布的推导</a></p>
-<p>二项分布进化至Possion分布的关键步骤如下：</p>
-<p><span class="math inline">\(\begin{equation}\label{eq:stand}
-=\frac{n!}{(n-k)!\times
-k!}\times(\frac{\lambda}{n})^{k}(1-\frac{\lambda}{n})^{n-k}\end{equation}\)</span></p>
-<p><span class="math inline">\(\begin{equation}\label{eq:step 2}
-=\frac{n(n-1)(n-2)\ldots(n-k+1)}{n^k}\lambda^k\frac{1}{k!}(1-\frac{\lambda}{n})^{n-k}\end{equation}\)</span></p>
-<p><span class="math inline">\(\begin{equation}\label{eq:save}
-=\frac{n!}{(n-k)!\times
-k!}\times\left(\frac{\lambda}{n}\right)^{k}\left(1-\frac{\lambda}{n}\right)^{n-k}
-\end{equation}\)</span></p>
-<p>Possion分布是二项分布模型在n趋近于无穷时的衍生</p>
-<section id="footnotes" class="footnotes footnotes-end-of-document"
-role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1"><p>我是怎么发现的：<a href="/2024/03/16/%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B-Poisson%E5%88%86%E5%B8%83-%E7%A2%B0%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" title="常用概率模型-Poisson分布-碰到的问题">常用概率模型-Poisson分布-碰到的问题</a><a href="#fnref1"
-class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://ysz.asia/2024/03/16/%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B-Poisson%E5%88%86%E5%B8%83-%E7%A2%B0%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1061,6 +935,141 @@ class="math inline">\(n\)</span> 趋向于无穷大时的极限 <span
 class="math inline">\((1 + 1/n)^n\)</span>，并且它的值大约等于
 2.71828。<span class="math inline">\(e\)</span>
 在自然、工程、和数学的很多领域中都非常重要，尤其是在计算连续复利、解决微分方程以及在概率论中。这个数不仅是一个无理数，也是一个超越数，这意味着它不是任何有理数系数多项式的根。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ysz.asia/2024/03/16/%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B-Poisson%E5%88%86%E5%B8%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_6179.JPG">
+      <meta itemprop="name" content="哲">
+      <meta itemprop="description" content="我很懒">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="哲の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/03/16/%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B-Poisson%E5%88%86%E5%B8%83/" class="post-title-link" itemprop="url">常用概率模型-Poisson分布</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-03-16 00:55:50" itemprop="dateCreated datePublished" datetime="2024-03-16T00:55:50+08:00">2024-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-03-23 15:35:13" itemprop="dateModified" datetime="2024-03-23T15:35:13+08:00">2024-03-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%AB%E7%94%9F%E7%BB%9F%E8%AE%A1%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">卫生统计学</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="引入">引入</h2>
+<p>让我们通过一个具体的问题来深入理解泊松分布：</p>
+<h3 id="问题0">问题0</h3>
+<p>假设你管理着一个小型的呼叫中心。经过长时间的记录，你发现该中心平均每小时接到10个电话。使用泊松分布，我们想计算在下一个小时内接到不同数量电话的概率。</p>
+<blockquote>
+<p>在解决问题0前，你需要意识到数学领域里的两个重要概念）<a href="#fn1"
+class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<ol type="1">
+<li>数学家们将e定义为<span class="math inline">\(lim_{n \to
+\infty}({1+\frac 1
+n})^n\)</span>,就像是牛顿第一大定律，我称它为e的定义，为你无需证明它的由来，你可以认为，e是一个代表对于复利问题结果的无限正确的合理推测</li>
+<li>数学家们将<span class="math inline">\(e^x\)</span>定义为<span
+class="math inline">\(lim_{n \to \infty}({1+\frac x
+n})^n\)</span>，像是牛顿第二定律，我称它为<span
+class="math inline">\(e^x\)</span>的定义，你同样不需要证明它的由来，你同样可以认为,<span
+class="math inline">\(e^x\)</span>这个数学符号，代表了对于复利问题里，利率进化至x而不是1时，复利问题的结果的无限正确的合理推测</li>
+</ol>
+</blockquote>
+<p><a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26263743">泊松分布的推导</a></p>
+<p>二项分布进化至Possion分布的关键步骤如下：</p>
+<p><span class="math inline">\(\begin{equation}\label{eq:1}
+=\frac{n!}{(n-k)!\times
+k!}\times(\frac{\lambda}{n})^{k}(1-\frac{\lambda}{n})^{n-k}\end{equation}\)</span></p>
+<p><span class="math inline">\(\begin{equation}\label{eq:2}
+=\frac{n(n-1)(n-2)\ldots(n-k+1)}{n^k}\lambda^k\frac{1}{k!}(1-\frac{\lambda}{n})^{n-k}\end{equation}\)</span></p>
+<p><span class="math inline">\(\begin{equation}\label{eq:3}
+=1(1-\frac1n)(1-\frac2n)\ldots(1-\frac{k-1}n)\lambda^k\frac1{k!}\frac{(1-\frac\lambda
+n)^n}{(1-\frac\lambda n)^k}
+\end{equation}\)</span></p>
+<p><span class="math inline">\(\begin{equation}\label{4}
+1(1-\frac1n)(1-\frac2n).\ldots(1-\frac{k-1}n)\to1
+\end{equation}\)</span></p>
+<p>从公式推导中我们可知：</p>
+<ol type="1">
+<li>从公式<span
+class="math inline">\(\ref{4}\)</span>中得知，Possion分布是二项分布以事件数趋近于无穷为背景的一个二级定理，若背景失效，Possion分布的最终公式无法使用</li>
+<li></li>
+</ol>
+<p>Possion分布是二项分布模型在n趋近于无穷时的衍生</p>
+<section id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>我是怎么发现的：<a href="/2024/03/16/%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B-Poisson%E5%88%86%E5%B8%83-%E7%A2%B0%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" title="常用概率模型-Poisson分布-碰到的问题">常用概率模型-Poisson分布-碰到的问题</a><a href="#fnref1"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
       
     </div>
