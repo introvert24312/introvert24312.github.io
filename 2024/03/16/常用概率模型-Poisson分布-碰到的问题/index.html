@@ -269,12 +269,12 @@ class="math inline">\((1 + 1/n)^n\)</span>，并且它的值大约等于
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2024/03/16/%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B-Poisson%E5%88%86%E5%B8%83/" rel="prev" title="常用概率模型-Poisson分布">
-      <i class="fa fa-chevron-left"></i> 常用概率模型-Poisson分布
+    <a href="/2024/03/14/%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83-%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83/" rel="prev" title="常用概率分布-二项分布">
+      <i class="fa fa-chevron-left"></i> 常用概率分布-二项分布
     </a></div>
       <div class="post-nav-item">
-    <a href="/2024/03/16/%E6%9E%81%E9%99%90/" rel="next" title="微分学-极限">
-      微分学-极限 <i class="fa fa-chevron-right"></i>
+    <a href="/2024/03/16/%E5%B8%B8%E7%94%A8%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B-Poisson%E5%88%86%E5%B8%83/" rel="next" title="常用概率模型-Poisson分布">
+      常用概率模型-Poisson分布 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -473,6 +473,61 @@ if (document.querySelectorAll('pre.mermaid').length) {
 
 
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
