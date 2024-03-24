@@ -20,17 +20,23 @@
     var CONFIG = {"hostname":"ysz.asia","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="我很懒">
-<meta property="og:type" content="website">
-<meta property="og:title" content="哲の博客">
-<meta property="og:url" content="https://ysz.asia/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/index.html">
+  <meta name="description" content="引入 问题0 正态分布分布是什么？它是怎么来的？  正态分布是中心极限定理的发展 中心极限定理是什么？ 例1: 假设你有100万人身高的数据，你定义样本X，样本大小为50，命令1000人每人制作一个样本X，当你收取1000人的样本均数\(X_n\)时，定义变量为\(X_n\),绘制\(X_n\)的频数分布直方图，你会得到一个钟形曲线，也叫高斯曲线 进化 假设你从赌场获得了一批偏心骰子，这个骰子掷出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用概率分布-正态分布">
+<meta property="og:url" content="https://ysz.asia/2024/03/24/Normal%20Distribution/index.html">
 <meta property="og:site_name" content="哲の博客">
-<meta property="og:description" content="我很懒">
+<meta property="og:description" content="引入 问题0 正态分布分布是什么？它是怎么来的？  正态分布是中心极限定理的发展 中心极限定理是什么？ 例1: 假设你有100万人身高的数据，你定义样本X，样本大小为50，命令1000人每人制作一个样本X，当你收取1000人的样本均数\(X_n\)时，定义变量为\(X_n\),绘制\(X_n\)的频数分布直方图，你会得到一个钟形曲线，也叫高斯曲线 进化 假设你从赌场获得了一批偏心骰子，这个骰子掷出">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/introvert24312/image/master/example%202%20of%20normal%20distribution.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/introvert24312/image/master/example%201%20of%20normal%20distribution.png">
+<meta property="article:published_time" content="2024-03-24T10:46:27.000Z">
+<meta property="article:modified_time" content="2024-03-24T15:43:18.889Z">
 <meta property="article:author" content="YSZ">
+<meta property="article:tag" content="统计学">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/introvert24312/image/master/example%202%20of%20normal%20distribution.png">
 
-<link rel="canonical" href="https://ysz.asia/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/">
+<link rel="canonical" href="https://ysz.asia/2024/03/24/Normal%20Distribution/">
 
 
 <script id="page-configurations">
@@ -38,12 +44,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>标签: 高等数学 | 哲の博客</title>
+  <title>常用概率分布-正态分布 | 哲の博客</title>
   
 
 
@@ -150,51 +156,127 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">高等数学
-          <small>标签</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ysz.asia/2024/03/24/Normal%20Distribution/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_6179.JPG">
+      <meta itemprop="name" content="YSZ">
+      <meta itemprop="description" content="我很懒">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="哲の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          常用概率分布-正态分布
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-03-24 18:46:27 / 修改时间：23:43:18" itemprop="dateCreated datePublished" datetime="2024-03-24T18:46:27+08:00">2024-03-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%AB%E7%94%9F%E7%BB%9F%E8%AE%A1%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">卫生统计学</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>442</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2024</span>
+        <h2 id="引入">引入</h2>
+<h3 id="问题0">问题0</h3>
+<p>正态分布分布是什么？它是怎么来的？</p>
+<hr />
+<p>正态分布是中心极限定理的发展</p>
+<p>中心极限定理是什么？</p>
+<p>例1:</p>
+<p>假设你有100万人身高的数据，你定义样本X，样本大小为50，命令1000人每人制作一个样本X，当你收取1000人的样本均数<span
+class="math inline">\(X_n\)</span>时，定义变量为<span
+class="math inline">\(X_n\)</span>,绘制<span
+class="math inline">\(X_n\)</span>的频数分布直方图，你会得到一个钟形曲线，也叫高斯曲线</p>
+<p>进化</p>
+<p>假设你从赌场获得了一批偏心骰子，这个骰子掷出1的概率为50%，掷出2、3、4、5、6的概率都为10%，投掷10次为1组，记录下每次的结果，你命令1000人每人产生一组结果同时计算骰子10次投掷结果的算数均数，把这个算数均数为<span
+class="math inline">\(C_n\)</span>,定义变量<span
+class="math inline">\(C_n\)</span>,绘制变量<span
+class="math inline">\(C_n\)</span>的频率分布直方图</p>
+<p><img src="https://raw.githubusercontent.com/introvert24312/image/master/example%202%20of%20normal%20distribution.png" alt="example 2 of normal distribution" style="zoom: 25%;" /></p>
+<p><img src="https://raw.githubusercontent.com/introvert24312/image/master/example%201%20of%20normal%20distribution.png" alt="example 1 of normal distribution" style="zoom:25%;" /></p>
+<h3
+id="目前我的能力限制我无法理解公式的来源先记住它">目前我的能力限制我无法理解公式的来源，先记住它：</h3>
+<p>完成上述步骤后，高斯得到了正态分布的密度函数的标准形式：</p>
+<p>$ f(x) = e^{-} $</p>
+<p>在这里，<span class="math inline">\(\mu\)</span>
+是误差的平均值，<span class="math inline">\(\sigma^2\)</span>
+是方差，它们分别代表了测量误差的中心位置和分布的宽度。</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-03-16T18:30:29+08:00"
-              content="2024-03-16">
-          03-16
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" rel="tag"># 统计学</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/03/16/Limit/" itemprop="url">
-            <span itemprop="name">微分学-极限</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/03/24/Mind%20map%20of%20health%20statistics/" rel="prev" title="卫生统计学思维导图">
+      <i class="fa fa-chevron-left"></i> 卫生统计学思维导图
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
   </article>
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
@@ -247,6 +329,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%85%A5"><span class="nav-number">1.</span> <span class="nav-text">引入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%980"><span class="nav-number">1.1.</span> <span class="nav-text">问题0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E5%89%8D%E6%88%91%E7%9A%84%E8%83%BD%E5%8A%9B%E9%99%90%E5%88%B6%E6%88%91%E6%97%A0%E6%B3%95%E7%90%86%E8%A7%A3%E5%85%AC%E5%BC%8F%E7%9A%84%E6%9D%A5%E6%BA%90%E5%85%88%E8%AE%B0%E4%BD%8F%E5%AE%83"><span class="nav-number">1.2.</span> <span class="nav-text">目前我的能力限制我无法理解公式的来源，先记住它：</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -391,6 +474,59 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
