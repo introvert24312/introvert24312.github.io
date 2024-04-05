@@ -296,7 +296,7 @@ click 2a "https://ysz.asia/2024/04/05/t%20testing/"</pre>
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-04-05 11:11:42 / 修改时间：21:35:55" itemprop="dateCreated datePublished" datetime="2024-04-05T11:11:42+08:00">2024-04-05</time>
+              <time title="创建时间：2024-04-05 11:11:42 / 修改时间：22:31:05" itemprop="dateCreated datePublished" datetime="2024-04-05T11:11:42+08:00">2024-04-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -314,14 +314,14 @@ click 2a "https://ysz.asia/2024/04/05/t%20testing/"</pre>
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>7.1k</span>
+              <span>7.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>35 分钟</span>
+              <span>39 分钟</span>
             </span>
 
         </div>
@@ -338,7 +338,7 @@ click 2a "https://ysz.asia/2024/04/05/t%20testing/"</pre>
 <p>假设样本abc的方差为</p>
 <p>1、10、100000000，那么</p>
 <p>最终指示f分布的统计量F灵敏度大大降低</p>
-<pre class="mermaid">graph TD
+<pre class="mermaid">graph TB
         原始数据-->|方差齐性检验（Lenove'testing）|00
                 原始数据-->|方差齐性检验（Bartlett-正态性要求高）|00
         00[(样本方差齐<br>数据间独立<br>最好正态)]:::highlight
@@ -357,10 +357,24 @@ click 2a "https://ysz.asia/2024/04/05/t%20testing/"</pre>
     end
     
     
-    111[模型准备运行]
+    111[模型运行]-->|在进行ANOVA并发现至少有一种肥料的效果显著不同于其他肥料后，你会想进一步检查模型的假设是否满足|残差图验证
+    
     
   
      classDef highlight fill:#ffff00,stroke:#333,stroke-width:2px;</pre>
+<pre class="mermaid">flowchart TB
+    111[模型运行] -->|在进行ANOVA并发现至少有一种肥料的效果显著不同于其他肥料后，你会想进一步检查模型的假设是否满足| 残差图验证
+    残差图验证 -->|检查残差分布| 方差齐性检验{方差齐性检验}
+    方差齐性检验 --> |假设不成立| 数据变换[进行数据变换]
+    方差齐性检验 --> |假设成立| 模型假设检验通过[模型假设检验通过]
+    数据变换 --> 变换后的ANOVA[对变换后的数据进行ANOVA]
+    变换后的ANOVA -->|再次检查假设| 残差图验证2[残差图验证]
+    残差图验证2 -->|检查残差分布| 方差齐性检验2{方差齐性再次检验}
+    方差齐性检验2 -->|假设不成立| 考虑非参数方法[考虑使用非参数方法或其他方案]
+    方差齐性检验2 -->|假设成立| 最终模型确认[最终模型确认]
+
+    classDef process fill:#f9f,stroke:#333,stroke-width:2px;
+    class 模型运行,残差图验证,方差齐性检验,数据变换,变换后的ANOVA,残差图验证2,方差齐性检验2,考虑非参数方法,最终模型确认 process;</pre>
 <pre class="mermaid">  graph TD
   0[(单因素方差分析模型的基本流程)]:::machine
   0-->1
@@ -690,6 +704,22 @@ id="步骤4比较q统计量与临界值没有q分布只有q表">步骤4：比较
 <h3 id="结论-1">结论</h3>
 <p>根据Dunnett法的结果，你得出结论，与未处理的控制组相比，杀虫剂A和C能显著提高作物的产量，而杀虫剂B的效果并不显著。</p>
 <p>通过这个例子，我们可以看到Dunnett法如何帮助科学家在控制整体第一类错误率的同时，准确地识别出哪些处理与控制组存在显著差异。</p>
+<h1 id="残差图">残差图</h1>
+<p>检查模型假设</p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/introvert24312/image/master/残差图.png"
+alt="残差图" />
+<figcaption aria-hidden="true">残差图</figcaption>
+</figure>
+<p>这里展示的是另一些残差图，同样地，您可以看到异方差性和方差齐性之间的区别：</p>
+<ul>
+<li><strong>异方差性图（Heteroscedasticity - Example
+2）</strong>：残差的分散度随自变量的增大而增大，表明残差的方差也随之增大。</li>
+<li><strong>方差齐性图（Homoscedasticity - Example
+2）</strong>：残差的分布相对均匀，与自变量的变化无明显相关性，显示出残差的方差保持相对恒定。</li>
+</ul>
+<p>通过不同的数据生成和回归分析，这些图像进一步说明了在回归分析中判断残差的异方差性与方差齐性的重要性。</p>
 <link rel="stylesheet" href="/css/folder.css" type="text/css"><script src="/js/folder.js" type="text/javascript" async></script>
       
     </div>
