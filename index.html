@@ -296,7 +296,7 @@ click 2a "https://ysz.asia/2024/04/05/t%20testing/"</pre>
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-04-05 11:11:42 / 修改时间：17:50:58" itemprop="dateCreated datePublished" datetime="2024-04-05T11:11:42+08:00">2024-04-05</time>
+              <time title="创建时间：2024-04-05 11:11:42 / 修改时间：20:47:59" itemprop="dateCreated datePublished" datetime="2024-04-05T11:11:42+08:00">2024-04-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -314,14 +314,14 @@ click 2a "https://ysz.asia/2024/04/05/t%20testing/"</pre>
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.3k</span>
+              <span>4.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>12 分钟</span>
+              <span>21 分钟</span>
             </span>
 
         </div>
@@ -333,14 +333,39 @@ click 2a "https://ysz.asia/2024/04/05/t%20testing/"</pre>
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>我明白了，方差分析之所以要求群体之间方差齐性是因为方差分析所使用的统计量决定的，</p>
+          <pre class="mermaid"> graph TD</pre>
+<p>我明白了，方差分析之所以要求群体之间方差齐性是因为方差分析所使用的统计量决定的，</p>
 <p>假设样本abc的方差为</p>
 <p>1、10、100000000，那么</p>
 <p>最终指示f分布的统计量F灵敏度大大降低</p>
 <pre class="mermaid">graph TD
+        原始数据-->|方差齐性检验（Lenove'testing）|00
+                原始数据-->|方差齐性检验（Bartlett-正态性要求高）|00
+        00[(样本方差齐<br>数据间独立<br>最好正态)]:::highlight
+        00-->0
     0[开始ANOVA方差分析]
- 
-    0 --> 1[计算每组的平均值]
+    
+    0-->02
+    subgraph 模型选择
+    
+  02[ANOVA模型选择] --> 02.1[单因素ANOVA]-->111
+    02 --> 02.02[多因素ANOVA]-->111
+    02 --> 02.3[重复测量ANOVA]-->111
+    02 --> 02.4[协方差分析ANCOVA]-->111
+    
+    
+    end
+    
+    
+    111[模型准备运行]-->1
+    
+  
+     classDef highlight fill:#ffff00,stroke:#333,stroke-width:2px;</pre>
+<pre class="mermaid">  graph TD
+  0[(单因素方差分析模型的基本流程)]:::machine
+  0-->1
+  1[计算每组的平均值]
+    
     1 --> 2[计算总体平均值]
     2 --> 3[对每个组计算平均值与总体平均值之差]
    subgraph 组间
@@ -362,7 +387,8 @@ click 2a "https://ysz.asia/2024/04/05/t%20testing/"</pre>
     14 --> 16[评估MSW反映的组内一致性]
     15 --> 17[根据 F=MSB/MSW 判断处理效应]
     16 --> 17
-    17-->18[根据F分布做出判断]</pre>
+    17-->18[根据F分布做出判断]
+        classDef machine fill:#1E90FF,stroke:#333,stroke-width:2px;</pre>
 <h2 id="原始数据">原始数据</h2>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">组A（低剂量）: [<span class="number">8</span>, <span class="number">9</span>, <span class="number">7</span>, <span class="number">10</span>, <span class="number">9</span>]</span><br><span class="line">组B（中剂量）: [<span class="number">12</span>, <span class="number">11</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">12</span>]</span><br><span class="line">组C（高剂量）: [<span class="number">15</span>, <span class="number">14</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">15</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>当然，让我们一步步完整地重新展现这个ANOVA计算的正确过程，包括原始数据、计算组间（MSB）和组内（MSW）方差，以及最终的F值。</p>
@@ -470,6 +496,60 @@ F = \frac{MSB}{MSW} = \frac{58.16}{9.11} = 6.38
 <p>在这个有趣例子中，组间差异和组内差异都是零</p>
 <p><img src="https://raw.githubusercontent.com/introvert24312/image/master/有趣的例子2.png" alt="有趣的例子2" style="zoom:50%;" /></p>
 <p>这个例子中，组间差距依旧为零，而组内差距较大（球不一样）</p>
+<p>因变量（Dependent Variable, DV）</p>
+<p>自变量（Independent Variable, IV）</p>
+<p>因变量（Dependent Variable,
+DV）是在实验或观察研究中你试图测试或测量的变量。它是对研究中的自变量（Independent
+Variable,
+IV）响应或变化的结果。简而言之，因变量是“依赖”的变量，其值取决于一个或多个其他变量（即自变量）的变化。</p>
+<p><code>什么是结果显著？</code></p>
+<p>若统计量落在统计量对应的分布的小区间里？小概率事件于是结果显著</p>
+<div class='fold collapsed'>
+    <div class='fold-title'>
+        显著的故事
+    </div>
+    <div class='fold-content'>
+        <p>这个问题触及了统计术语的历史和传统。在统计学中，“显著”（significant）一词用来描述一个结果是在统计学意义上不太可能是偶然发生的。这个术语起源于20世纪初，当时的统计学家，包括罗纳德·费舍尔（Ronald
+Fisher），开始发展假设检验理论。费舍尔是在1925年首次引入“显著性”这个概念，特别是在他的著作《统计学方法和科学推理》中。</p>
+<h3 id="为什么叫它显著">为什么叫它“显著”？</h3>
+<ul>
+<li><p><strong>历史传统</strong>：在早期统计学的文献中，当观察到的数据在统计上强烈指示某个事件不太可能仅由随机变异导致时，这种情况被称为“显著的”（significant）。这意味着数据显示出了一种模式或效应，这种模式或效应在统计上是“显著的”，即它超出了随机波动所能解释的范围。</p></li>
+<li><p><strong>强调发现</strong>：“显著性”一词的使用强调了发现的非随机性或意义。当一个结果被称为“统计学上显著”的时候，这意味着结果不太可能仅仅由偶然因素造成，因此，这个词强调了结果背后可能存在的实际影响或效应。</p></li>
+</ul>
+<h3 id="为什么不叫它不显著">为什么不叫它“不显著”？</h3>
+<ul>
+<li><strong>逻辑和语境</strong>：“不显著”（not
+significant）这个术语实际上也被广泛使用，但它用于指代那些统计检验未能拒绝零假设的情况，即观测结果可能与随机变异相符合，没有足够的证据表明存在显著的效应或差异。在这种情况下，使用“不显著”是为了表明数据没有显示出足以超越随机波动的模式或效应。</li>
+</ul>
+<h3 id="结论">结论</h3>
+<p>因此，“显著”和“不显著”这两个术语在统计学中共同存在，分别用来描述结果是否足够强烈以至于不太可能仅仅由随机因素导致。这些术语的选择反映了统计学的传统，以及对于结果意义的解释：一个“显著”的发现指向了超越随机性的模式或效应，而“不显著”的结果则没有足够的证据支持这样的结论。</p>
+
+    </div>
+</div>
+<pre class="mermaid">flowchart TB
+    A[开始] --> B{方差分析\nANOVA/MANOVA}
+    B --> C{检验显著性}
+    C -->|否| D[分析结束]
+    C -->|是| E[事后检验]
+    E -->|SNK| F[Student-Newman-Keuls]
+    E -->|Dunnett| G[Dunnett's Test]
+    E -->|Bonferroni| H[Bonferroni Correction]
+    B --> I{检验交互作用}
+    I -->|是| J[进一步探究\n交互作用]
+    I -->|否| E
+    F --> K[效应量计算]
+    G --> K
+    H --> K
+    J -->|进入事后检验| E
+    K --> L[假设检验之后的分析\n如线性回归、ANCOVA等]
+    L --> M[分析结束]
+
+    classDef startend fill:#f9f,stroke:#333,stroke-width:4px;
+    classDef process fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef decision fill:#fbf,stroke:#f66,stroke-width:2px;
+    class A,B,M startend;
+    class C,I decision;
+    class E,F,G,H,J,K,L process;</pre>
 <link rel="stylesheet" href="/css/folder.css" type="text/css"><script src="/js/folder.js" type="text/javascript" async></script>
       
     </div>
