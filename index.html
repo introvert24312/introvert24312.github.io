@@ -296,7 +296,7 @@ click 2a "https://ysz.asia/2024/04/05/t%20testing/"</pre>
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-04-05 11:11:42 / 修改时间：20:47:59" itemprop="dateCreated datePublished" datetime="2024-04-05T11:11:42+08:00">2024-04-05</time>
+              <time title="创建时间：2024-04-05 11:11:42 / 修改时间：21:34:10" itemprop="dateCreated datePublished" datetime="2024-04-05T11:11:42+08:00">2024-04-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -314,14 +314,14 @@ click 2a "https://ysz.asia/2024/04/05/t%20testing/"</pre>
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.2k</span>
+              <span>7.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>21 分钟</span>
+              <span>35 分钟</span>
             </span>
 
         </div>
@@ -389,7 +389,8 @@ click 2a "https://ysz.asia/2024/04/05/t%20testing/"</pre>
     16 --> 17
     17-->18[根据F分布做出判断]
         classDef machine fill:#1E90FF,stroke:#333,stroke-width:2px;</pre>
-<h2 id="原始数据">原始数据</h2>
+<h1 id="单因素方差分析">单因素方差分析</h1>
+<h3 id="原始数据">原始数据</h3>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">组A（低剂量）: [<span class="number">8</span>, <span class="number">9</span>, <span class="number">7</span>, <span class="number">10</span>, <span class="number">9</span>]</span><br><span class="line">组B（中剂量）: [<span class="number">12</span>, <span class="number">11</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">12</span>]</span><br><span class="line">组C（高剂量）: [<span class="number">15</span>, <span class="number">14</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">15</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>当然，让我们一步步完整地重新展现这个ANOVA计算的正确过程，包括原始数据、计算组间（MSB）和组内（MSW）方差，以及最终的F值。</p>
 <h3
@@ -502,7 +503,7 @@ F = \frac{MSB}{MSW} = \frac{58.16}{9.11} = 6.38
 DV）是在实验或观察研究中你试图测试或测量的变量。它是对研究中的自变量（Independent
 Variable,
 IV）响应或变化的结果。简而言之，因变量是“依赖”的变量，其值取决于一个或多个其他变量（即自变量）的变化。</p>
-<p><code>什么是结果显著？</code></p>
+<h4 id="什么是结果显著"><code>什么是结果显著？</code></h4>
 <p>若统计量落在统计量对应的分布的小区间里？小概率事件于是结果显著</p>
 <div class='fold collapsed'>
     <div class='fold-title'>
@@ -511,17 +512,17 @@ IV）响应或变化的结果。简而言之，因变量是“依赖”的变量
     <div class='fold-content'>
         <p>这个问题触及了统计术语的历史和传统。在统计学中，“显著”（significant）一词用来描述一个结果是在统计学意义上不太可能是偶然发生的。这个术语起源于20世纪初，当时的统计学家，包括罗纳德·费舍尔（Ronald
 Fisher），开始发展假设检验理论。费舍尔是在1925年首次引入“显著性”这个概念，特别是在他的著作《统计学方法和科学推理》中。</p>
-<h3 id="为什么叫它显著">为什么叫它“显著”？</h3>
+<h4 id="为什么叫它显著">为什么叫它“显著”？</h4>
 <ul>
 <li><p><strong>历史传统</strong>：在早期统计学的文献中，当观察到的数据在统计上强烈指示某个事件不太可能仅由随机变异导致时，这种情况被称为“显著的”（significant）。这意味着数据显示出了一种模式或效应，这种模式或效应在统计上是“显著的”，即它超出了随机波动所能解释的范围。</p></li>
 <li><p><strong>强调发现</strong>：“显著性”一词的使用强调了发现的非随机性或意义。当一个结果被称为“统计学上显著”的时候，这意味着结果不太可能仅仅由偶然因素造成，因此，这个词强调了结果背后可能存在的实际影响或效应。</p></li>
 </ul>
-<h3 id="为什么不叫它不显著">为什么不叫它“不显著”？</h3>
+<h4 id="为什么不叫它不显著">为什么不叫它“不显著”？</h4>
 <ul>
 <li><strong>逻辑和语境</strong>：“不显著”（not
 significant）这个术语实际上也被广泛使用，但它用于指代那些统计检验未能拒绝零假设的情况，即观测结果可能与随机变异相符合，没有足够的证据表明存在显著的效应或差异。在这种情况下，使用“不显著”是为了表明数据没有显示出足以超越随机波动的模式或效应。</li>
 </ul>
-<h3 id="结论">结论</h3>
+<h4 id="结论">结论</h4>
 <p>因此，“显著”和“不显著”这两个术语在统计学中共同存在，分别用来描述结果是否足够强烈以至于不太可能仅仅由随机因素导致。这些术语的选择反映了统计学的传统，以及对于结果意义的解释：一个“显著”的发现指向了超越随机性的模式或效应，而“不显著”的结果则没有足够的证据支持这样的结论。</p>
 
     </div>
@@ -550,6 +551,145 @@ significant）这个术语实际上也被广泛使用，但它用于指代那些
     class A,B,M startend;
     class C,I decision;
     class E,F,G,H,J,K,L process;</pre>
+<pre class="mermaid">flowchart TB
+    A[开始] --> B{进行ANOVA测试}
+    B --> C{ANOVA结果显著?}
+    C -->|否| D[无需进一步比较]
+    C -->|是| E[选择多重比较方法]
+    E --> F{比较的目的}
+    F --> G[比较多个实验组与一个控制组]
+    F --> H[比较特定几个组]
+    F --> I[全面比较所有组间差异]
+    G --> J[Dunnett法]
+    H --> K[Bonferroni校正]
+    I --> L[SNK方法]
+    J --> M[执行Dunnett比较]
+    K --> N[执行Bonferroni校正的两两比较]
+    L --> O[执行SNK步骤比较]
+    M --> P[得到比较结果]
+    N --> P
+    O --> P</pre>
+<h1 id="q检验-student-newman-keuls">q检验（ Student Newman Keuls）</h1>
+<p>Q检验（也称为SNK法，即Student-Newman-Keuls方法）是一种后续多重比较测试，用于在方差分析（ANOVA）发现显著差异后，识别哪些具体的组间平均值存在显著差异。这种方法旨在平衡统计检验的灵敏度和整体错误率（特别是第一类错误，即假阳性率）之间的关系。以下是Q检验的基本思路和步骤：</p>
+<h3 id="步骤1进行anova">步骤1：进行ANOVA</h3>
+<ul>
+<li>首先，进行一方ANOVA来确定是否至少有一个组的平均值与其他组不同。如果ANOVA的结果不显著，那么没有必要进一步进行多重比较。</li>
+<li>如果ANOVA显示至少有一个组不同，那么可以使用Q检验来确定哪些组之间存在显著差异。</li>
+</ul>
+<h3 id="步骤2排列均值">步骤2：排列均值</h3>
+<ul>
+<li>将所有组的平均值按升序或降序排列。</li>
+</ul>
+<h3 id="步骤3计算q统计量">步骤3：计算Q统计量</h3>
+<ul>
+<li><p>对于任意两个组的平均值，计算它们之间的Q统计量。Q统计量的计算公式为：</p>
+<p>$ Q = $</p>
+<p>其中，<span class="math inline">\(\bar{X}_1\)</span>和<span
+class="math inline">\(\bar{X}_2\)</span>是两个比较组的平均值，SE是标准误差，通常基于组内方差和各组样本量来计算。</p></li>
+</ul>
+<h3
+id="步骤4比较q统计量与临界值没有q分布只有q表">步骤4：比较Q统计量与临界值（没有Q分布，只有Q表）</h3>
+<ul>
+<li>使用特定的α水平（如0.05）和相关的自由度，查找或计算Q检验的临界值。这个临界值通常通过查阅SNK的临界值表来获取。</li>
+<li>如果计算出的Q统计量大于临界值，那么我们可以拒绝零假设，认为两组平均值之间存在显著差异。</li>
+</ul>
+<h3 id="步骤5进行所有必要的比较">步骤5：进行所有必要的比较</h3>
+<ul>
+<li>对所有可能的组合进行比较。这包括不仅是相邻的组，也包括不相邻的组。理论上，每一对组合都应该进行比较，但实际上，人们通常首先关注相邻组的比较，因为这些比较更可能显示出显著差异。</li>
+</ul>
+<h3 id="步骤6控制错误率">步骤6：控制错误率</h3>
+<ul>
+<li>通过上述步骤，Q检验考虑到了多重比较问题，并试图控制整体第一类错误率。尽管如此，进行大量比较时仍需谨慎，因为这可能增加发现至少一个假阳性差异的机会。</li>
+</ul>
+<h3 id="小结">小结</h3>
+<p>Q检验的优点是它可以同时考虑多个比较，而不是单独考虑每个比较，从而减少了整体的第一类错误率。然而，由于它是一种后续测试，必须首先执行ANOVA并发现显著差异。此外，Q检验比一些其他多重比较方法（如Tukey的HSD测试）更不保守，可能在某些情况下导致更高的第一类错误率。因此，选择哪种后续测试方法取决于研究的具体需求、对错误的容忍程度以及样本大小等因素。</p>
+<h1 id="bonferroni校正">Bonferroni校正</h1>
+<p><code>非常保守，甚至过保守，有效控制I类错误（假阳性）</code></p>
+<p>进行Bonferroni校正后的两两比较主要涉及计算每一对组合的统计显著性，并将得到的p值与校正后的显著性水平进行比较。以下是具体步骤：</p>
+<h3 id="步骤1-确定校正后的显著性水平">步骤1: 确定校正后的显著性水平</h3>
+<p>首先，确定校正后的显著性水平。如果原始的显著性水平是α，并且你打算进行n次比较，那么校正后的显著性水平为：</p>
+<p><span class="math display">\[
+\text{校正后的}\ \alpha = \frac{\alpha}{n}
+\]</span></p>
+<h3 id="步骤2-进行比较">步骤2: 进行比较</h3>
+<p>对于每一对你想要比较的组合：</p>
+<ul>
+<li>计算这两组数据的统计显著性，通常通过进行独立样本t检验或其他适当的比较方法，取决于数据的性质和分布。</li>
+<li>得到每次比较的p值。</li>
+</ul>
+<h3 id="步骤3-比较p值和校正后的显著性水平">步骤3:
+比较p值和校正后的显著性水平</h3>
+<p>对于每次比较：</p>
+<ul>
+<li>如果p值小于或等于校正后的显著性水平，则认为这两组之间有统计学上的显著差异。</li>
+<li>如果p值大于校正后的显著性水平，则认为这两组之间没有统计学上的显著差异。</li>
+</ul>
+<h3 id="例子">例子</h3>
+<p>假设你有4组数据（A、B、C、D），你的原始显著性水平是0.05，并计划进行6次比较。因此，校正后的显著性水平为0.05/6
+≈ 0.0083。</p>
+<p>假设你已经进行了以下两两比较，并得到了相应的p值：</p>
+<ul>
+<li>A vs. B: p = 0.02</li>
+<li>A vs. C: p = 0.005</li>
+<li>A vs. D: p = 0.01</li>
+<li>B vs. C: p = 0.03</li>
+<li>B vs. D: p = 0.07</li>
+<li>C vs. D: p = 0.001</li>
+</ul>
+<p>将每个p值与校正后的显著性水平0.0083进行比较：</p>
+<ul>
+<li>A vs. B的p值（0.02）&gt; 0.0083，因此A和B之间没有显著差异。</li>
+<li>A vs. C的p值（0.005）&lt; 0.0083，因此A和C之间有显著差异。</li>
+<li>A vs. D的p值（0.01）&gt; 0.0083，因此A和D之间没有显著差异。</li>
+<li>B vs. C的p值（0.03）&gt; 0.0083，因此B和C之间没有显著差异。</li>
+<li>B vs. D的p值（0.07）&gt; 0.0083，因此B和D之间没有显著差异。</li>
+<li>C vs. D的p值（0.001）&lt; 0.0083，因此C和D之间有显著差异。</li>
+</ul>
+<h3 id="结论">结论</h3>
+<p>通过这个过程，你可以准确地识别出哪些组之间存在统计学上的显著差异。Bonferroni校正提供了一种简单有效的方式来控制多重比较的整体第一类错误率，尽管它可能比较保守。</p>
+<h1 id="dunnett法">Dunnett法</h1>
+<p>让我们通过一个具体的例子来解释Dunnett法的应用。</p>
+<h3 id="研究背景">研究背景</h3>
+<p>假设你是一位农业科学家，正在研究三种新的杀虫剂（分别称为A、B、C）对作物产量的影响，并将它们与未处理的控制组（D）进行比较。目标是找出哪些杀虫剂能显著提高产量。</p>
+<h3 id="实验设计">实验设计</h3>
+<ul>
+<li><strong>控制组（D）</strong>：未使用杀虫剂的作物。</li>
+<li><strong>实验组</strong>：
+<ul>
+<li><strong>A组</strong>：使用杀虫剂A的作物。</li>
+<li><strong>B组</strong>：使用杀虫剂B的作物。</li>
+<li><strong>C组</strong>：使用杀虫剂C的作物。</li>
+</ul></li>
+<li>每个组包含30株作物，实验持续一个生长季。</li>
+</ul>
+<h3 id="步骤1-进行anova">步骤1: 进行ANOVA</h3>
+<p>实验结束后，你测量了每株作物的产量，并进行了方差分析（ANOVA），结果表明至少有一个处理组的平均产量与控制组存在显著差异。</p>
+<h3 id="步骤2-使用dunnett法进行比较">步骤2: 使用Dunnett法进行比较</h3>
+<p>现在，你需要使用Dunnett法来确定是哪些具体的杀虫剂处理组（A、B、C）与控制组（D）之间的产量差异达到了统计学上的显著性。</p>
+<h3 id="计算和比较">计算和比较</h3>
+<ul>
+<li>你计算了每个实验组与控制组之间的平均产量差异。</li>
+<li>然后，使用Dunnett法计算的临界值来判断这些差异是否统计显著。这里，我们假设已经通过查表得到了适当的临界值。</li>
+</ul>
+<h3 id="假设结果如下">假设结果如下</h3>
+<ul>
+<li><strong>A组与D组</strong>的平均产量差异的p值为0.02。</li>
+<li><strong>B组与D组</strong>的平均产量差异的p值为0.15。</li>
+<li><strong>C组与D组</strong>的平均产量差异的p值为0.005。</li>
+<li>假设根据样本大小和比较次数，通过Dunnett校正后的显著性水平为0.017。</li>
+</ul>
+<h3 id="结果解读">结果解读</h3>
+<ul>
+<li><strong>A组与D组</strong>：p值0.02 &lt;
+0.017，因此A处理显著增加了产量。</li>
+<li><strong>B组与D组</strong>：p值0.15 &gt;
+0.017，因此B处理没有显著增加产量。</li>
+<li><strong>C组与D组</strong>：p值0.005 &lt;
+0.017，因此C处理显著增加了产量。</li>
+</ul>
+<h3 id="结论-1">结论</h3>
+<p>根据Dunnett法的结果，你得出结论，与未处理的控制组相比，杀虫剂A和C能显著提高作物的产量，而杀虫剂B的效果并不显著。</p>
+<p>通过这个例子，我们可以看到Dunnett法如何帮助科学家在控制整体第一类错误率的同时，准确地识别出哪些处理与控制组存在显著差异。</p>
 <link rel="stylesheet" href="/css/folder.css" type="text/css"><script src="/js/folder.js" type="text/javascript" async></script>
       
     </div>
