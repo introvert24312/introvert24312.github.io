@@ -187,7 +187,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-05 14:35:43" itemprop="dateModified" datetime="2024-04-05T14:35:43+08:00">2024-04-05</time>
+                <time title="修改时间：2024-04-06 10:18:19" itemprop="dateModified" datetime="2024-04-06T10:18:19+08:00">2024-04-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -205,14 +205,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>784</span>
+              <span>1.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
+              <span>6 分钟</span>
             </span>
 
         </div>
@@ -247,11 +247,111 @@ subgraph 统计推断
 1-->1b[区间估计]
 2[假设检验]-->|比较2小样本间的平均数|2a[t检验]
 2[假设检验]-->|若比较3者以上平均数|2b[ANOVA]
+2-->|比较分类数据间的关系|卡方检验
 end
 click 1a "https://ysz.asia/2024/10/10/interval%20estimation/"
 click 1b "https://ysz.asia/2024/10/10/interval%20estimation/"
 click 2 "https://ysz.asia/2024/04/04/hypothesis%20testing/"
 click 2a "https://ysz.asia/2024/04/05/t%20testing/"</pre>
+<pre class="mermaid">gantt
+    title 统计方法发展历程
+    dateFormat YYYY-MM-DD
+    section 卡方检验
+    卡方检验: 1900-01-01, 1900-12-31
+    section t检验
+    t检验: 1908-01-01, 1908-12-31
+    section 方差分析
+    方差分析: 1920-01-01, 1925-12-31
+   
+    section 贝叶斯方法的广泛发展和应用<br>（1763年提出）
+    广泛发展开始: 1950-01-01, 1950-12-31
+    持续发展至今: 1951-01-01, 2024-12-31
+    
+    section 随机森林算法
+    算法提出与发展: 2001-01-01, 2001-12-31
+    持续发展与应用: 2002-01-01, 2024-12-31</pre>
+<link rel="stylesheet" href="/css/folder.css" type="text/css"><script src="/js/folder.js" type="text/javascript" async></script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ysz.asia/2024/04/06/chi%20square%20test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_6179.JPG">
+      <meta itemprop="name" content="YSZ">
+      <meta itemprop="description" content="我很懒">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="哲の博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/04/06/chi%20square%20test/" class="post-title-link" itemprop="url">卡方检验</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-04-06 10:20:11 / 修改时间：10:28:32" itemprop="dateCreated datePublished" datetime="2024-04-06T10:20:11+08:00">2024-04-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%AB%E7%94%9F%E7%BB%9F%E8%AE%A1%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">卫生统计学</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
 <link rel="stylesheet" href="/css/folder.css" type="text/css"><script src="/js/folder.js" type="text/javascript" async></script>
       
     </div>
@@ -294,10 +394,16 @@ click 2a "https://ysz.asia/2024/04/05/t%20testing/"</pre>
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-04-05 11:11:42 / 修改时间：22:31:05" itemprop="dateCreated datePublished" datetime="2024-04-05T11:11:42+08:00">2024-04-05</time>
+              <time title="创建时间：2024-04-05 11:11:42" itemprop="dateCreated datePublished" datetime="2024-04-05T11:11:42+08:00">2024-04-05</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-06 10:42:34" itemprop="dateModified" datetime="2024-04-06T10:42:34+08:00">2024-04-06</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -321,7 +427,7 @@ click 2a "https://ysz.asia/2024/04/05/t%20testing/"</pre>
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>39 分钟</span>
+              <span>40 分钟</span>
             </span>
 
         </div>
@@ -334,10 +440,9 @@ click 2a "https://ysz.asia/2024/04/05/t%20testing/"</pre>
 
       
           <pre class="mermaid"> graph TD</pre>
-<p>我明白了，方差分析之所以要求群体之间方差齐性是因为方差分析所使用的统计量决定的，</p>
-<p>假设样本abc的方差为</p>
-<p>1、10、100000000，那么</p>
-<p>最终指示f分布的统计量F灵敏度大大降低</p>
+<p>方差分析之所以要求群体之间方差齐性是因为方差分析所使用的统计量决定的，</p>
+<p>若样本a、b、c的方差分别为：1、10、100000000，那么</p>
+<p>最终指示F分布的统计量F灵敏度将大大降低</p>
 <pre class="mermaid">graph TB
         原始数据-->|方差齐性检验（Lenove'testing）|00
                 原始数据-->|方差齐性检验（Bartlett-正态性要求高）|00
@@ -444,7 +549,9 @@ class="math inline">\(k\)</span>是组的数量。</li>
 <ul>
 <li>将组间平方和（SSB）除以组间自由度（df_between），得到组间方差（MSB）。</li>
 </ul>
-<p>$ MSB = $</p>
+<p><span class="math display">\[
+MSB = \frac{SSB}{df_{between}}
+\]</span></p>
 <p>这个结果MSB代表了平均每个自由度上的方差量，反映了不同组之间平均值的变异性。</p>
 <h4 id="示例">示例</h4>
 <p>假设我们有两组数据：</p>
@@ -480,7 +587,9 @@ class="math inline">\(N\)</span>减去组数<span
 class="math inline">\(k\)</span>。自由度反映了在计算方差时可自由变动的数据点数量。</p>
 <h4 id="第四步计算组内方差msw">第四步：计算组内方差（MSW）</h4>
 <p>将组内平方和（SSW）除以其对应的自由度（df_within），得到组内方差（MSW）。</p>
-<p>$ MSW = = $</p>
+<p><span class="math display">\[
+MSW = \frac{SSW}{df_{within}} = \frac{SSW}{N - k}
+\]</span></p>
 <p>这个结果MSW代表了平均每个自由度上的方差量，即组内平均的变异性。</p>
 <h4 id="示例-1">示例</h4>
 <p>假设我们有两组数据：</p>
@@ -2131,375 +2240,6 @@ class="math inline">\(\mu_X - \mu_Y\)</span>。</p></li>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ysz.asia/2024/03/17/%E7%BB%9F%E8%AE%A1%E6%8F%8F%E8%BF%B0%20%E7%90%86%E6%B8%85%E7%BB%93%E6%9E%84%E5%90%8E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_6179.JPG">
-      <meta itemprop="name" content="YSZ">
-      <meta itemprop="description" content="我很懒">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="哲の博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/03/17/%E7%BB%9F%E8%AE%A1%E6%8F%8F%E8%BF%B0%20%E7%90%86%E6%B8%85%E7%BB%93%E6%9E%84%E5%90%8E/" class="post-title-link" itemprop="url">PBL-第二次第三次作业</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-03-17 11:04:02" itemprop="dateCreated datePublished" datetime="2024-03-17T11:04:02+08:00">2024-03-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-05 14:35:43" itemprop="dateModified" datetime="2024-04-05T14:35:43+08:00">2024-04-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PBL/" itemprop="url" rel="index"><span itemprop="name">PBL</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>13 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="情景再现">情景再现</h3>
-<h4 id="第二幕主要流程">第二幕主要流程</h4>
-<pre class="mermaid">graph TD;
-00[小青病了,确诊为铅中毒] -->|铅中毒引起村民恐慌| 0
-    0[疾控中心受卫生厅委托进行调查] --> 1[对小青所在的中毒村X的所有儿童进行血铅测定]
-    1 --> 11[所有儿童177人]
-    11 --> 111[超标率62.7%]
-  0 --> 2[对中毒村X,周围村G,GG,F进行血铅测定]
-    2 --> 21[所有儿童447人]
-    21 --> 211[超标率43.4%<br>194份超标]
-   211 -->|发现X村儿童的血铅水品高于4村平均水平|2111{于是对X村进行调查,发现附近有一家化工厂}
-   2111 -->|疾控中心绘制 图1  , 图2 |21111[统计图显示, 村落 与 儿童居住地 距离化工厂越近,血铅水平越高]
-   21111 -->|可能的问题1|211111([当血铅水平与离厂距离成反比的背景下,<br>GG村却比更20m远处的F村的儿童平均血铅浓度高10个单位]):::highlight
-  0 -->|因为多数化工厂职工来源于4村,<br>原文:为了区分是否与父母在化工厂工作有关<br>我的想法:材料是怎么知道父母的工作会影响儿童血铅水平呢?于是这里有一个逻辑的漏洞,并且这个漏洞直接加速了推理的进程<br>所以:通过推理材料,我认为,材料的撰写人员在有意无意地告诉我,儿童的血铅水平直接受到父母在化工厂工作的影响<br>我的认为更好的表达:为了排查工厂是否影响儿童的血铅水平,于是......|3[对职工子女与非职工子女进行比较]
-  3 -->31[职工子女的血铅浓度超标率:52.8%<br>非职工子女的血铅超标率:39.0%]
-  31 -->311[通过推理与职工子女血铅数据的佐证,血铅浓度的确受父母工作影响]
-    0[疾控中心受卫生厅委托进行调查] -->|我的想法:为什么要对成人血铅进行检测呢| 4[共成人血铅样本1158份 见表1 ]
-    4 --> 41[绘制图10]
-    41 -->|在1158人中有241名化工厂职工| 411[化工厂员工血铅超标率15.6%]
-    41 -->|在1158人中有927名非化工厂职工| 412[非化工厂员工血铅超标率1.6%]
-    411 --> 421[绘制图11]
-    412 --> 421[绘制图11]
-
- classDef highlight fill:#ffff00,stroke:#333,stroke-width:2px;
- classDef blueStyle fill:#0000ff,stroke:#333,stroke-width:2px;</pre>
-<h4 id="第三幕主要内容">第三幕主要内容</h4>
-<pre class="mermaid">graph TD
-0[疾控中心受卫生厅委托进行调查] -->5[对厂生产人员构成进行分析] -->51[绘制图12]
-0[疾控中心受卫生厅委托进行调查] -->6[各车间铅污染水平]  -->61[绘制图13]
-0[疾控中心受卫生厅委托进行调查] -->7[4车间血铅增高检出率] -->71[绘制图14]
- 51[绘制图12]-->81[结论:黄丹二盐车间存在重大嫌疑]
- 61[绘制图13]-->81
- 71[绘制图14]-->81</pre>
-<h3 id="绘制的统计图表">绘制的统计图表</h3>
-<h4 id="表1-村别血铅浓度统计">表1-村别血铅浓度统计</h4>
-<table>
-<colgroup>
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 12%" />
-<col style="width: 15%" />
-<col style="width: 12%" />
-<col style="width: 15%" />
-<col style="width: 14%" />
-<col style="width: 12%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>村别</th>
-<th>人数</th>
-<th>&lt;400μg/L人数</th>
-<th>&lt;400μg/L比例(%)</th>
-<th>≥400μg/L人数</th>
-<th>≥400μg/L比例(%)</th>
-<th>平均浓度(μg/L)</th>
-<th>最高值(μg/L)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>冯瓦</td>
-<td>13</td>
-<td>11</td>
-<td>84.6</td>
-<td>2</td>
-<td>15.4</td>
-<td>187.0</td>
-<td>548.0</td>
-</tr>
-<tr class="even">
-<td>高庄</td>
-<td>207</td>
-<td>200</td>
-<td>96.6</td>
-<td>7</td>
-<td>3.4</td>
-<td>110.3</td>
-<td>579.0</td>
-</tr>
-<tr class="odd">
-<td>龚湖</td>
-<td>3</td>
-<td>3</td>
-<td>100</td>
-<td>0</td>
-<td>0</td>
-<td>46.7</td>
-<td>60.0</td>
-</tr>
-<tr class="even">
-<td>新立</td>
-<td>607</td>
-<td>574</td>
-<td>94.6</td>
-<td>33</td>
-<td>5.4</td>
-<td>128.7</td>
-<td>622.0</td>
-</tr>
-<tr class="odd">
-<td>不详</td>
-<td>328</td>
-<td>219</td>
-<td>97.3</td>
-<td>9</td>
-<td>2.7</td>
-<td>96.4</td>
-<td>889.0</td>
-</tr>
-<tr class="even">
-<td><strong>总计</strong></td>
-<td><strong>1158</strong></td>
-<td><strong>1007</strong></td>
-<td><strong>86.9</strong></td>
-<td><strong>51</strong></td>
-<td><strong>4.4</strong></td>
-<td><strong>133.1</strong></td>
-<td><strong>622.0</strong></td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><strong>整体血铅水平</strong>：总共1158人中，有51人血铅浓度超过400μg/L，占总人数的4.4%。</li>
-<li><strong>村别超标情况</strong>：
-<ul>
-<li>冯瓦村：超标率为15.4%，平均浓度为187.0μg/L。</li>
-<li>高庄村：超标率为3.4%，平均浓度为110.3μg/L。</li>
-<li>龚湖村：没有超标情况，平均浓度为46.7μg/L。</li>
-<li>新立村：超标率为5.4%，平均浓度为128.7μg/L。</li>
-<li>不详村：超标率为2.7%，平均浓度为96.4μg/L。</li>
-</ul></li>
-<li><strong>最高值观察</strong>：最高血铅值在不详村，达到889.0μg/L，而最低最高值出现在龚湖村，为60.0μg/L。</li>
-<li><strong>血铅浓度分布</strong>：龚湖村血铅浓度控制得最好，平均浓度和最高值均最低。</li>
-</ul>
-<h4 id="图-10-1158份成人血清浓度检测结果-村别统计">图 10
-1158份成人血清浓度检测结果-村别统计</h4>
-<figure>
-<img
-src="https://raw.githubusercontent.com/introvert24312/image/master/村别血铅浓度统计.png"
-alt="村别血铅浓度统计" />
-<figcaption aria-hidden="true">村别血铅浓度统计</figcaption>
-</figure>
-<p>发现：经标化处理后发现，F村平均水品较高（平均水平远超其他3村）</p>
-<h4 id="图-11-1158人中职工与非职工的血铅超标占比">图 11
-1158人中职工与非职工的血铅超标占比</h4>
-<figure>
-<img
-src="https://raw.githubusercontent.com/introvert24312/image/master/f3b8369f-5593-4af7-bde3-f667b35bb77a.png"
-alt="f3b8369f-5593-4af7-bde3-f667b35bb77a" />
-<figcaption
-aria-hidden="true">f3b8369f-5593-4af7-bde3-f667b35bb77a</figcaption>
-</figure>
-<hr />
-<h4 id="图12-工厂人员构成比">图12-工厂人员构成比</h4>
-<p><img src="https://raw.githubusercontent.com/introvert24312/image/master/车间人员构成比.png" style="zoom:25%;" /></p>
-<p>这是一所私人企业，有员工256人，</p>
-<p>​ 其中1线工人189人，</p>
-<p>​ 技术人员30人，</p>
-<p>​ 后勤及管理人员37人</p>
-<h4 id="图13-各车间铅污染水平">图13-各车间铅污染水平</h4>
-<p><img src="https://raw.githubusercontent.com/introvert24312/image/master/各车间铅污染水平.png" alt="各车间铅污染水平" style="zoom:25%;" /></p>
-<p>*注:铅尘国家标准PC-TWA:0.05mg/m</p>
-<table>
-<thead>
-<tr class="header">
-<th>车间</th>
-<th>TWA(mg/m3)</th>
-<th>超标倍数</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>黄丹二盐车间</td>
-<td>0.698</td>
-<td>13.0</td>
-</tr>
-<tr class="even">
-<td>片状车间</td>
-<td>0.300</td>
-<td>5.0</td>
-</tr>
-<tr class="odd">
-<td>粉状车间</td>
-<td>0.188</td>
-<td>2.8</td>
-</tr>
-<tr class="even">
-<td>液体车间</td>
-<td>0.008</td>
-<td>-</td>
-</tr>
-</tbody>
-</table>
-<h4 id="图14-4车间血铅增高检出率">图14-4车间血铅增高检出率</h4>
-<p><img src="https://raw.githubusercontent.com/introvert24312/image/master/4车间血铅增高检出率.png" alt="4车间血铅增高检出率" style="zoom:25%;" /></p>
-<table>
-<thead>
-<tr class="header">
-<th>车 间</th>
-<th>总人数</th>
-<th>血铅增高人数</th>
-<th>检出率(%)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>片状车间</td>
-<td>51</td>
-<td>16</td>
-<td>31.4</td>
-</tr>
-<tr class="even">
-<td>粉状车间</td>
-<td>66</td>
-<td>15</td>
-<td>22.7</td>
-</tr>
-<tr class="odd">
-<td>黄丹二盐车间</td>
-<td>45</td>
-<td>22</td>
-<td>48.9</td>
-</tr>
-<tr class="even">
-<td>液体车间</td>
-<td>27</td>
-<td>3</td>
-<td>11.1</td>
-</tr>
-<tr class="odd">
-<td>技术人员</td>
-<td>30</td>
-<td>3</td>
-<td>10.0</td>
-</tr>
-<tr class="even">
-<td>合计</td>
-<td>219</td>
-<td>59</td>
-<td>26.9</td>
-</tr>
-</tbody>
-</table>
-<p>结论：所有统计数据指向黄丹二盐车间存在重大嫌疑</p>
-<h3 id="第二幕的有效信息">第二幕的有效信息</h3>
-<h4 id="统计描述">统计描述</h4>
-<ol type="1">
-<li><strong>职工子女与非职工子女血铅浓度比较</strong>：
-<ul>
-<li>职工子女血铅平均浓度超标率为52.8%，表明超过一半的职工子女血铅浓度超过了正常范围。</li>
-<li>非职工子女血铅平均浓度超标率为39.0%，表明虽然比例较职工子女低，但也有相当一部分非职工子女血铅浓度超标。</li>
-</ul></li>
-<li><strong>成人血铅浓度统计</strong>：
-<ul>
-<li>总共检测成人血铅样品1158份，平均浓度为133.1μg/L。</li>
-<li>其中51份超出正常值的上限，超标率为4.4%。</li>
-</ul></li>
-</ol>
-<h4 id="统计分析">统计分析</h4>
-<ol type="1">
-<li><strong>血铅浓度与居住距化工厂的距离的关系</strong>：
-<ul>
-<li>在927名非厂职工中，血铅浓度随着离厂居住距离的增加而下降，这可能表明化工厂的环境对周围居民的血铅浓度有显著影响。</li>
-</ul></li>
-<li><strong>化工厂职工与非职工血铅浓度对比</strong>：
-<ul>
-<li>231名化工厂职工中，有36名的血铅水平超过正常值的上限，超标率为15.6%。</li>
-<li>相比之下，非化工厂职工的血铅超标率仅为1.6%，表明化工厂职工血铅超标的风险远高于非化工厂职工。</li>
-</ul></li>
-</ol>
-<h4 id="结论">结论</h4>
-<ul>
-<li><p><strong>化工厂环境的影响</strong>：数据表明，与硬脂酸盐化工厂工作环境相关的职工及其子女的血铅浓度明显高于非职工及其子女，说明化工厂的环境对人体血铅浓度有显著影响。</p></li>
-<li><p><strong>居住距离的作用</strong>：非化工厂职工血铅浓度随居住距离的增加而降低，进一步证实了化工厂对周围环境的影响范围</p></li>
-</ul>
-<hr />
-<p>至此,第二幕结束........</p>
-<h2 id="第三幕的有效信息">第三幕的有效信息</h2>
-<p>略。。。。</p>
-<p>黄丹二盐车间存在重大嫌疑</p>
-<hr />
-<p>至此,第三幕结束........</p>
-<link rel="stylesheet" href="/css/folder.css" type="text/css"><script src="/js/folder.js" type="text/javascript" async></script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2571,7 +2311,7 @@ aria-hidden="true">f3b8369f-5593-4af7-bde3-f667b35bb77a</figcaption>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -2605,7 +2345,7 @@ aria-hidden="true">f3b8369f-5593-4af7-bde3-f667b35bb77a</figcaption>
     <h3 class="widget-title">Tag Cloud</h3>
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width:100%">
-            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BB%E5%AD%A6/" rel="tag">医学</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" rel="tag">统计学</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" rel="tag">高等数学</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BB%E5%AD%A6/" rel="tag">医学</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" rel="tag">统计学</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" rel="tag">高等数学</a><span class="tag-list-count">1</span></li></ul>
         </canvas>
     </div>
 </div>
