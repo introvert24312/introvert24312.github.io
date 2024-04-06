@@ -187,7 +187,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-06 12:35:00" itemprop="dateModified" datetime="2024-04-06T12:35:00+08:00">2024-04-06</time>
+                <time title="修改时间：2024-04-06 17:14:47" itemprop="dateModified" datetime="2024-04-06T17:14:47+08:00">2024-04-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -205,7 +205,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
+              <span>1.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -247,12 +247,13 @@ subgraph 统计推断
 1-->1b[区间估计]
 2[假设检验]-->|比较2小样本间的平均数|2a[t检验]
 2[假设检验]-->|若比较3者以上平均数|2b[ANOVA]
-2-->|比较分类数据间的关系|卡方检验
+2-->|比较分类数据间的关系|2c[卡方检验]
 end
 click 1a "https://ysz.asia/2024/10/10/interval%20estimation/"
 click 1b "https://ysz.asia/2024/10/10/interval%20estimation/"
 click 2 "https://ysz.asia/2024/04/04/hypothesis%20testing/"
-click 2a "https://ysz.asia/2024/04/05/t%20testing/"</pre>
+click 2a "https://ysz.asia/2024/04/05/t%20testing/"
+click 2c "https://ysz.asia/2024/04/06/chi%20square%20test/"</pre>
 <pre class="mermaid">gantt
     title 统计方法发展历程
     dateFormat YYYY-MM-DD
@@ -324,7 +325,7 @@ end</pre>
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-04-06 10:20:11 / 修改时间：14:00:56" itemprop="dateCreated datePublished" datetime="2024-04-06T10:20:11+08:00">2024-04-06</time>
+              <time title="创建时间：2024-04-06 10:20:11 / 修改时间：18:35:59" itemprop="dateCreated datePublished" datetime="2024-04-06T10:20:11+08:00">2024-04-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -342,14 +343,14 @@ end</pre>
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.3k</span>
+              <span>5.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>26 分钟</span>
+              <span>29 分钟</span>
             </span>
 
         </div>
@@ -382,6 +383,33 @@ end</pre>
     M -->|否| O[接受零假设]
     N --> P[报告结果]
     O --> P</pre>
+<pre class="mermaid">flowchart TD
+    A[开始] --> B{研究设计}
+    B --> C{单个分类变量<br>与理论分布比较?}
+    C -->|是| D[卡方拟合优度检验]
+    C -->|否| E{比较不同群体<br>在同一变量上的分布?}
+    E -->|是| F[卡方同质性检验]
+    E -->|否| G{分析两个变量<br>之间的关系?}
+    G -->|是| H[卡方独立性检验]
+    G -->|否| I{成对或重复测量<br>的数据?}
+    I -->|是| J[配对卡方检验<br>如麦克尼马检验]
+    I -->|否| K[考虑其他统计方法]
+    
+    D --> L{例子:<br>色子是否公平?}
+    F --> M{例子:<br>不同地区对产品偏好}
+    H --> N{例子:<br>性别与购物偏好}
+    J --> O{例子:<br>治疗前后健康状况改变}</pre>
+<pre class="mermaid">flowchart TD
+    A[开始] --> B{数据和设计类型}
+    B -->|单一样本与理论分布比较| C[卡方拟合优度检验]
+    B -->|两个或多个分类变量之间关系| D[卡方独立性检验]
+    B -->|多个独立样本间比较| E[卡方同质性检验]
+    B -->|成对或重复测量数据| F[配对卡方检验\麦克尼马检验]
+
+    C --> G["例子: 检验色子是否公平"]
+    D --> H["例子: 吸烟是否与肺病独立"]
+    E --> I["例子: 不同学校学生对科学课程兴趣的比较"]
+    F --> J["例子: 新减肥药前后体重变化的比较"]</pre>
 <pre class="mermaid">
 graph TD
     A[卡方分析类型] --> B[卡方拟合优度检验]

@@ -28,7 +28,7 @@
 <meta property="og:description" content="卡方的核心原理：比较观察频数和期望频数 评估观察数据是否与某种理论预期或假设相符合——是一致的。 graph TD     A[定义问题] --&gt; B[收集数据]     B --&gt; C{数据类型}     C --&gt;|分类数据| D[选择卡方检验]     D --&gt;|一个变量| E[卡方拟合度检验]     D --&gt;|两个变量| F[卡方独立性检验]     D --&gt;|比较多个群体| G[">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-06T02:20:11.000Z">
-<meta property="article:modified_time" content="2024-04-06T06:00:56.894Z">
+<meta property="article:modified_time" content="2024-04-06T10:35:59.209Z">
 <meta property="article:author" content="YSZ">
 <meta property="article:tag" content="统计学">
 <meta name="twitter:card" content="summary">
@@ -184,7 +184,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-04-06 10:20:11 / 修改时间：14:00:56" itemprop="dateCreated datePublished" datetime="2024-04-06T10:20:11+08:00">2024-04-06</time>
+              <time title="创建时间：2024-04-06 10:20:11 / 修改时间：18:35:59" itemprop="dateCreated datePublished" datetime="2024-04-06T10:20:11+08:00">2024-04-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -202,14 +202,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.3k</span>
+              <span>5.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>26 分钟</span>
+              <span>29 分钟</span>
             </span>
 
         </div>
@@ -242,6 +242,33 @@
     M -->|否| O[接受零假设]
     N --> P[报告结果]
     O --> P</pre>
+<pre class="mermaid">flowchart TD
+    A[开始] --> B{研究设计}
+    B --> C{单个分类变量<br>与理论分布比较?}
+    C -->|是| D[卡方拟合优度检验]
+    C -->|否| E{比较不同群体<br>在同一变量上的分布?}
+    E -->|是| F[卡方同质性检验]
+    E -->|否| G{分析两个变量<br>之间的关系?}
+    G -->|是| H[卡方独立性检验]
+    G -->|否| I{成对或重复测量<br>的数据?}
+    I -->|是| J[配对卡方检验<br>如麦克尼马检验]
+    I -->|否| K[考虑其他统计方法]
+    
+    D --> L{例子:<br>色子是否公平?}
+    F --> M{例子:<br>不同地区对产品偏好}
+    H --> N{例子:<br>性别与购物偏好}
+    J --> O{例子:<br>治疗前后健康状况改变}</pre>
+<pre class="mermaid">flowchart TD
+    A[开始] --> B{数据和设计类型}
+    B -->|单一样本与理论分布比较| C[卡方拟合优度检验]
+    B -->|两个或多个分类变量之间关系| D[卡方独立性检验]
+    B -->|多个独立样本间比较| E[卡方同质性检验]
+    B -->|成对或重复测量数据| F[配对卡方检验\麦克尼马检验]
+
+    C --> G["例子: 检验色子是否公平"]
+    D --> H["例子: 吸烟是否与肺病独立"]
+    E --> I["例子: 不同学校学生对科学课程兴趣的比较"]
+    F --> J["例子: 新减肥药前后体重变化的比较"]</pre>
 <pre class="mermaid">
 graph TD
     A[卡方分析类型] --> B[卡方拟合优度检验]
