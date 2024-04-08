@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"ysz.asia","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="使用t检验的一般流程 graph TD     0[(随机样本来自正态分布总体比较均数时方差相等)]:::highlight     0 --&gt;|建立假设|1{选择适当的t检验类型}     1 --&gt; 2(独立样本T检验)     1 --&gt; 3(配对样本T检验)     1 --&gt; 4(单样本T检验)     2 --&gt; 5(计算t值)     3 --&gt; 5     4 --&gt; 5">
+  <meta name="description" content="使用t检验的一般流程 graph TD     0[(随机样本来自正态分布总体比较均数时)]:::highlight     0 --&gt;|建立假设| A{检验数据正态性}     A --&gt;|正态分布| B{检验方差齐性}     A --&gt;|非正态分布| F[使用非参数检验]     B --&gt;|数据量相似| C[选择方差齐性检验]     C --&gt;|Levene检验| D[当数据偏离正态分布">
 <meta property="og:type" content="article">
 <meta property="og:title" content="t检验">
 <meta property="og:url" content="https://ysz.asia/2024/04/05/t%20testing/index.html">
 <meta property="og:site_name" content="哲の博客">
-<meta property="og:description" content="使用t检验的一般流程 graph TD     0[(随机样本来自正态分布总体比较均数时方差相等)]:::highlight     0 --&gt;|建立假设|1{选择适当的t检验类型}     1 --&gt; 2(独立样本T检验)     1 --&gt; 3(配对样本T检验)     1 --&gt; 4(单样本T检验)     2 --&gt; 5(计算t值)     3 --&gt; 5     4 --&gt; 5">
+<meta property="og:description" content="使用t检验的一般流程 graph TD     0[(随机样本来自正态分布总体比较均数时)]:::highlight     0 --&gt;|建立假设| A{检验数据正态性}     A --&gt;|正态分布| B{检验方差齐性}     A --&gt;|非正态分布| F[使用非参数检验]     B --&gt;|数据量相似| C[选择方差齐性检验]     C --&gt;|Levene检验| D[当数据偏离正态分布">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-04T17:50:00.000Z">
-<meta property="article:modified_time" content="2024-04-05T06:35:43.090Z">
+<meta property="article:modified_time" content="2024-04-08T05:05:42.300Z">
 <meta property="article:author" content="YSZ">
 <meta property="article:tag" content="统计学">
 <meta name="twitter:card" content="summary">
@@ -182,10 +182,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-04-05 01:50:00 / 修改时间：14:35:43" itemprop="dateCreated datePublished" datetime="2024-04-05T01:50:00+08:00">2024-04-05</time>
+              <time title="创建时间：2024-04-05 01:50:00" itemprop="dateCreated datePublished" datetime="2024-04-05T01:50:00+08:00">2024-04-05</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-08 13:05:42" itemprop="dateModified" datetime="2024-04-08T13:05:42+08:00">2024-04-08</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -202,14 +208,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6.4k</span>
+              <span>7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>32 分钟</span>
+              <span>35 分钟</span>
             </span>
 
         </div>
@@ -222,6 +228,33 @@
 
       
         <h1 id="使用t检验的一般流程">使用t检验的一般流程</h1>
+<pre class="mermaid">graph TD
+    0[(随机样本<br>来自正态分布总体<br>比较均数时)]:::highlight
+    0 -->|建立假设| A{检验数据正态性}
+    A -->|正态分布| B{检验方差齐性}
+    A -->|非正态分布| F[使用非参数检验]
+    B -->|数据量相似| C[选择方差齐性检验]
+    C -->|Levene检验| D[当数据偏离正态分布]
+    C -->|Bartlett检验| E[当数据严格正态]
+    C -->|F检验| G[样本量大且满足正态]
+    B -->|数据量不相似| H[推荐Levene检验]
+    D --> I{方差是否齐性}
+    E --> I
+    G --> I
+    H --> I
+    I -->|是| J[选择Student's t检验或Welch's t检验]
+    I -->|否| K[使用Welch's t检验]
+    J --> L[独立样本T检验或配对样本T检验]
+    K --> M[独立样本Welch's T检验]
+    L --> N(计算t值)
+    M --> N
+    N --> O(确定显著性水平 α)
+    O --> P(查找t分布表以确定临界t值)
+    P --> Q{比较计算得到的t值与临界t值}
+    Q -->|计算的t值 大于 临界t值| R(拒绝零假设,接受备择假设,差异显著)
+    Q -->|计算的t值 小于等于 临界t值| S(不能拒绝零假设,差异不显著)
+
+classDef highlight fill:#ffff00,stroke:#333,stroke-width:2px;</pre>
 <pre class="mermaid">graph TD
     0[(随机样本<br>来自正态分布总体<br>比较均数时方差相等)]:::highlight
     0 -->|建立假设|1{选择适当的t检验类型}
