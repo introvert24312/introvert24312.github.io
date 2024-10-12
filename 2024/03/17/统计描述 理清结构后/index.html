@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/sun-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/sun-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ysz.asia","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="情景再现 第二幕主要流程 graph TD; 00[小青病了,确诊为铅中毒] --&gt;|铅中毒引起村民恐慌| 0     0[疾控中心受卫生厅委托进行调查] --&gt; 1[对小青所在的中毒村X的所有儿童进行血铅测定]     1 --&gt; 11[所有儿童177人]     11 --&gt; 111[超标率62.7%]   0 --&gt; 2[对中毒村X,周围村G,GG,F进行血铅测定]     2 --&gt; 21">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PBL-第二次第三次作业">
+<meta property="og:url" content="https://ysz.asia/2024/03/17/%E7%BB%9F%E8%AE%A1%E6%8F%8F%E8%BF%B0%20%E7%90%86%E6%B8%85%E7%BB%93%E6%9E%84%E5%90%8E/index.html">
+<meta property="og:site_name" content="(￣▽￣)ノ">
+<meta property="og:description" content="情景再现 第二幕主要流程 graph TD; 00[小青病了,确诊为铅中毒] --&gt;|铅中毒引起村民恐慌| 0     0[疾控中心受卫生厅委托进行调查] --&gt; 1[对小青所在的中毒村X的所有儿童进行血铅测定]     1 --&gt; 11[所有儿童177人]     11 --&gt; 111[超标率62.7%]   0 --&gt; 2[对中毒村X,周围村G,GG,F进行血铅测定]     2 --&gt; 21">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/introvert24312/image/master/%E8%BD%A6%E9%97%B4%E4%BA%BA%E5%91%98%E6%9E%84%E6%88%90%E6%AF%94.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/introvert24312/image/master/%E5%90%84%E8%BD%A6%E9%97%B4%E9%93%85%E6%B1%A1%E6%9F%93%E6%B0%B4%E5%B9%B3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/introvert24312/image/master/4%E8%BD%A6%E9%97%B4%E8%A1%80%E9%93%85%E5%A2%9E%E9%AB%98%E6%A3%80%E5%87%BA%E7%8E%87.png">
+<meta property="article:published_time" content="2024-03-17T03:04:02.000Z">
+<meta property="article:modified_time" content="2024-10-12T10:03:13.866Z">
+<meta property="article:author" content="YSZ">
+<meta property="article:tag" content="医学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/introvert24312/image/master/%E8%BD%A6%E9%97%B4%E4%BA%BA%E5%91%98%E6%9E%84%E6%88%90%E6%AF%94.png">
+
+<link rel="canonical" href="https://ysz.asia/2024/03/17/%E7%BB%9F%E8%AE%A1%E6%8F%8F%E8%BF%B0%20%E7%90%86%E6%B8%85%E7%BB%93%E6%9E%84%E5%90%8E/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>PBL-第二次第三次作业 | (￣▽￣)ノ</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <!-- Add GitHub Fork corner stard -->
+    <a target="_blank" rel="noopener" href="https://github.com/introvert24312" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <!-- Add GitHub Fork corner end -->
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">(￣▽￣)ノ</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ysz.asia/2024/03/17/%E7%BB%9F%E8%AE%A1%E6%8F%8F%E8%BF%B0%20%E7%90%86%E6%B8%85%E7%BB%93%E6%9E%84%E5%90%8E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_6179.JPG">
+      <meta itemprop="name" content="YSZ">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="(￣▽￣)ノ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PBL-第二次第三次作业
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-03-17 11:04:02" itemprop="dateCreated datePublished" datetime="2024-03-17T11:04:02+08:00">2024-03-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-10-12 18:03:13" itemprop="dateModified" datetime="2024-10-12T18:03:13+08:00">2024-10-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PBL/" itemprop="url" rel="index"><span itemprop="name">PBL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="情景再现">情景再现</h3>
+<h4 id="第二幕主要流程">第二幕主要流程</h4>
+<pre class="mermaid">graph TD;
+00[小青病了,确诊为铅中毒] -->|铅中毒引起村民恐慌| 0
+    0[疾控中心受卫生厅委托进行调查] --> 1[对小青所在的中毒村X的所有儿童进行血铅测定]
+    1 --> 11[所有儿童177人]
+    11 --> 111[超标率62.7%]
+  0 --> 2[对中毒村X,周围村G,GG,F进行血铅测定]
+    2 --> 21[所有儿童447人]
+    21 --> 211[超标率43.4%<br>194份超标]
+   211 -->|发现X村儿童的血铅水品高于4村平均水平|2111{于是对X村进行调查,发现附近有一家化工厂}
+   2111 -->|疾控中心绘制 图1  , 图2 |21111[统计图显示, 村落 与 儿童居住地 距离化工厂越近,血铅水平越高]
+   21111 -->|可能的问题1|211111([当血铅水平与离厂距离成反比的背景下,<br>GG村却比更20m远处的F村的儿童平均血铅浓度高10个单位]):::highlight
+  0 -->|因为多数化工厂职工来源于4村,<br>原文:为了区分是否与父母在化工厂工作有关<br>我的想法:材料是怎么知道父母的工作会影响儿童血铅水平呢?于是这里有一个逻辑的漏洞,并且这个漏洞直接加速了推理的进程<br>所以:通过推理材料,我认为,材料的撰写人员在有意无意地告诉我,儿童的血铅水平直接受到父母在化工厂工作的影响<br>我的认为更好的表达:为了排查工厂是否影响儿童的血铅水平,于是......|3[对职工子女与非职工子女进行比较]
+  3 -->31[职工子女的血铅浓度超标率:52.8%<br>非职工子女的血铅超标率:39.0%]
+  31 -->311[通过推理与职工子女血铅数据的佐证,血铅浓度的确受父母工作影响]
+    0[疾控中心受卫生厅委托进行调查] -->|我的想法:为什么要对成人血铅进行检测呢| 4[共成人血铅样本1158份 见表1 ]
+    4 --> 41[绘制图10]
+    41 -->|在1158人中有241名化工厂职工| 411[化工厂员工血铅超标率15.6%]
+    41 -->|在1158人中有927名非化工厂职工| 412[非化工厂员工血铅超标率1.6%]
+    411 --> 421[绘制图11]
+    412 --> 421[绘制图11]
+
+ classDef highlight fill:#ffff00,stroke:#333,stroke-width:2px;
+ classDef blueStyle fill:#0000ff,stroke:#333,stroke-width:2px;</pre>
+<h4 id="第三幕主要内容">第三幕主要内容</h4>
+<pre class="mermaid">graph TD
+0[疾控中心受卫生厅委托进行调查] -->5[对厂生产人员构成进行分析] -->51[绘制图12]
+0[疾控中心受卫生厅委托进行调查] -->6[各车间铅污染水平]  -->61[绘制图13]
+0[疾控中心受卫生厅委托进行调查] -->7[4车间血铅增高检出率] -->71[绘制图14]
+ 51[绘制图12]-->81[结论:黄丹二盐车间存在重大嫌疑]
+ 61[绘制图13]-->81
+ 71[绘制图14]-->81</pre>
+<h3 id="绘制的统计图表">绘制的统计图表</h3>
+<h4 id="表1-村别血铅浓度统计">表1-村别血铅浓度统计</h4>
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 12%" />
+<col style="width: 15%" />
+<col style="width: 12%" />
+<col style="width: 15%" />
+<col style="width: 14%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>村别</th>
+<th>人数</th>
+<th>&lt;400μg/L人数</th>
+<th>&lt;400μg/L比例(%)</th>
+<th>≥400μg/L人数</th>
+<th>≥400μg/L比例(%)</th>
+<th>平均浓度(μg/L)</th>
+<th>最高值(μg/L)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>冯瓦</td>
+<td>13</td>
+<td>11</td>
+<td>84.6</td>
+<td>2</td>
+<td>15.4</td>
+<td>187.0</td>
+<td>548.0</td>
+</tr>
+<tr>
+<td>高庄</td>
+<td>207</td>
+<td>200</td>
+<td>96.6</td>
+<td>7</td>
+<td>3.4</td>
+<td>110.3</td>
+<td>579.0</td>
+</tr>
+<tr>
+<td>龚湖</td>
+<td>3</td>
+<td>3</td>
+<td>100</td>
+<td>0</td>
+<td>0</td>
+<td>46.7</td>
+<td>60.0</td>
+</tr>
+<tr>
+<td>新立</td>
+<td>607</td>
+<td>574</td>
+<td>94.6</td>
+<td>33</td>
+<td>5.4</td>
+<td>128.7</td>
+<td>622.0</td>
+</tr>
+<tr>
+<td>不详</td>
+<td>328</td>
+<td>219</td>
+<td>97.3</td>
+<td>9</td>
+<td>2.7</td>
+<td>96.4</td>
+<td>889.0</td>
+</tr>
+<tr>
+<td><strong>总计</strong></td>
+<td><strong>1158</strong></td>
+<td><strong>1007</strong></td>
+<td><strong>86.9</strong></td>
+<td><strong>51</strong></td>
+<td><strong>4.4</strong></td>
+<td><strong>133.1</strong></td>
+<td><strong>622.0</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>整体血铅水平</strong>：总共1158人中，有51人血铅浓度超过400μg/L，占总人数的4.4%。</li>
+<li><strong>村别超标情况</strong>：
+<ul>
+<li>冯瓦村：超标率为15.4%，平均浓度为187.0μg/L。</li>
+<li>高庄村：超标率为3.4%，平均浓度为110.3μg/L。</li>
+<li>龚湖村：没有超标情况，平均浓度为46.7μg/L。</li>
+<li>新立村：超标率为5.4%，平均浓度为128.7μg/L。</li>
+<li>不详村：超标率为2.7%，平均浓度为96.4μg/L。</li>
+</ul></li>
+<li><strong>最高值观察</strong>：最高血铅值在不详村，达到889.0μg/L，而最低最高值出现在龚湖村，为60.0μg/L。</li>
+<li><strong>血铅浓度分布</strong>：龚湖村血铅浓度控制得最好，平均浓度和最高值均最低。</li>
+</ul>
+<h4 id="图-10-1158份成人血清浓度检测结果-村别统计">图 10
+1158份成人血清浓度检测结果-村别统计</h4>
+<figure>
+<img
+src="https://raw.githubusercontent.com/introvert24312/image/master/村别血铅浓度统计.png"
+alt="村别血铅浓度统计" />
+<figcaption aria-hidden="true">村别血铅浓度统计</figcaption>
+</figure>
+<p>发现：经标化处理后发现，F村平均水品较高（平均水平远超其他3村）</p>
+<h4 id="图-11-1158人中职工与非职工的血铅超标占比">图 11
+1158人中职工与非职工的血铅超标占比</h4>
+<figure>
+<img
+src="https://raw.githubusercontent.com/introvert24312/image/master/f3b8369f-5593-4af7-bde3-f667b35bb77a.png"
+alt="f3b8369f-5593-4af7-bde3-f667b35bb77a" />
+<figcaption
+aria-hidden="true">f3b8369f-5593-4af7-bde3-f667b35bb77a</figcaption>
+</figure>
+<hr />
+<h4 id="图12-工厂人员构成比">图12-工厂人员构成比</h4>
+<p><img src="https://raw.githubusercontent.com/introvert24312/image/master/车间人员构成比.png" style="zoom:25%;" /></p>
+<p>这是一所私人企业，有员工256人，</p>
+<p>​ 其中1线工人189人，</p>
+<p>​ 技术人员30人，</p>
+<p>​ 后勤及管理人员37人</p>
+<h4 id="图13-各车间铅污染水平">图13-各车间铅污染水平</h4>
+<p><img src="https://raw.githubusercontent.com/introvert24312/image/master/各车间铅污染水平.png" alt="各车间铅污染水平" style="zoom:25%;" /></p>
+<p>*注:铅尘国家标准PC-TWA:0.05mg/m</p>
+<table>
+<thead>
+<tr>
+<th>车间</th>
+<th>TWA(mg/m3)</th>
+<th>超标倍数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>黄丹二盐车间</td>
+<td>0.698</td>
+<td>13.0</td>
+</tr>
+<tr>
+<td>片状车间</td>
+<td>0.300</td>
+<td>5.0</td>
+</tr>
+<tr>
+<td>粉状车间</td>
+<td>0.188</td>
+<td>2.8</td>
+</tr>
+<tr>
+<td>液体车间</td>
+<td>0.008</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h4 id="图14-4车间血铅增高检出率">图14-4车间血铅增高检出率</h4>
+<p><img src="https://raw.githubusercontent.com/introvert24312/image/master/4车间血铅增高检出率.png" alt="4车间血铅增高检出率" style="zoom:25%;" /></p>
+<table>
+<thead>
+<tr>
+<th>车 间</th>
+<th>总人数</th>
+<th>血铅增高人数</th>
+<th>检出率(%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>片状车间</td>
+<td>51</td>
+<td>16</td>
+<td>31.4</td>
+</tr>
+<tr>
+<td>粉状车间</td>
+<td>66</td>
+<td>15</td>
+<td>22.7</td>
+</tr>
+<tr>
+<td>黄丹二盐车间</td>
+<td>45</td>
+<td>22</td>
+<td>48.9</td>
+</tr>
+<tr>
+<td>液体车间</td>
+<td>27</td>
+<td>3</td>
+<td>11.1</td>
+</tr>
+<tr>
+<td>技术人员</td>
+<td>30</td>
+<td>3</td>
+<td>10.0</td>
+</tr>
+<tr>
+<td>合计</td>
+<td>219</td>
+<td>59</td>
+<td>26.9</td>
+</tr>
+</tbody>
+</table>
+<p>结论：所有统计数据指向黄丹二盐车间存在重大嫌疑</p>
+<h3 id="第二幕的有效信息">第二幕的有效信息</h3>
+<h4 id="统计描述">统计描述</h4>
+<ol type="1">
+<li><strong>职工子女与非职工子女血铅浓度比较</strong>：
+<ul>
+<li>职工子女血铅平均浓度超标率为52.8%，表明超过一半的职工子女血铅浓度超过了正常范围。</li>
+<li>非职工子女血铅平均浓度超标率为39.0%，表明虽然比例较职工子女低，但也有相当一部分非职工子女血铅浓度超标。</li>
+</ul></li>
+<li><strong>成人血铅浓度统计</strong>：
+<ul>
+<li>总共检测成人血铅样品1158份，平均浓度为133.1μg/L。</li>
+<li>其中51份超出正常值的上限，超标率为4.4%。</li>
+</ul></li>
+</ol>
+<h4 id="统计分析">统计分析</h4>
+<ol type="1">
+<li><strong>血铅浓度与居住距化工厂的距离的关系</strong>：
+<ul>
+<li>在927名非厂职工中，血铅浓度随着离厂居住距离的增加而下降，这可能表明化工厂的环境对周围居民的血铅浓度有显著影响。</li>
+</ul></li>
+<li><strong>化工厂职工与非职工血铅浓度对比</strong>：
+<ul>
+<li>231名化工厂职工中，有36名的血铅水平超过正常值的上限，超标率为15.6%。</li>
+<li>相比之下，非化工厂职工的血铅超标率仅为1.6%，表明化工厂职工血铅超标的风险远高于非化工厂职工。</li>
+</ul></li>
+</ol>
+<h4 id="结论">结论</h4>
+<ul>
+<li><p><strong>化工厂环境的影响</strong>：数据表明，与硬脂酸盐化工厂工作环境相关的职工及其子女的血铅浓度明显高于非职工及其子女，说明化工厂的环境对人体血铅浓度有显著影响。</p></li>
+<li><p><strong>居住距离的作用</strong>：非化工厂职工血铅浓度随居住距离的增加而降低，进一步证实了化工厂对周围环境的影响范围</p></li>
+</ul>
+<hr />
+<p>至此,第二幕结束........</p>
+<h2 id="第三幕的有效信息">第三幕的有效信息</h2>
+<p>略。。。。</p>
+<p>黄丹二盐车间存在重大嫌疑</p>
+<hr />
+<p>至此,第三幕结束........</p>
+<link rel="stylesheet" href="/css/folder.css" type="text/css"><script src="/js/folder.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8C%BB%E5%AD%A6/" rel="tag"># 医学</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/03/16/Limit/" rel="prev" title="微分学-极限">
+      <i class="fa fa-chevron-left"></i> 微分学-极限
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/03/24/Normal%20Distribution/" rel="next" title="常用概率分布-正态分布">
+      常用概率分布-正态分布 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%83%85%E6%99%AF%E5%86%8D%E7%8E%B0"><span class="nav-number">1.</span> <span class="nav-text">情景再现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E5%B9%95%E4%B8%BB%E8%A6%81%E6%B5%81%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">第二幕主要流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E5%B9%95%E4%B8%BB%E8%A6%81%E5%86%85%E5%AE%B9"><span class="nav-number">1.2.</span> <span class="nav-text">第三幕主要内容</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%9B%BE%E8%A1%A8"><span class="nav-number">2.</span> <span class="nav-text">绘制的统计图表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A81-%E6%9D%91%E5%88%AB%E8%A1%80%E9%93%85%E6%B5%93%E5%BA%A6%E7%BB%9F%E8%AE%A1"><span class="nav-number">2.1.</span> <span class="nav-text">表1-村别血铅浓度统计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE-10-1158%E4%BB%BD%E6%88%90%E4%BA%BA%E8%A1%80%E6%B8%85%E6%B5%93%E5%BA%A6%E6%A3%80%E6%B5%8B%E7%BB%93%E6%9E%9C-%E6%9D%91%E5%88%AB%E7%BB%9F%E8%AE%A1"><span class="nav-number">2.2.</span> <span class="nav-text">图 10
+1158份成人血清浓度检测结果-村别统计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE-11-1158%E4%BA%BA%E4%B8%AD%E8%81%8C%E5%B7%A5%E4%B8%8E%E9%9D%9E%E8%81%8C%E5%B7%A5%E7%9A%84%E8%A1%80%E9%93%85%E8%B6%85%E6%A0%87%E5%8D%A0%E6%AF%94"><span class="nav-number">2.3.</span> <span class="nav-text">图 11
+1158人中职工与非职工的血铅超标占比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE12-%E5%B7%A5%E5%8E%82%E4%BA%BA%E5%91%98%E6%9E%84%E6%88%90%E6%AF%94"><span class="nav-number">2.4.</span> <span class="nav-text">图12-工厂人员构成比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE13-%E5%90%84%E8%BD%A6%E9%97%B4%E9%93%85%E6%B1%A1%E6%9F%93%E6%B0%B4%E5%B9%B3"><span class="nav-number">2.5.</span> <span class="nav-text">图13-各车间铅污染水平</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE14-4%E8%BD%A6%E9%97%B4%E8%A1%80%E9%93%85%E5%A2%9E%E9%AB%98%E6%A3%80%E5%87%BA%E7%8E%87"><span class="nav-number">2.6.</span> <span class="nav-text">图14-4车间血铅增高检出率</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E5%B9%95%E7%9A%84%E6%9C%89%E6%95%88%E4%BF%A1%E6%81%AF"><span class="nav-number">3.</span> <span class="nav-text">第二幕的有效信息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%9F%E8%AE%A1%E6%8F%8F%E8%BF%B0"><span class="nav-number">3.1.</span> <span class="nav-text">统计描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90"><span class="nav-number">3.2.</span> <span class="nav-text">统计分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">3.3.</span> <span class="nav-text">结论</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E5%B9%95%E7%9A%84%E6%9C%89%E6%95%88%E4%BF%A1%E6%81%AF"><span class="nav-number"></span> <span class="nav-text">第三幕的有效信息</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YSZ"
+      src="/images/IMG_6179.JPG">
+  <p class="site-author-name" itemprop="name">YSZ</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width:100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Harry-Potter/" rel="tag">Harry Potter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BB%E5%AD%A6/" rel="tag">医学</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" rel="tag">统计学</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" rel="tag">高等数学</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YSZ</span>
+
+
+  <script src='https://unpkg.com/mermaid@10.9.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize(JSON.stringify());
+    }
+  </script>
+
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

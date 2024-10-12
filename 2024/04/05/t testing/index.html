@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/sun-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/sun-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ysz.asia","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="使用t检验的一般流程 graph TD     0[(随机样本来自正态分布总体比较均数时方差相等)]:::highlight     0 --&gt;|建立假设|1{选择适当的t检验类型}     1 --&gt; 2(独立样本T检验)     1 --&gt; 3(配对样本T检验)     1 --&gt; 4(单样本T检验)     2 --&gt; 5(计算t值)     3 --&gt; 5     4 --&gt; 5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="t检验">
+<meta property="og:url" content="https://ysz.asia/2024/04/05/t%20testing/index.html">
+<meta property="og:site_name" content="(￣▽￣)ノ">
+<meta property="og:description" content="使用t检验的一般流程 graph TD     0[(随机样本来自正态分布总体比较均数时方差相等)]:::highlight     0 --&gt;|建立假设|1{选择适当的t检验类型}     1 --&gt; 2(独立样本T检验)     1 --&gt; 3(配对样本T检验)     1 --&gt; 4(单样本T检验)     2 --&gt; 5(计算t值)     3 --&gt; 5     4 --&gt; 5">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-04T17:50:00.000Z">
+<meta property="article:modified_time" content="2024-10-12T10:03:13.866Z">
+<meta property="article:author" content="YSZ">
+<meta property="article:tag" content="统计学">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://ysz.asia/2024/04/05/t%20testing/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>t检验 | (￣▽￣)ノ</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <!-- Add GitHub Fork corner stard -->
+    <a target="_blank" rel="noopener" href="https://github.com/introvert24312" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <!-- Add GitHub Fork corner end -->
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">(￣▽￣)ノ</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ysz.asia/2024/04/05/t%20testing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_6179.JPG">
+      <meta itemprop="name" content="YSZ">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="(￣▽￣)ノ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          t检验
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-04-05 01:50:00" itemprop="dateCreated datePublished" datetime="2024-04-05T01:50:00+08:00">2024-04-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-10-12 18:03:13" itemprop="dateModified" datetime="2024-10-12T18:03:13+08:00">2024-10-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%AB%E7%94%9F%E7%BB%9F%E8%AE%A1%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">卫生统计学</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="使用t检验的一般流程">使用t检验的一般流程</h1>
+<pre class="mermaid">graph TD
+    0[(随机样本<br>来自正态分布总体<br>比较均数时方差相等)]:::highlight
+    0 -->|建立假设|1{选择适当的t检验类型}
+    1 --> 2(独立样本T检验)
+    1 --> 3(配对样本T检验)
+    1 --> 4(单样本T检验)
+    2 --> 5(计算t值)
+    3 --> 5
+    4 --> 5
+    5 --> 6(确定显著性水平 α)
+    6 --> 7(查找t分布表以确定临界t值)
+    7 --> 8{比较计算得到的t值与临界t值}
+    8 -->|计算的t值 大于 临界t值| 9(拒绝零假设,接受备择假设,差异显著)
+    8 -->|计算的t值 小于等于 临界t值| 10(不能拒绝零假设,差异不显著)
+    
+ classDef highlight fill:#ffff00,stroke:#333,stroke-width:2px;</pre>
+<h1 id="两独立样本t检验">两独立样本t检验</h1>
+<pre class="mermaid">graph TD
+    0[收集两个班级的成绩数据]
+    0 --> |根据F检验分布图|1[进行方差齐性检验]
+    1 -->|方差相等| 2[选择标准独立样本T检验]
+    1 -->|方差不等| 3[选择Welch的T检验]
+    2 --> 4[计算T值]
+    3 --> 4
+    4 --> 5[确定显著性水平 α]
+    5 --> 6[与临界值比较]
+    6 -->|T值 大于 临界值| 7[结论:两班成绩有显著差异]
+    6 -->|T值 小于等于 临界值| 8[结论:两班成绩无显著差异]</pre>
+<h2 id="原始数据">原始数据</h2>
+<p>以下是我的原始数据</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将班级A和班级B的成绩罗列出来</span></span><br><span class="line">classA_scores, classB_scores</span><br><span class="line"></span><br><span class="line">Result</span><br><span class="line">(array([<span class="number">78.97371322</span>, <span class="number">73.89388559</span>, <span class="number">80.1815083</span> , <span class="number">87.18423885</span>, <span class="number">73.126773</span>  ,</span><br><span class="line">        <span class="number">73.12690434</span>, <span class="number">87.63370252</span>, <span class="number">81.13947783</span>, <span class="number">71.24420491</span>, <span class="number">79.34048035</span>,</span><br><span class="line">        <span class="number">71.29265846</span>, <span class="number">71.27416197</span>, <span class="number">76.93569817</span>, <span class="number">59.69375804</span>, <span class="number">61.20065734</span>,</span><br><span class="line">        <span class="number">70.50169977</span>, <span class="number">66.89735104</span>, <span class="number">77.51397866</span>, <span class="number">67.7358074</span> , <span class="number">63.70157039</span>,</span><br><span class="line">        <span class="number">86.72519015</span>, <span class="number">73.1937896</span> , <span class="number">75.54022564</span>, <span class="number">63.60201451</span>, <span class="number">70.6449382</span> ,</span><br><span class="line">        <span class="number">75.88738072</span>, <span class="number">65.79205138</span>, <span class="number">78.00558415</span>, <span class="number">70.19489048</span>, <span class="number">72.66645</span>   ]),</span><br><span class="line"> array([<span class="number">71.98293388</span>, <span class="number">96.52278185</span>, <span class="number">77.86502775</span>, <span class="number">67.42289071</span>, <span class="number">86.22544912</span>,</span><br><span class="line">        <span class="number">65.7915635</span> , <span class="number">80.08863595</span>, <span class="number">58.40329876</span>, <span class="number">64.71813951</span>, <span class="number">79.96861236</span>,</span><br><span class="line">        <span class="number">85.3846658</span> , <span class="number">79.71368281</span>, <span class="number">76.84351718</span>, <span class="number">74.98896304</span>, <span class="number">63.2147801</span> ,</span><br><span class="line">        <span class="number">70.80155792</span>, <span class="number">73.39361229</span>, <span class="number">88.57122226</span>, <span class="number">81.4361829</span> , <span class="number">60.36959845</span>,</span><br><span class="line">        <span class="number">81.24083969</span>, <span class="number">74.1491772</span> , <span class="number">71.23078222</span>, <span class="number">84.11676289</span>, <span class="number">88.30999522</span>]))</span><br></pre></td></tr></table></figure>
+<h2 id="进行levenes-方差齐性检验">进行Levene’s 方差齐性检验</h2>
+<div class='fold collapsed'>
+    <div class='fold-title'>
+        *为什么不用F检验而是用Levene检验？*
+    </div>
+    <div class='fold-content'>
+        <p>F检验和Levene检验都是用于统计分析中的方法，它们有不同的应用场景和假设条件。主要区别在于它们对数据的敏感度不同，特别是在处理不满足正态分布假设或方差齐性（homoscedasticity）的数据时。</p>
+<h3 id="f检验">F检验</h3>
+<ul>
+<li><strong>用途</strong>：F检验通常用于比较两组数据的方差，以检验它们是否具有相同的方差，即方差齐性。它是许多参数统计测试，如ANOVA（方差分析）的前提条件。</li>
+<li><strong>假设条件</strong>：F检验对数据的正态分布假设非常敏感。当数据明显偏离正态分布时，F检验的结果可能不可靠。此外，F检验在样本大小不等时可能也不稳健。</li>
+</ul>
+<h3 id="levene检验">Levene检验</h3>
+<ul>
+<li><strong>用途</strong>：Levene检验是用于检验两个或多个样本的方差是否相等的统计方法。它不仅用于方差分析的前提检验，也适用于其他需要方差齐性假设的统计方法。</li>
+<li><strong>假设条件</strong>：相比F检验，Levene检验对数据的正态分布假设不那么敏感。它通过对每个样本的每个观测值与其组内平均值（或中位数/均值）的差的绝对值进行分析，来评估方差的一致性。这种方法使得Levene检验在处理非正态分布数据或具有异常值的数据时更为稳健。</li>
+</ul>
+<h3
+id="为什么选择levene检验而不是f检验">为什么选择Levene检验而不是F检验？</h3>
+<ol type="1">
+<li><strong>数据分布的灵活性</strong>：由于Levene检验对数据的正态性假设要求不严格，因此在处理实际数据（尤其是那些可能偏离正态分布的数据）时更加灵活和可靠。</li>
+<li><strong>异常值的影响</strong>：Levene检验通过分析观测值与组内平均值（或中位数）的差的绝对值，减少了异常值对检验结果的影响。</li>
+<li><strong>应用范围广泛</strong>：Levene检验可以用于两个或多个样本的方差齐性检验，使其在不同的统计分析场景中都能适用。</li>
+</ol>
+<p>总之，选择Levene检验还是F检验，主要取决于你的数据特性和分析需求。在实际应用中，如果数据可能违反正态性假设或包含异常值，Levene检验通常是更稳健的选择。</p>
+
+    </div>
+</div>
+<h3 id="w的计算">W的计算</h3>
+<p>根据我们的示例计算：</p>
+<p>A：班级A的平均成绩为83.5分。</p>
+<p>B：班级B的平均成绩为86.4分。</p>
+<p>C：班级A的平均绝对偏差为4.9分。</p>
+<p>D：班级B的平均绝对偏差为4.0分。</p>
+<div class='fold collapsed'>
+    <div class='fold-title'>
+        步骤C/D
+    </div>
+    <div class='fold-content'>
+        <ol type="1">
+<li><strong>计算学生成绩的平均值</strong></li>
+<li><strong>计算每个学生成绩与平均值的绝对差异</strong></li>
+<li><strong>求这些绝对差异的平均值</strong></li>
+</ol>
+
+    </div>
+</div>
+<p>E：所有数据的总体平均绝对偏差为4.45分。</p>
+<p>F：Levene统计量<span
+class="math inline">\(W\)</span>的计算结果为0.403。</p>
+<div class='fold collapsed'>
+    <div class='fold-title'>
+        计算统计量(W)
+    </div>
+    <div class='fold-content'>
+        <p>Levene统计量<span
+class="math inline">\(W\)</span>的计算基于方差分析（ANOVA）原理，具体公式为：</p>
+<p><span class="math display">\[
+W = \frac{(N - k) \sum_{i=1}^{k} n_i (Z_i - Z)^2}{(k - 1) \sum_{i=1}^{k}
+\sum_{j=1}^{n_i} (|x_{ij} - \bar{x}_i| - Z_i)^2}
+\]</span></p>
+<p>其中：</p>
+<p>对于两个班级（班级A和班级B）的数学考试成绩进行Levene的方差齐性检验，具体的字母与数字的对应关系如下：</p>
+<ul>
+<li><span
+class="math inline">\(N\)</span>：总的观测值数量，即两个班级学生总数。班级A有10名学生，班级B也有10名学生，所以<span
+class="math inline">\(N = 10 + 10 = 20\)</span>。</li>
+<li><span
+class="math inline">\(k\)</span>：组的数量，在这个例子中有两个班级，所以<span
+class="math inline">\(k=2\)</span>。</li>
+<li><span class="math inline">\(n_i\)</span>：第<span
+class="math inline">\(i\)</span>个组中的观测值数量。对于班级A，<span
+class="math inline">\(n_A = 10\)</span>；对于班级B，<span
+class="math inline">\(n_B = 10\)</span>。</li>
+<li><span class="math inline">\(Z_i\)</span>：第<span
+class="math inline">\(i\)</span>个组的绝对偏差均值。在之前的计算中，我们发现班级A的平均绝对偏差<span
+class="math inline">\(Z_A = 4.9\)</span>，班级B的平均绝对偏差<span
+class="math inline">\(Z_B = 4.0\)</span>。</li>
+<li><span
+class="math inline">\(Z\)</span>：所有观测值绝对偏差的全体均值，即合并班级A和班级B所有绝对偏差后的平均值，计算得<span
+class="math inline">\(Z = 4.45\)</span>。</li>
+<li><span class="math inline">\(|x_{ij} - \bar{x}_i|\)</span>：第<span
+class="math inline">\(i\)</span>个组中第<span
+class="math inline">\(j\)</span>个观测值相对于其组平均值的绝对偏差。对于班级A和班级B的每个学生，我们分别计算了他们的成绩与各自班级平均成绩的绝对差值。</li>
+</ul>
+<p>利用上述信息，我们能够计算Levene统计量<span
+class="math inline">\(W\)</span>。在这个例子中，我们已经通过一系列步骤计算出了<span
+class="math inline">\(W\)</span>的值为0.403。这个值表明了我们如何利用给定的数据和Levene检验公式来评估两个班级成绩方差的齐性。在实际操作中，我们会进一步利用这个<span
+class="math inline">\(W\)</span>值来确定其对应的p值，从而做出是否拒绝方差齐性零假设的决策。</p>
+
+    </div>
+</div>
+<p>Levene统计量<span
+class="math inline">\(W\)</span>表示的是在我们的示例数据中，两个班级成绩的方差齐性的检验统计量。计算出的<span
+class="math inline">\(W\)</span>值用来与F分布的临界值进行比较，以决定是否拒绝方差齐性的零假设。在实际应用中，我们通常还需要查找或通过统计软件获取相应的p值，以确定这个统计量在给定显著性水平下的显著性。</p>
+<h3 id="各种f分布图">各种F分布图</h3>
+<p><img
+src="https://raw.githubusercontent.com/introvert24312/image/master/分母与自由度变换时F的分布簇.png"
+alt="分母与自由度变换时F的分布簇" />
+根据参数为（自由度、分母)的F图像，得出p值</p>
+<p>0假设通常是两条统计量相等，若p值较小那么是一个小概率事件，即拒绝0假设，得出两统计量不相等</p>
+<p><del><em>本文篇幅有限，仅仅探究方差相等（即方差齐性的情况）</em>算了…..我还是写完它吧</del></p>
+<h2
+id="选择标准独立样本t检验并计算t值假设方差相等">选择标准独立样本T检验并计算t值（假设方差相等）</h2>
+<p>标准的独立样本T检验使用池化方差（<span
+class="math inline">\(s_p^2\)</span>）来估计标准误差，适用于当我们假设两个样本的方差相等时。其计算步骤如下：</p>
+<ol type="1">
+<li><h3 id="计算池化方差"><strong>计算池化方差</strong>:</h3></li>
+</ol>
+<p><span class="math display">\[
+s_p^2 = \frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}
+\]</span></p>
+<p>其中，<span class="math inline">\(n_1\)</span>和<span
+class="math inline">\(n_2\)</span>是两个样本的大小，<span
+class="math inline">\(s_1^2\)</span>和<span
+class="math inline">\(s_2^2\)</span>是两个样本的方差。</p>
+<ol start="2" type="1">
+<li><h3
+id="计算标准误差se"><strong>计算标准误差</strong>（SE）:</h3></li>
+</ol>
+<p><span class="math display">\[
+  SE = \sqrt{s_p^2\left(\frac{1}{n_1} + \frac{1}{n_2}\right)}
+\]</span></p>
+<ol start="3" type="1">
+<li><h3 id="计算t值"><strong>计算T值</strong>:</h3></li>
+</ol>
+<p><span class="math display">\[
+  T = \frac{\bar{x}_1 - \bar{x}_2}{SE}
+\]</span></p>
+<p>其中，<span class="math inline">\(\bar{x}_1\)</span>和<span
+class="math inline">\(\bar{x}_2\)</span>是两个样本的平均值。</p>
+<ol start="4" type="1">
+<li><h3 id="自由度的计算">自由度的计算</h3>
+<span class="math display">\[
+df =  (n_1 + n_2 - 2)。
+\]</span></li>
+</ol>
+<h2
+id="选择welchst检验并计算t值不假设方差相等">选择Welch’sT检验并计算t值（不假设方差相等）</h2>
+<p>Welch的T检验是一种更通用的方法，它不要求两个样本的方差相等，因此适用于更广泛的情形。其计算步骤如下：</p>
+<ol type="1">
+<li><h3
+id="直接计算每个样本的标准误差"><strong>直接计算每个样本的标准误差</strong>:</h3></li>
+</ol>
+<p><span class="math display">\[
+  SE_1 = \frac{s_1^2}{n_1}, \quad SE_2 = \frac{s_2^2}{n_2}
+\]</span></p>
+<ol start="2" type="1">
+<li><h3
+id="计算两个样本标准误差的和的平方根总标准误差se"><strong>计算两个样本标准误差的和的平方根</strong>（总标准误差，SE）:</h3></li>
+</ol>
+<p><span class="math display">\[
+  SE = \sqrt{SE_1 + SE_2}
+\]</span></p>
+<ol start="3" type="1">
+<li><h3 id="计算t值-1"><strong>计算T值</strong>:</h3></li>
+</ol>
+<p><span class="math display">\[
+  T = \frac{\bar{x}_1 - \bar{x}_2}{SE}
+\]</span></p>
+<ol start="4" type="1">
+<li><h3 id="自由度的计算-1"><strong>自由度的计算</strong></h3></li>
+</ol>
+<p>对于Welch的T检验，自由度（df）的计算比标准T检验复杂，使用以下公式：</p>
+<p><span class="math display">\[
+df = \frac{(SE_1 + SE_2)^2}{\frac{SE_1^2}{n_1 - 1} + \frac{SE_2^2}{n_2 -
+1}}
+\]</span></p>
+<hr />
+<h2 id="总结与实操">总结与实操</h2>
+<p>-
+<strong>标准T检验</strong>假设两个独立样本具有相同的方差，并使用池化方差来计算标准误差和T值。</p>
+<p>- <strong>Welch
+T检验</strong>不要求两个样本的方差相等，直接计算每个样本的标准误差来估计总标准误差，并据此计算T值，通常给出一个更保守的自由度估计。</p>
+<p>在我们的例子中，使用班级A和班级B的数学成绩进行计算：</p>
+<h3
+id="标准的独立样本t检验假设方差相等">标准的独立样本T检验（假设方差相等）</h3>
+<ul>
+<li><strong>T值</strong>：-1.141</li>
+<li><strong><span
+class="math inline">\(p\)</span>值</strong>：0.269</li>
+<li><strong>自由度（df）</strong>：18</li>
+</ul>
+<h3 id="welch的t检验不假设方差相等">Welch的T检验（不假设方差相等）</h3>
+<ul>
+<li><strong>T值</strong>：-1.141</li>
+<li><strong><span
+class="math inline">\(p\)</span>值</strong>：0.269</li>
+<li><strong>自由度（df）</strong>：约17.52</li>
+</ul>
+<h3 id="解释">解释</h3>
+<p>在这个例子中，不论是使用标准的独立样本T检验还是Welch的T检验，我们都得到了相似的T值和<span
+class="math inline">\(p\)</span>值，表明在显著性水平0.05下，我们没有足够的证据拒绝零假设，即两个班级的数学成绩没有显著差异。这种情况下，班级A和班级B的成绩可以认为在统计学上是相等的。</p>
+<p>自由度的差异主要源于两种方法对样本方差不同假设的处理方式。Welch的T检验因为不假设方差齐性，所以通常会有一个略微不同的、更保守的自由度估计。</p>
+<p>这个例子展示了如何根据样本方差是否相等，选择合适的独立样本T检验方法，并进行计算。在实际研究中，选择哪种方法取决于样本方差的性质以及研究者的偏好。</p>
+<h1 id="单样本资料的t检验">单样本资料的t检验</h1>
+<pre class="mermaid">graph TD
+    0(设立假设) --> 1(收集数据)
+    1 --> 2(计算t值)
+    2 --> 3(确定显著性水平)
+    3 --> 4(查找t分布表或使用统计软件获取p值)
+    4 --> 5(做出决策)
+
+    1 -->|确定样本大小n 计算样本均值和样本标准差s| 1
+    2 -->|使用公式| 2
+    3 -->|通常选择α = 0.05 可调整| 3
+    4 -->|根据t值和自由度n-1获取p值| 4
+    5 -->|如果p值小于或等于α 拒绝零假设 存在显著差异|结论
+    5 -->|如果p值大于α 不能拒绝零假设 无显著差异| 结论</pre>
+<h2 id="原始数据-1">原始数据</h2>
+<p><strong>背景</strong>:
+假设你是一名心理学研究者，想要研究大学生的睡眠质量。根据国家健康机构的数据，成年人的平均睡眠时间应为7小时（即总体平均μ=7小时）。你想要测试的假设是，受试的大学生平均睡眠时间是否与这个标准有显著差异。</p>
+<h2 id="单样本t检验的步骤">单样本t检验的步骤</h2>
+<ol type="1">
+<li><h3 id="收集数据">收集数据:</h3>
+<p>你对30名大学生进行了调查，记录他们的平均睡眠时间。假设得到的样本平均睡眠时间<span
+class="math inline">\(\bar x\)</span>=6.5小时，样本标准差<span
+class="math inline">\(s\)</span>=1.2小时。</p></li>
+<li><h3 id="建立假设">建立假设:</h3>
+<ul>
+<li><strong>零假设</strong>(<span
+class="math inline">\(H_0\)</span>)：样本均值等于总体均值。在我们的例子中，零假设是大学生的平均睡眠时间为7小时。</li>
+<li><strong>备择假设</strong>(<span
+class="math inline">\(H_1\)</span>)：样本均值不等于总体均值。即大学生的平均睡眠时间不是7小时。</li>
+</ul></li>
+<li><h3 id="收集数据并计算统计量">收集数据并计算统计量:</h3>
+<ul>
+<li>在我们的例子中，你调查了30名大学生，发现样本平均睡眠时间<span
+class="math inline">\(\bar{x}\)</span>为6.5小时，样本标准差<span
+class="math inline">\(s\)</span>为1.2小时。</li>
+</ul></li>
+<li><h3 id="计算t值-2">计算t值:</h3>
+<p><span class="math display">\[
+t = \frac{\bar{x} - \mu}{s / \sqrt{n}}
+\]</span></p></li>
+<li><h3 id="观察t分布并判断假设结果">观察t分布并判断假设结果</h3>
+<ul>
+<li>使用计算出的t值，我们查找t分布表，以确定与我们的t值对应的p值。p值是在零假设为真的条件下，观察到的结果（或更极端的结果）发生的概率。</li>
+<li>在我们的例子中，p值为0.011，这意味着如果大学生的真实平均睡眠时间确实为7小时，那么我们观察到平均睡眠时间为6.5小时（或更极端）的概率仅为1.1%。</li>
+</ul></li>
+<li><h3 id="解释结果">解释结果</h3></li>
+</ol>
+<ul>
+<li><strong>p值的解释</strong>:
+p值用于决定是否拒绝零假设。如果p值小于我们事先设定的显著性水平（通常是0.05），我们就有足够的证据拒绝零假设。</li>
+<li><strong>在我们的例子中</strong>，因为p值（0.011）小于0.05，我们拒绝零假设，得出结论：有统计学上的显著证据表明大学生的平均睡眠时间不是7小时。</li>
+</ul>
+<h1 id="配对样本t检验">配对样本t检验</h1>
+<pre class="mermaid">graph TD
+    0(设立假设)
+    0 -->|零假设H0: 平均差异为0| 1(收集数据)
+    0 -->|备择假设H1: 平均差异不为0| 1
+    1 --> 2(计算差异的平均值和标准差)
+    2 --> 3(计算t值)
+    3 --> 4(确定显著性水平α)
+    4 --> 5(查找t分布表或使用统计软件获取p值)
+    5 --> 6(做出决策)
+    6 -->|p值小于等于α: 拒绝H0| 7[存在显著差异]
+    6 -->|p值大于α: 不能拒绝H0| 8[没有显著差异]</pre>
+<p>使用一个更具体的例子来深入理解配对设计资料的t检验：</p>
+<h3 id="背景">背景</h3>
+<p>一名营养学研究员想要评估一种新的营养计划对体重管理的效果。为此，她选择了10名志愿者，这些志愿者都希望通过饮食改善来减轻体重。</p>
+<h3 id="研究设计">研究设计</h3>
+<ul>
+<li><strong>前测</strong>:
+实施新的营养计划之前，研究员记录了每位志愿者的体重（单位：千克）。</li>
+<li><strong>干预</strong>: 这些志愿者遵循为期一个月的新营养计划。</li>
+<li><strong>后测</strong>: 计划结束后，再次记录每位志愿者的体重。</li>
+</ul>
+<h3 id="数据收集">数据收集</h3>
+<p>假设我们得到以下体重变化数据（单位：千克），显示了每位志愿者在营养计划前后的体重差异（减少的体重表示为正值）：</p>
+<table>
+<thead>
+<tr>
+<th>志愿者</th>
+<th>前测体重</th>
+<th>后测体重</th>
+<th>体重差异(前测 - 后测)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>85</td>
+<td>82</td>
+<td>3</td>
+</tr>
+<tr>
+<td>2</td>
+<td>78</td>
+<td>75</td>
+<td>3</td>
+</tr>
+<tr>
+<td>3</td>
+<td>92</td>
+<td>88</td>
+<td>4</td>
+</tr>
+<tr>
+<td>4</td>
+<td>76</td>
+<td>74</td>
+<td>2</td>
+</tr>
+<tr>
+<td>5</td>
+<td>80</td>
+<td>77</td>
+<td>3</td>
+</tr>
+<tr>
+<td>6</td>
+<td>88</td>
+<td>84</td>
+<td>4</td>
+</tr>
+<tr>
+<td>7</td>
+<td>95</td>
+<td>90</td>
+<td>5</td>
+</tr>
+<tr>
+<td>8</td>
+<td>102</td>
+<td>97</td>
+<td>5</td>
+</tr>
+<tr>
+<td>9</td>
+<td>77</td>
+<td>75</td>
+<td>2</td>
+</tr>
+<tr>
+<td>10</td>
+<td>83</td>
+<td>80</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<h3 id="假设设立">假设设立</h3>
+<ul>
+<li><strong>零假设（<span class="math inline">\(H_0\)</span>）</strong>:
+营养计划对体重没有影响，即体重差异的平均值等于0。</li>
+<li><strong>备择假设（<span
+class="math inline">\(H_1\)</span>）</strong>:
+营养计划对体重有影响，即体重差异的平均值不等于0。</li>
+</ul>
+<h3 id="计算">计算</h3>
+<p>首先，我们计算体重差异的平均值(<span
+class="math inline">\(\bar{d}\)</span>)和标准差(<span
+class="math inline">\(s_d\)</span>)。然后，使用配对设计资料的t检验公式计算t值，确定显著性：</p>
+<p>$ t = $</p>
+<p>其中<span class="math inline">\(n\)</span>是志愿者的数量。</p>
+<h3 id="结论">结论</h3>
+<p>基于计算结果，如果得到的p值小于0.05，我们将拒绝零假设，这意味着有足够的证据表明营养计划有效地促进了体重减轻。</p>
+<p>现在，让我们计算体重差异的平均值、标准差，以及t检验的结果，来确定这个营养计划是否显著影响体重减轻。</p>
+<p>在这个例子中，体重差异的平均值(<span
+class="math inline">\(\bar{d}\)</span>)为3.4千克，标准差(<span
+class="math inline">\(s_d\)</span>)为1.075千克。使用配对设计资料的t检验公式，我们得到的t值为10.002。对应的p值为约0.00000357。</p>
+<h3 id="结论-1">结论</h3>
+<p>因为p值远小于0.05，我们拒绝零假设。这意味着有充分的统计学证据表明这种营养计划显著降低了参与者的体重。这个具体例子展示了配对设计资料的t检验如何用于分析同一组受试者在接受特定干预前后的变化，以及如何通过计算得出科学有效的结论。</p>
+<link rel="stylesheet" href="/css/folder.css" type="text/css"><script src="/js/folder.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" rel="tag"># 统计学</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/04/04/hypothesis%20testing/" rel="prev" title="假设检验">
+      <i class="fa fa-chevron-left"></i> 假设检验
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/04/05/ANOVA/" rel="next" title="ANOVA">
+      ANOVA <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8t%E6%A3%80%E9%AA%8C%E7%9A%84%E4%B8%80%E8%88%AC%E6%B5%81%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">使用t检验的一般流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%A4%E7%8B%AC%E7%AB%8B%E6%A0%B7%E6%9C%ACt%E6%A3%80%E9%AA%8C"><span class="nav-number">2.</span> <span class="nav-text">两独立样本t检验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%A7%8B%E6%95%B0%E6%8D%AE"><span class="nav-number">2.1.</span> <span class="nav-text">原始数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E8%A1%8Clevenes-%E6%96%B9%E5%B7%AE%E9%BD%90%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="nav-number">2.2.</span> <span class="nav-text">进行Levene’s 方差齐性检验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#f%E6%A3%80%E9%AA%8C"><span class="nav-number">2.2.1.</span> <span class="nav-text">F检验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#levene%E6%A3%80%E9%AA%8C"><span class="nav-number">2.2.2.</span> <span class="nav-text">Levene检验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9levene%E6%A3%80%E9%AA%8C%E8%80%8C%E4%B8%8D%E6%98%AFf%E6%A3%80%E9%AA%8C"><span class="nav-number">2.2.3.</span> <span class="nav-text">为什么选择Levene检验而不是F检验？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#w%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="nav-number">2.2.4.</span> <span class="nav-text">W的计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%84%E7%A7%8Df%E5%88%86%E5%B8%83%E5%9B%BE"><span class="nav-number">2.2.5.</span> <span class="nav-text">各种F分布图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E6%A0%87%E5%87%86%E7%8B%AC%E7%AB%8B%E6%A0%B7%E6%9C%ACt%E6%A3%80%E9%AA%8C%E5%B9%B6%E8%AE%A1%E7%AE%97t%E5%80%BC%E5%81%87%E8%AE%BE%E6%96%B9%E5%B7%AE%E7%9B%B8%E7%AD%89"><span class="nav-number">2.3.</span> <span class="nav-text">选择标准独立样本T检验并计算t值（假设方差相等）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%B1%A0%E5%8C%96%E6%96%B9%E5%B7%AE"><span class="nav-number">2.3.1.</span> <span class="nav-text">计算池化方差:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%A0%87%E5%87%86%E8%AF%AF%E5%B7%AEse"><span class="nav-number">2.3.2.</span> <span class="nav-text">计算标准误差（SE）:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97t%E5%80%BC"><span class="nav-number">2.3.3.</span> <span class="nav-text">计算T值:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E7%94%B1%E5%BA%A6%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="nav-number">2.3.4.</span> <span class="nav-text">自由度的计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9welchst%E6%A3%80%E9%AA%8C%E5%B9%B6%E8%AE%A1%E7%AE%97t%E5%80%BC%E4%B8%8D%E5%81%87%E8%AE%BE%E6%96%B9%E5%B7%AE%E7%9B%B8%E7%AD%89"><span class="nav-number">2.4.</span> <span class="nav-text">选择Welch’sT检验并计算t值（不假设方差相等）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E8%AE%A1%E7%AE%97%E6%AF%8F%E4%B8%AA%E6%A0%B7%E6%9C%AC%E7%9A%84%E6%A0%87%E5%87%86%E8%AF%AF%E5%B7%AE"><span class="nav-number">2.4.1.</span> <span class="nav-text">直接计算每个样本的标准误差:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E4%B8%A4%E4%B8%AA%E6%A0%B7%E6%9C%AC%E6%A0%87%E5%87%86%E8%AF%AF%E5%B7%AE%E7%9A%84%E5%92%8C%E7%9A%84%E5%B9%B3%E6%96%B9%E6%A0%B9%E6%80%BB%E6%A0%87%E5%87%86%E8%AF%AF%E5%B7%AEse"><span class="nav-number">2.4.2.</span> <span class="nav-text">计算两个样本标准误差的和的平方根（总标准误差，SE）:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97t%E5%80%BC-1"><span class="nav-number">2.4.3.</span> <span class="nav-text">计算T值:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E7%94%B1%E5%BA%A6%E7%9A%84%E8%AE%A1%E7%AE%97-1"><span class="nav-number">2.4.4.</span> <span class="nav-text">自由度的计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E5%AE%9E%E6%93%8D"><span class="nav-number">2.5.</span> <span class="nav-text">总结与实操</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E7%9A%84%E7%8B%AC%E7%AB%8B%E6%A0%B7%E6%9C%ACt%E6%A3%80%E9%AA%8C%E5%81%87%E8%AE%BE%E6%96%B9%E5%B7%AE%E7%9B%B8%E7%AD%89"><span class="nav-number">2.5.1.</span> <span class="nav-text">标准的独立样本T检验（假设方差相等）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#welch%E7%9A%84t%E6%A3%80%E9%AA%8C%E4%B8%8D%E5%81%87%E8%AE%BE%E6%96%B9%E5%B7%AE%E7%9B%B8%E7%AD%89"><span class="nav-number">2.5.2.</span> <span class="nav-text">Welch的T检验（不假设方差相等）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E9%87%8A"><span class="nav-number">2.5.3.</span> <span class="nav-text">解释</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%95%E6%A0%B7%E6%9C%AC%E8%B5%84%E6%96%99%E7%9A%84t%E6%A3%80%E9%AA%8C"><span class="nav-number">3.</span> <span class="nav-text">单样本资料的t检验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%A7%8B%E6%95%B0%E6%8D%AE-1"><span class="nav-number">3.1.</span> <span class="nav-text">原始数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E6%A0%B7%E6%9C%ACt%E6%A3%80%E9%AA%8C%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.2.</span> <span class="nav-text">单样本t检验的步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B6%E9%9B%86%E6%95%B0%E6%8D%AE"><span class="nav-number">3.2.1.</span> <span class="nav-text">收集数据:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E5%81%87%E8%AE%BE"><span class="nav-number">3.2.2.</span> <span class="nav-text">建立假设:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B6%E9%9B%86%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%AE%A1%E7%AE%97%E7%BB%9F%E8%AE%A1%E9%87%8F"><span class="nav-number">3.2.3.</span> <span class="nav-text">收集数据并计算统计量:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97t%E5%80%BC-2"><span class="nav-number">3.2.4.</span> <span class="nav-text">计算t值:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%82%E5%AF%9Ft%E5%88%86%E5%B8%83%E5%B9%B6%E5%88%A4%E6%96%AD%E5%81%87%E8%AE%BE%E7%BB%93%E6%9E%9C"><span class="nav-number">3.2.5.</span> <span class="nav-text">观察t分布并判断假设结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E9%87%8A%E7%BB%93%E6%9E%9C"><span class="nav-number">3.2.6.</span> <span class="nav-text">解释结果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E5%AF%B9%E6%A0%B7%E6%9C%ACt%E6%A3%80%E9%AA%8C"><span class="nav-number">4.</span> <span class="nav-text">配对样本t检验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">4.0.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A0%94%E7%A9%B6%E8%AE%BE%E8%AE%A1"><span class="nav-number">4.0.2.</span> <span class="nav-text">研究设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%94%B6%E9%9B%86"><span class="nav-number">4.0.3.</span> <span class="nav-text">数据收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%87%E8%AE%BE%E8%AE%BE%E7%AB%8B"><span class="nav-number">4.0.4.</span> <span class="nav-text">假设设立</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97"><span class="nav-number">4.0.5.</span> <span class="nav-text">计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">4.0.6.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA-1"><span class="nav-number">4.0.7.</span> <span class="nav-text">结论</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YSZ"
+      src="/images/IMG_6179.JPG">
+  <p class="site-author-name" itemprop="name">YSZ</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width:100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Harry-Potter/" rel="tag">Harry Potter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BB%E5%AD%A6/" rel="tag">医学</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" rel="tag">统计学</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" rel="tag">高等数学</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YSZ</span>
+
+
+  <script src='https://unpkg.com/mermaid@10.9.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize(JSON.stringify());
+    }
+  </script>
+
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

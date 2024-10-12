@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/sun-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/sun-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ysz.asia","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="之所以单开一个新的空间来存放像Z得分、标准误差、T分布这样的知识点，是因为在统计推断这个统计学的核心概念里，它们同时被参数估计与假设检验所需要 Z得分 Z得分是衡量数据点相对于其数据集平均值的偏离程度，用标准差的倍数表示。 Z得分的计算公式是： \(\begin{equation}\label{Z} Z &#x3D; \frac{X - \mu}{\sigma} \end{equation}\) 其中：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="统计推断的工具池">
+<meta property="og:url" content="https://ysz.asia/2024/03/29/A%20Tool%20Pool%20for%20Parameter%20Estimation%20and%20Hypothesis%20Testing/index.html">
+<meta property="og:site_name" content="(￣▽￣)ノ">
+<meta property="og:description" content="之所以单开一个新的空间来存放像Z得分、标准误差、T分布这样的知识点，是因为在统计推断这个统计学的核心概念里，它们同时被参数估计与假设检验所需要 Z得分 Z得分是衡量数据点相对于其数据集平均值的偏离程度，用标准差的倍数表示。 Z得分的计算公式是： \(\begin{equation}\label{Z} Z &#x3D; \frac{X - \mu}{\sigma} \end{equation}\) 其中：">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-29T05:50:00.000Z">
+<meta property="article:modified_time" content="2024-10-12T10:03:13.864Z">
+<meta property="article:author" content="YSZ">
+<meta property="article:tag" content="统计学">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://ysz.asia/2024/03/29/A%20Tool%20Pool%20for%20Parameter%20Estimation%20and%20Hypothesis%20Testing/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>统计推断的工具池 | (￣▽￣)ノ</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <!-- Add GitHub Fork corner stard -->
+    <a target="_blank" rel="noopener" href="https://github.com/introvert24312" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <!-- Add GitHub Fork corner end -->
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">(￣▽￣)ノ</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ysz.asia/2024/03/29/A%20Tool%20Pool%20for%20Parameter%20Estimation%20and%20Hypothesis%20Testing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_6179.JPG">
+      <meta itemprop="name" content="YSZ">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="(￣▽￣)ノ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          统计推断的工具池
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-03-29 13:50:00" itemprop="dateCreated datePublished" datetime="2024-03-29T13:50:00+08:00">2024-03-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-10-12 18:03:13" itemprop="dateModified" datetime="2024-10-12T18:03:13+08:00">2024-10-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%AB%E7%94%9F%E7%BB%9F%E8%AE%A1%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">卫生统计学</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>之所以单开一个新的空间来存放像Z得分、标准误差、T分布这样的知识点，是因为在统计推断这个统计学的核心概念里，它们同时被参数估计与假设检验所需要</p>
+<h1 id="z得分">Z得分</h1>
+<p>Z得分是衡量数据点相对于其数据集平均值的偏离程度，用标准差的倍数表示。</p>
+<p>Z得分的计算公式是：</p>
+<p><span class="math inline">\(\begin{equation}\label{Z}
+Z = \frac{X - \mu}{\sigma}
+\end{equation}\)</span></p>
+<p>其中：</p>
+<ul>
+<li><span class="math inline">\(Z\)</span> 是Z得分。</li>
+<li><span class="math inline">\(X\)</span> 是观测值。</li>
+<li><span class="math inline">\(\mu\)</span> 是数据集的平均值。</li>
+<li><span class="math inline">\(\sigma\)</span> 是数据集的标准差。</li>
+</ul>
+<p>通过这个公式，你可以将任何观测值转换成Z得分，这表示该观测值相对于整个数据集平均值的偏离程度，以标准差为单位。这个分数可以是正数、负数，或者零：</p>
+<ul>
+<li>正数表示观测值高于平均值。</li>
+<li>负数表示观测值低于平均值。</li>
+<li>零表示观测值等于平均值。</li>
+</ul>
+<h1 id="标准误差">标准误差</h1>
+<p>标准误差就像一把尺子，这把尺子每个总体都会拥有一把，专门为该总体定制。
+&gt;
+&gt;当我们使用统计量来估计参数时，这把尺子的作用是度量在处理特定样本量时计算出的某个特定统计量——通常是样本均值——相对于总体参数，通常是总体均值，的准确度和可靠性。
+&gt;
+&gt;这把尺子是非常独特的，因为它的刻度不是固定的，而是随着样本量的大小变化而变化。当样本量增加时，这把尺子的刻度会变得更加紧凑，意味着统计量与参数之间的差异变得更小，我们的估计也就更加接近真实的总体参数值。换句话说，随着我们增加样本量，这把尺子帮助我们更精确地测量统计量对总体参数的估计，从而减少估计的不确定性。另一方面，这把尺子也反映了总体内在的变异性。总体变异性越大，即总体标准差越大，这把尺子告诉我们即使是对同一个总体参数的估计也会有较大的波动。这就像是尺子的刻度在变宽，提示我们即便使用相同的样本量，不同样本之间的统计量也可能有较大的差异。总之，标准误差这把尺子是统计学家的宝贵工具。它不仅帮助我们量化使用样本数据估计总体参数时的准确度和可靠性，还教导我们关于样本量大小和总体变异性如何影响我们的估计。通过这把尺子，我们能够更加自信地进行统计推断，理解和解释我们从样本数据中得出的结论。
+&gt;
+&gt;统计量相对于参数当用于衡量统计量围绕参数展开分布的离散程度的指标，更确切地说，它用来衡量样本均值作为总体均值估计的准确性</p>
+<h4 id="尺子的定义">尺子的定义</h4>
+<p>这把尺子——标准误差（SE）的计算公式是基于总体标准差（<span
+class="math inline">\(\sigma\)</span>）和样本大小（<span
+class="math inline">\(n\)</span>）：</p>
+<p>$ SE = $</p>
+<p>其中：</p>
+<ul>
+<li><p><span class="math inline">\(SE\)</span>
+是标准误差，代表样本均值的分布标准差，即我们讨论的“尺子”的精确度；</p></li>
+<li><p><span class="math inline">\(\sigma\)</span>
+是总体标准差，代表总体数据点相对于总体均值的平均偏差，反映了总体内的变异性；</p></li>
+<li><p><span class="math inline">\(n\)</span>
+是样本大小，即从总体中抽取用于分析的数据点数量。</p></li>
+</ul>
+<h4 id="尺子的应用场景">尺子的应用场景</h4>
+<p>当总体标准差 (<span class="math inline">\(\sigma\)</span>)
+已知时，这个公式可以直接用来计算标准误差。然而，在实际研究中，我们往往不知道总体标准差，因此会使用样本标准差（<span
+class="math inline">\(s\)</span>）来代替 <span
+class="math inline">\(\sigma\)</span>，相应地，标准误差的计算公式变为：</p>
+<p>$ SE = $</p>
+<p>其中 <span class="math inline">\(s\)</span>
+是样本标准差，它是基于抽取的样本计算得出的。</p>
+<h4 id="标准误差的意义">标准误差的意义</h4>
+<p>-
+<strong>准确度的衡量</strong>：标准误差度量了样本均值作为总体均值估计的准确度。标准误差越小，表示我们的样本均值越接近总体均值，即我们的估计越准确。</p>
+<p>- <strong>样本量的影响</strong>：公式中的 <span
+class="math inline">\(\sqrt{n}\)</span>
+显示了增加样本量如何减小标准误差，从而提高估计的准确度。这是因为较大的样本更能代表总体，减少了抽样误差。</p>
+<p>这个“尺子”的计算公式不仅简单但极其强大，它是进行科学研究和数据分析时不可或缺的工具，帮助我们量化统计估计的准确度。</p>
+<h1 id="t">t</h1>
+<h2 id="t分布">t分布</h2>
+<p>更公正地使用小样本来描述推断总体均值</p>
+<h3 id="t分布的发现">t分布的发现</h3>
+<p>戈塞特对于t分布的发现，具体来说，是一个关于如何在只有少量样本数据时估计总体均值的统计问题的解决方案。他注意到，当样本量较小时，样本标准差与总体标准差之间存在较大的不确定性，这影响了基于正态分布的推断的准确性。t分布的发现背后的数学原理和思考过程可以分为以下几个关键步骤：</p>
+<h4 id="样本标准差的不确定性">样本标准差的不确定性</h4>
+<ul>
+<li>在小样本情况下，样本标准差作为总体标准差的估计具有较高的不确定性。这意味着，使用样本标准差来标准化样本均值（从而计算z得分）会导致推断过程中的误差增大。</li>
+</ul>
+<h4 id="寻找适用于小样本的分布">寻找适用于小样本的分布</h4>
+<ul>
+<li>戈塞特通过实验和数学推导寻找一个可以准确描述样本均值分布的概率分布，这个分布需要能够考虑到样本标准差的不确定性。他发现，当样本量较小时，样本均值的分布不再是正态分布，而是一种新的分布——现在被称为t分布。</li>
+</ul>
+<h4 id="t分布的特性">t分布的特性</h4>
+<ul>
+<li>t分布的形状依赖于自由度（通常为样本大小减1）。对于较小的样本量，t分布比正态分布更加“扁平”（即，在均值附近的概率密度较低，尾部较重）。这意味着，在小样本情况下，t分布提供的置信区间比基于正态分布的置信区间要宽，更加保守，从而更好地反映了实际的不确定性。</li>
+<li>随着样本量的增加，t分布逐渐接近正态分布。当样本量足够大时（例如，超过30），t分布和正态分布几乎没有区别，这时可以使用正态分布的方法来进行估计和推断。</li>
+</ul>
+<h4 id="数学表达">数学表达</h4>
+<ul>
+<li>t分布的数学公式表达了戈塞特的这一发现。给定一个样本均值<span
+class="math inline">\(\bar{x}\)</span>，总体均值<span
+class="math inline">\(\mu\)</span>，样本标准差<span
+class="math inline">\(s\)</span>，和样本大小<span
+class="math inline">\(n\)</span>，t值定义为：</li>
+</ul>
+<p><span class="math inline">\(\begin{equation}\label{t}
+t = \frac{\bar{x} - \mu}{s/\sqrt{n}}
+\end{equation}\)</span></p>
+<p>这个t值随后被用来从t分布表中查找p值或者置信区间，这种方式考虑了样本标准差的不确定性和样本大小。</p>
+<p>戈塞特的工作是统计学和实际应用研究的一个重要里程碑，它为小样本数据分析提供了一个强大的工具，至今仍被广泛应用于各个领域。</p>
+<p>t分布根据自由度的不同展开为分布簇，每个自由度下的t分布的图形都不一样，有趣的是，自由度越大，t分布的图像就越接近正态分布，可以尝试使用R语言来绘制t分布的图像，代码如下、结果如下</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 载入ggplot2包进行绘图</span></span><br><span class="line">library<span class="punctuation">(</span>ggplot2<span class="punctuation">)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 选择展示的自由度值</span></span><br><span class="line">dfs <span class="operator">&lt;-</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">,</span> <span class="number">10</span><span class="punctuation">,</span> <span class="number">20</span><span class="punctuation">,</span> <span class="number">30</span><span class="punctuation">,</span> <span class="number">40</span><span class="punctuation">,</span> <span class="number">50</span><span class="punctuation">,</span> <span class="number">100000</span><span class="punctuation">)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个空的数据框来存储t分布数据</span></span><br><span class="line">df_t_selected <span class="operator">&lt;-</span> data.frame<span class="punctuation">(</span>x <span class="operator">=</span> numeric<span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">,</span> density <span class="operator">=</span> numeric<span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">,</span> df <span class="operator">=</span> integer<span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成选定自由度的t分布数据</span></span><br><span class="line"><span class="keyword">for</span><span class="punctuation">(</span>df <span class="keyword">in</span> dfs<span class="punctuation">)</span> <span class="punctuation">&#123;</span></span><br><span class="line">  x <span class="operator">&lt;-</span> seq<span class="punctuation">(</span><span class="operator">-</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> length.out <span class="operator">=</span> <span class="number">100</span><span class="punctuation">)</span> <span class="comment"># 生成值序列</span></span><br><span class="line">  density <span class="operator">&lt;-</span> dt<span class="punctuation">(</span>x<span class="punctuation">,</span> df<span class="punctuation">)</span> <span class="comment"># 计算密度</span></span><br><span class="line">  df_t_selected <span class="operator">&lt;-</span> rbind<span class="punctuation">(</span>df_t_selected<span class="punctuation">,</span> data.frame<span class="punctuation">(</span>x<span class="punctuation">,</span> density<span class="punctuation">,</span> df <span class="operator">=</span> as.factor<span class="punctuation">(</span>df<span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="comment"># 添加到数据框</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用ggplot2绘图</span></span><br><span class="line">ggplot<span class="punctuation">(</span>df_t_selected<span class="punctuation">,</span> aes<span class="punctuation">(</span>x <span class="operator">=</span> x<span class="punctuation">,</span> y <span class="operator">=</span> density<span class="punctuation">,</span> color <span class="operator">=</span> df<span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  geom_line<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operator">+</span> <span class="comment"># 绘制线条</span></span><br><span class="line">  labs<span class="punctuation">(</span>title <span class="operator">=</span> <span class="string">&quot;T Distribution for Selected Degrees of Freedom&quot;</span><span class="punctuation">,</span></span><br><span class="line">       x <span class="operator">=</span> <span class="string">&quot;Value&quot;</span><span class="punctuation">,</span></span><br><span class="line">       y <span class="operator">=</span> <span class="string">&quot;Density&quot;</span><span class="punctuation">,</span></span><br><span class="line">       color <span class="operator">=</span> <span class="string">&quot;Degrees of Freedom&quot;</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  theme_minimal<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  scale_color_viridis_d<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># 使用viridis颜色方案增强可视化</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure>
+<img
+src="https://raw.githubusercontent.com/introvert24312/image/master/t分布关于自由度的簇.png"
+alt="t分布关于自由度的簇" />
+<figcaption aria-hidden="true">t分布关于自由度的簇</figcaption>
+</figure>
+<hr />
+<p><code>应用</code></p>
+<h3 id="t检验">t检验</h3>
+<link rel="stylesheet" href="/css/folder.css" type="text/css"><script src="/js/folder.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" rel="tag"># 统计学</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/03/29/Reflections%20on%20Parameter%20Estimation/" rel="prev" title="对参数估计的思考">
+      <i class="fa fa-chevron-left"></i> 对参数估计的思考
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/04/03/interval%20estimation/" rel="next" title="区间估计">
+      区间估计 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#z%E5%BE%97%E5%88%86"><span class="nav-number">1.</span> <span class="nav-text">Z得分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E8%AF%AF%E5%B7%AE"><span class="nav-number">2.</span> <span class="nav-text">标准误差</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%BA%E5%AD%90%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">尺子的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%BA%E5%AD%90%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">尺子的应用场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E8%AF%AF%E5%B7%AE%E7%9A%84%E6%84%8F%E4%B9%89"><span class="nav-number">2.0.0.3.</span> <span class="nav-text">标准误差的意义</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#t"><span class="nav-number">3.</span> <span class="nav-text">t</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#t%E5%88%86%E5%B8%83"><span class="nav-number">3.1.</span> <span class="nav-text">t分布</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#t%E5%88%86%E5%B8%83%E7%9A%84%E5%8F%91%E7%8E%B0"><span class="nav-number">3.1.1.</span> <span class="nav-text">t分布的发现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B7%E6%9C%AC%E6%A0%87%E5%87%86%E5%B7%AE%E7%9A%84%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">样本标准差的不确定性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E9%80%82%E7%94%A8%E4%BA%8E%E5%B0%8F%E6%A0%B7%E6%9C%AC%E7%9A%84%E5%88%86%E5%B8%83"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">寻找适用于小样本的分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#t%E5%88%86%E5%B8%83%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">t分布的特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E8%A1%A8%E8%BE%BE"><span class="nav-number">3.1.1.4.</span> <span class="nav-text">数学表达</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#t%E6%A3%80%E9%AA%8C"><span class="nav-number">3.1.2.</span> <span class="nav-text">t检验</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YSZ"
+      src="/images/IMG_6179.JPG">
+  <p class="site-author-name" itemprop="name">YSZ</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width:100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Harry-Potter/" rel="tag">Harry Potter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BB%E5%AD%A6/" rel="tag">医学</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" rel="tag">统计学</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" rel="tag">高等数学</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YSZ</span>
+
+
+  <script src='https://unpkg.com/mermaid@10.9.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize(JSON.stringify());
+    }
+  </script>
+
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

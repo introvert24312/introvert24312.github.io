@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/sun-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/sun-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ysz.asia","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="结论 二项分布的概率质量函数（即特定成功次数的概率）由下列公式给出： $ P(X &#x3D; k) &#x3D; p^k (1-p)^{n-k} $   公式字母的含义  其中： - \(X\) 是成功的次数； - \(k\) 是特定的成功次数，\(k &#x3D; 0, 1, 2, \ldots, n\)； - \(n\) 是实验的总次数； - \(p\) 是每次实验成功的概率； - \(\binom{n}{k}\) 是组">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用概率分布-二项分布">
+<meta property="og:url" content="https://ysz.asia/2024/03/14/Binomial%20Distribution/index.html">
+<meta property="og:site_name" content="(￣▽￣)ノ">
+<meta property="og:description" content="结论 二项分布的概率质量函数（即特定成功次数的概率）由下列公式给出： $ P(X &#x3D; k) &#x3D; p^k (1-p)^{n-k} $   公式字母的含义  其中： - \(X\) 是成功的次数； - \(k\) 是特定的成功次数，\(k &#x3D; 0, 1, 2, \ldots, n\)； - \(n\) 是实验的总次数； - \(p\) 是每次实验成功的概率； - \(\binom{n}{k}\) 是组">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-13T17:16:27.000Z">
+<meta property="article:modified_time" content="2024-10-12T10:03:13.864Z">
+<meta property="article:author" content="YSZ">
+<meta property="article:tag" content="统计学">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://ysz.asia/2024/03/14/Binomial%20Distribution/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>常用概率分布-二项分布 | (￣▽￣)ノ</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <!-- Add GitHub Fork corner stard -->
+    <a target="_blank" rel="noopener" href="https://github.com/introvert24312" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <!-- Add GitHub Fork corner end -->
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">(￣▽￣)ノ</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ysz.asia/2024/03/14/Binomial%20Distribution/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_6179.JPG">
+      <meta itemprop="name" content="YSZ">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="(￣▽￣)ノ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          常用概率分布-二项分布
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-03-14 01:16:27" itemprop="dateCreated datePublished" datetime="2024-03-14T01:16:27+08:00">2024-03-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-10-12 18:03:13" itemprop="dateModified" datetime="2024-10-12T18:03:13+08:00">2024-10-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%AB%E7%94%9F%E7%BB%9F%E8%AE%A1%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">卫生统计学</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="结论">结论</h2>
+<p>二项分布的概率质量函数（即特定成功次数的概率）由下列公式给出：</p>
+$ P(X = k) = p^k (1-p)^{n-k} $
+<details>
+<summary>
+公式字母的含义
+</summary>
+其中： - <span class="math inline">\(X\)</span> 是成功的次数； - <span
+class="math inline">\(k\)</span> 是特定的成功次数，<span
+class="math inline">\(k = 0, 1, 2, \ldots, n\)</span>； - <span
+class="math inline">\(n\)</span> 是实验的总次数； - <span
+class="math inline">\(p\)</span> 是每次实验成功的概率； - <span
+class="math inline">\(\binom{n}{k}\)</span> 是组合数，表示从 <span
+class="math inline">\(n\)</span> 次实验中选择 <span
+class="math inline">\(k\)</span> 次成功的方式数，计算公式为 <span
+class="math inline">\(\binom{n}{k} = \frac{n!}{k!(n-k)!}\)</span>。
+</details>
+<table>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 19%" />
+<col style="width: 30%" />
+<col style="width: 34%" />
+</colgroup>
+<thead>
+<tr>
+<th>分布类型</th>
+<th>描述</th>
+<th>均值 (均数)</th>
+<th>标准差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>二项分布</td>
+<td>变量 <span class="math inline">\(X\)</span></td>
+<td><span class="math inline">\(n\pi\)</span></td>
+<td><span class="math inline">\(\sqrt{n\pi(1-\pi)}\)</span></td>
+</tr>
+<tr>
+<td>二项分布的频率</td>
+<td><span class="math inline">\(p = \frac{X}{n}\)</span></td>
+<td><span class="math inline">\(\pi\)</span></td>
+<td><span
+class="math inline">\(\sqrt{\frac{\pi(1-\pi)}{n}}\)</span></td>
+</tr>
+<tr>
+<td>泊松分布</td>
+<td>变量</td>
+<td><span class="math inline">\(\lambda\)</span></td>
+<td><span class="math inline">\(\sqrt{\lambda}\)</span></td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>
+二项分布概率的标准差是如何转化的？
+</summary>
+<p>这个变换基于二项分布的性质以及随机变量比率的性质。我们从基本的均值和标准差公式出发，看看这是如何转换的。</p>
+<h3 id="二项分布变量-x-的均值和标准差">二项分布变量 <span
+class="math inline">\(X\)</span> 的均值和标准差</h3>
+<p>给定一个二项分布变量 <span
+class="math inline">\(X\)</span>，它的均值和标准差分别是： - 均值 <span
+class="math inline">\(E[X] = n\pi\)</span> - 标准差 <span
+class="math inline">\(\sigma_X = \sqrt{n\pi(1-\pi)}\)</span></p>
+<h3 id="频率-p-fracxn-的均值和标准差">频率 <span class="math inline">\(p
+= \frac{X}{n}\)</span> 的均值和标准差</h3>
+<p>当我们考虑频率 <span class="math inline">\(p =
+\frac{X}{n}\)</span>，我们需要理解它的均值和标准差是如何从 <span
+class="math inline">\(X\)</span> 的均值和标准差变换来的。</p>
+<h4 id="均值的变换">均值的变换</h4>
+<p>首先，<span class="math inline">\(p\)</span> 的均值（即期望值）是：
+<span class="math inline">\(E[p] = E\left[\frac{X}{n}\right] =
+\frac{E[X]}{n}\)</span></p>
+<p>由于 <span class="math inline">\(E[X] = n\pi\)</span>，所以： <span
+class="math inline">\(E[p] = \frac{n\pi}{n} = \pi\)</span></p>
+<p>这说明，尽管 <span class="math inline">\(X\)</span>
+的期望值随着试验次数 <span class="math inline">\(n\)</span> 和成功概率
+<span class="math inline">\(\pi\)</span> 的乘积而增加，频率 <span
+class="math inline">\(p\)</span> 的期望值只依赖于成功概率 <span
+class="math inline">\(\pi\)</span>。</p>
+<h4 id="标准差的变换">标准差的变换</h4>
+<p>标准差的变换更为复杂。首先，回顾一下标准差的定义。对于任意常数 <span
+class="math inline">\(a\)</span> 和随机变量 <span
+class="math inline">\(X\)</span>，有 <span
+class="math inline">\(\sigma_{aX} = |a|\sigma_X\)</span>。因此，对于
+<span class="math inline">\(p = \frac{X}{n}\)</span>，我们有：</p>
+<p><span class="math inline">\(\sigma_p = \sqrt{\text{Var}(p)} =
+\sqrt{\text{Var}\left(\frac{X}{n}\right)} =
+\frac{1}{n}\sqrt{\text{Var}(X)}\)</span></p>
+<p>由于 <span class="math inline">\(\text{Var}(X) =
+n\pi(1-\pi)\)</span>，我们得到：</p>
+<p><span class="math inline">\(\sigma_p = \frac{1}{n}\sqrt{n\pi(1-\pi)}
+= \sqrt{\frac{\pi(1-\pi)}{n}}\)</span></p>
+<p>这个变换说明，虽然原始二项分布变量 <span
+class="math inline">\(X\)</span> 的分散程度随着 <span
+class="math inline">\(n\)</span> 和 <span
+class="math inline">\(\pi\)</span> 的变化而变化，但当我们考虑频率 <span
+class="math inline">\(p\)</span> 时，其分散程度（标准差）与试验次数
+<span class="math inline">\(n\)</span>
+的平方根成反比，反映了大数定律的一个方面：随着试验次数的增加，频率的变异性减小。</p>
+<h3 id="总结">总结</h3>
+通过这些变换，我们可以看到二项分布变量的频率 <span
+class="math inline">\(p\)</span> 相对于原始变量 <span
+class="math inline">\(X\)</span>
+的均值和标准差如何变化，这反映了在大样本极限下，频率稳定于其真实概率的统计性质。
+</details>
+<h2 id="引入">引入</h2>
+<h3 id="问题0">问题0：</h3>
+<p>袋内里有2黄球，3白球，进行5次摸球，每次摸球都放回，如何计算摸出2个黄球的概率？</p>
+<blockquote>
+<p><code>为了解释问题0，而需要理解问题1</code></p>
+</blockquote>
+<h3 id="问题1">问题1：</h3>
+<p>假设你是一位教师，你需要为一场即将到来的科学展览安排4名学生从你的班级中担任展示。你的班级有10名学生，你想知道有多少种不同的方式来选择并排列这4名学生进行展示。</p>
+<blockquote>
+<p><code>为了解决问题1，你需要理解排列数与组合数这两个关键的概念</code></p>
+</blockquote>
+<p>但......在这两个部分开始之前，你需要理解什么是阶乘。</p>
+<p><mark>请完全信任我的叙述，我为我接下来的话负责，请放轻松，享受概念理解与问题解决的过程..........</mark></p>
+<h2 id="前言">前言</h2>
+<p><span
+class="math inline">\(n!\)</span>（读作“n阶乘”）表示从1乘到n的所有整数的乘积。阶乘是组合数学中一个非常重要的概念，用于计算排列、组合等问题中的可能性数量。具体来说，<span
+class="math inline">\(n!\)</span>的定义如下：</p>
+<p><span class="math inline">\(n! = n \times (n-1) \times (n-2) \times
+\cdots \times 3 \times 2 \times 1\)</span></p>
+<p>对于<span class="math inline">\(n =
+0\)</span>的特殊情况，按照定义，<span class="math inline">\(0! =
+1\)</span>。这个定义是为了使得阶乘在数学公式和理论中保持一致性，尤其是在组合和排列的计算中。</p>
+<p>例子：</p>
+<ul>
+<li><span class="math inline">\(1! = 1\)</span></li>
+<li><span class="math inline">\(2! = 2 \times 1 = 2\)</span></li>
+<li><span class="math inline">\(3! = 3 \times 2 \times 1 =
+6\)</span></li>
+<li><span class="math inline">\(4! = 4 \times 3 \times 2 \times 1 =
+24\)</span></li>
+<li>以此类推。</li>
+</ul>
+<p>阶乘的快速增长性质使得它在计算大量元素的排列组合时非常有用，但也意味着随着n的增大，n的阶乘非常快地变得非常大。</p>
+<h2 id="排列数">排列数</h2>
+<h3 id="排列的基本思想">排列的基本思想</h3>
+<p>排列关注的是顺序，即从n个不同元素中选取k个并按照一定的顺序排列它们的方法数。比如说，如果有三本书A、B、C，选取两本书并排列它们，AB和BA被视为两种不同的排列。</p>
+<h3 id="公式的推导">公式的推导</h3>
+<ol type="1">
+<li><strong>第一步的选择</strong>：你有n个选项可以选择。</li>
+<li><strong>第二步的选择</strong>：在选择了第一个元素之后，你还剩下(n-1)个选项。</li>
+<li><strong>第三步的选择</strong>：选择了两个元素后，剩下(n-2)个选项。</li>
+<li><strong>以此类推</strong>，直到你选择了k个元素。当你选择到第k个元素时，你只剩下(n-k+1)个选项。</li>
+</ol>
+<p>将这些选择的数量相乘，我们得到排列的总数为:</p>
+<p><span class="math inline">\(n \times (n-1) \times (n-2) \times \cdots
+\times (n-k+1)\)</span></p>
+<p>这个连乘可以扩展为n的阶乘除以(n-k)的阶乘，因为阶乘包含了所有从n乘到1的乘积，而我们只需要前k个数的乘积。因此，公式可以写为:</p>
+<p><span class="math inline">\(P(n, k) = \frac{n!}{(n-k)!}\)</span></p>
+<p>这个公式有效地计算了在n个不同选项中选择k个并进行排列的所有可能方式的数量。</p>
+<h3 id="为什么需要除以-n-k">为什么需要除以 <span
+class="math inline">\((n-k)!\)</span></h3>
+<p>在选择过程中，我们只关心前k个选择的乘积，而<span
+class="math inline">\(n!\)</span>
+包含了从n乘到1的所有乘积。为了剔除我们不需要的部分（即，从<span
+class="math inline">\(n-k\)</span>乘到1的部分），我们通过除以<span
+class="math inline">\((n-k)!\)</span>
+来消除这些多余的乘积。这样，剩下的就仅仅是前k个选择的乘积，正好对应于我们想要计算的排列数。</p>
+<hr />
+<p>我们已经知晓在数据库里将n个数据排列的所有可能情况，对排列数的答案进行二次理解：</p>
+<p>排列可解读为两个过程：选出目标数据，对目标数据进行乱序重组</p>
+<p>对数字进行排列可以理解为两个过程：从数据库里选出哪些数字需要排列-打乱这些数字以便获得所有可能的情况</p>
+<p>故：</p>
+<p>我们得出组合数的概念：</p>
+<h2 id="组合数">组合数</h2>
+<p>组合数的公式 <span class="math inline">\(C(n, k) =
+\frac{n!}{k!(n-k)!}\)</span>
+是从排列数的概念发展而来的，但加上了对选择顺序不敏感的考虑。要理解这个公式，我们需要先理解排列和组合的区别，然后看看这个公式是如何从排列的概念中演化出来的。</p>
+<h3 id="排列与组合的区别">排列与组合的区别</h3>
+<ul>
+<li><strong>排列（Permutations）</strong>：是指从n个不同元素中，任取k个元素按照一定的顺序排成一列的过程。排列强调的是顺序，即同样的元素以不同的顺序排列被视为不同的排列。</li>
+<li><strong>组合（Combinations）</strong>：也是从n个不同元素中任取k个元素，但是与排列不同的是，组合不考虑这些元素的顺序。即，只要元素的组合相同，不管顺序如何，都被认为是同一种组合。</li>
+</ul>
+<h3 id="公式的来历">公式的来历</h3>
+<ol type="1">
+<li><p><strong>排列的数量</strong>：首先，我们考虑所有可能的排列，即从n个不同元素中取出k个来排列的总数，这个数量是
+<span class="math inline">\(P(n, k) =
+\frac{n!}{(n-k)!}\)</span>。这里，<span
+class="math inline">\(n!\)</span> 表示n的所有整数乘积，<span
+class="math inline">\((n-k)!\)</span>
+是因为我们从n中取出k个，剩下的<span
+class="math inline">\(n-k\)</span>个不参与排列。</p></li>
+<li><p><strong>引入组合的考虑</strong>：组合不考虑顺序。假设我们已经从n个元素中选出了k个，这k个元素自己可以以<span
+class="math inline">\(k!\)</span>种不同的方式排列（这就是它们的排列数）。但因为组合不关心这些内部的排列方式，所以实际的组合数要比排列数少。</p></li>
+<li><p><strong>组合数的定义</strong>：因此，要从排列数转换为组合数，我们需要除以这k个元素的所有可能排列，即除以<span
+class="math inline">\(k!\)</span>。这就给出了组合数的公式 <span
+class="math inline">\(C(n, k) = \frac{n!}{k!(n-k)!}\)</span>。</p></li>
+</ol>
+<h3 id="直观理解">直观理解</h3>
+<p>公式的本质是在说：当你从一组n个元素中选择k个元素时，首先你有<span
+class="math inline">\(n!\)</span>种方式选择和排列这些元素。但因为在组合中顺序不重要，所以你需要除以两个数：
+- <span
+class="math inline">\(k!\)</span>：因为你选择的k个元素可以以<span
+class="math inline">\(k!\)</span>种不同方式被排列，但这些排列对于组合来说都是相同的。
+- <span
+class="math inline">\((n-k)!\)</span>：你实际上没有关心剩下的<span
+class="math inline">\(n-k\)</span>个元素是如何排列的，所以也需要排除这些情况。</p>
+<p>这个公式巧妙地使用了数学原理，允许我们准确计算在不考虑顺序的情况下，从n个不同元素中选择k个元素的方法数。</p>
+<h2 id="问题解决">问题解决</h2>
+<p>问题0的解决：</p>
+<p>摸球可以抽象为以下过程：</p>
+<p>摸球事件A：a，b，c，d，e，摸球事件A的成功概率：2/5，失败概率为3/5</p>
+<p>求：摸球事件A里，2次成功，3次失败的概率</p>
+<p>那么：</p>
+<p>由浅入深：</p>
+<ul>
+<li>先列举情况1：a成功，b成功，c失败，d失败，e失败
+<ul>
+<li>情况1发生的概率为：<span class="math inline">\(P(a)\times P(b)\times
+P(c)\times P(b)\times P(d)\times P(e)\)</span></li>
+</ul></li>
+</ul>
+<p>但，这是一种情况，除此之外还有很多情况，</p>
+<p>因为，只要abcde事件的结果满足：其中2次事件成功，3次事件失败，那么就达到了最终摸出2次黄球的目的</p>
+<p>所以定义”函数a“为：2次事件成功，3次事件失败</p>
+<p>又，函数a又可以抽象为两个步骤：从abcdee事件中抽取2项认为成功，但抽完后你其实已经知道了哪三次事件失败，所以3次事件失败不需要抽取，（当然，你也可以认为在3项事件里抽取3项）</p>
+<p>所以：二项分布的公式为 ：<span
+class="math inline">\(抽取事件可能发生的情况\times n次事件成功的情况
+\times m事件失败的情况\)</span></p>
+<p>于是，你终于知道了二项分布公式的来源：</p>
+<p>即：</p>
+<p>$ P(X=k)=nkp<sup>k(1-p)</sup>{n-k} $</p>
+<h2 id="结论-1">结论</h2>
+<p>二项分布的概率质量函数（PMF，Probability Mass
+Function）是用来描述在固定次数 <span class="math inline">\(n\)</span>
+的独立实验中，每次实验只有两种可能结果（成功或失败）且成功的概率为 <span
+class="math inline">\(p\)</span> 的情况下，获得成功的次数 <span
+class="math inline">\(k\)</span> 的概率。二项分布的公式如下：</p>
+<p><span class="math inline">\(P(X=k)=\binom
+nkp^k(1-p)^{n-k}\)</span></p>
+<p>其中： - <span class="math inline">\(P(X = k)\)</span> 表示在 <span
+class="math inline">\(n\)</span> 次独立实验中恰好获得 <span
+class="math inline">\(k\)</span> 次成功的概率。 - <span
+class="math inline">\(\binom{n}{k}\)</span> 是组合数，表示从 <span
+class="math inline">\(n\)</span> 个实验中选择 <span
+class="math inline">\(k\)</span> 个成功的方式数，计算公式为 <span
+class="math inline">\(\frac{n!}{k!(n-k)!}\)</span>，其中 <span
+class="math inline">\(n!\)</span> 表示 <span
+class="math inline">\(n\)</span> 的阶乘，即 <span
+class="math inline">\(1 \times 2 \times \cdots \times n\)</span>。 -
+<span class="math inline">\(p\)</span> 是每次实验成功的概率。 - <span
+class="math inline">\(1-p\)</span> 是每次实验失败的概率。 - <span
+class="math inline">\(k\)</span> 是成功的次数，可以取的值为 <span
+class="math inline">\(0, 1, 2, \ldots, n\)</span>。</p>
+<p>二项分布模型是统计学和概率论中非常重要的一个概率分布，广泛应用于质量控制、临床试验和调查抽样等领域。</p>
+<h2 id="外推">外推</h2>
+<p>问题2：假设有一个骰子，有六面，投掷10次，想要知道1点、2点和3点各出现2次，4点、5点和6点各出现1次的概率。</p>
+<p>与二项分布相对应，我们有三项分布（Trinomial
+Distribution），但更常见的是称为多项分布（Multinomial
+Distribution），其中三项分布可以看作是多项分布的一个特例。多项分布是二项分布的一个推广，用于描述在固定次数的独立试验中，每次试验有多于两种可能结果的情况，并且每种结果都有固定的概率。</p>
+<p><code>多项分布的核心是事件与事件之间的独立</code></p>
+<p><mark>所以我认为：多项分布可以抽象为以下过程：</mark></p>
+<blockquote>
+<ol type="1">
+<li>若干事件与若干事件发生的结果：
+<ol type="1">
+<li>事件：A-S-D-F-G-H-J-K-L-P</li>
+<li>事件发生的结果：a-s-d-f-g-h-j-k-l-p</li>
+</ol></li>
+<li>事件发生的概率：
+<ol type="1">
+<li>跌骰子获得1的概率为1/6</li>
+</ol></li>
+<li>满足一定条件时，事件结果的概率：
+<ol type="1">
+<li>进行10次骰子事件，2次1，2次5，6次3的概率</li>
+</ol></li>
+</ol>
+</blockquote>
+<p><code>只有将事物抽象，才能洞察事物的本质</code></p>
+<blockquote>
+<p>跌骰子事件一共发生10次，按时间维度将这10个事件标记为：</p>
+<p>A-S-D-F-G-H-J-K-L-P</p>
+<p>每次事件有六种可能的结果：</p>
+<p>1-2-3-4-5-6</p>
+<p>要求1:在总事件A-S-D-F-G-H-J-K-L-P中，有2次满足情况a，有2次满足情况b，有3次满足情况c，有3次满足d的概率</p>
+</blockquote>
+<p><code>抛开条件，总事件会有多少种可能？</code></p>
+<blockquote>
+<p>因为我对总事件按时间维度标记为A-S-D-F-G-H-J-K-L-P</p>
+<p>于是对应地，总事件的结果(result-1)标记为a-s-d-f-g-h-j-k-l-p</p>
+</blockquote>
+<blockquote>
+<p>回到要求1，要求1可以认为对总事件的结果进行组合，在“a-s-d-f-g-h-j-k-l-p”抽2项记作q事件，抽2项记作w事件，抽3项计作e事件，抽3项计作r事件</p>
+<p>问题变为，q事件，w事件，e事件，r事件同时发生时的概率（计作事件X）</p>
+<p>q事件发生的概率是：<span class="math inline">\(\frac 1 6 \times \frac
+1 6\)</span></p>
+<p>w事件发生的概率是：<span class="math inline">\(\frac 1 6 \times \frac
+1 6\)</span></p>
+<p>e事件发生的概率是：<span class="math inline">\(\frac 1 6 \times \frac
+1 6\times \frac 1 6\)</span></p>
+<p>r事件发生的概率是：<span class="math inline">\(\frac 1 6 \times \frac
+1 6\times \frac 1 6\)</span></p>
+<p>但............单单求出事件X发生的概率还不能解决问题，因为要求Q转化为事件X时进行了组合，意味着不止一种情况，所以求出事件X的概率后，还需与组合数相乘，才遍历了遵循要求Q后，可能发生的
+所有情况</p>
+</blockquote>
+<p>至此，你已经成功明白了多项分布，让我们来尝试使用它</p>
+<h3 id="多项分布的定义">多项分布的定义</h3>
+<p>假设一个实验有 <span class="math inline">\(k\)</span>
+个可能的结果，每个结果发生的概率分别是 <span class="math inline">\(p_1,
+p_2, ..., p_k\)</span>，并且 <span
+class="math inline">\(\sum_{i=1}^{k}p_i = 1\)</span>。如果我们进行了
+<span class="math inline">\(n\)</span>
+次这样的独立实验，那么每种结果分别发生 <span class="math inline">\(x_1,
+x_2, ..., x_k\)</span> 次（其中 <span
+class="math inline">\(\sum_{i=1}^{k}x_i =
+n\)</span>）的概率由多项分布给出：</p>
+<p><span class="math display">\[ P(X_1=x_1, X_2=x_2, ..., X_k=x_k) =
+\frac{n!}{x_1!x_2!...x_k!}p_1^{x_1}p_2^{x_2}...p_k^{x_k} \]</span></p>
+<p>来道多项分布的题目考考你吧：</p>
+<h3 id="题目">题目</h3>
+<p>一个袋子里有5个红球、3个蓝球和2个绿球，总共10个球。现在不放回地随机抽取4个球。设随机变量<span
+class="math inline">\(X\)</span>、<span
+class="math inline">\(Y\)</span>和<span
+class="math inline">\(Z\)</span>分别表示抽到的红球、蓝球和绿球的数量。</p>
+<p>计算以下概率：</p>
+<ol type="1">
+<li>抽到2个红球，1个蓝球和1个绿球的概率。</li>
+<li>抽到至少1个绿球的概率。</li>
+</ol>
+<p><strong>提示：</strong>使用多项分布的概率质量函数计算第1问。对于第2问，可以考虑使用补集的概念（即1减去没有抽到绿球的概率）来简化计算。</p>
+<h4 id="解题步骤">解题步骤</h4>
+<ol type="1">
+<li><p><strong>对于第1问：</strong>首先确定抽取球的概率分布。红球的概率是<span
+class="math inline">\(p_1 = \frac{5}{10}\)</span>，蓝球的概率是<span
+class="math inline">\(p_2 = \frac{3}{10}\)</span>，绿球的概率是<span
+class="math inline">\(p_3 =
+\frac{2}{10}\)</span>。然后使用多项分布的公式计算概率。</p></li>
+<li><p><strong>对于第2问：</strong>计算不抽到绿球的概率，即所有球都是红色或蓝色的概率，然后用1减去这个概率得到至少抽到一个绿球的概率。</p></li>
+</ol>
+<p>我会先帮你计算第1问的概率，然后再计算第2问的。让我们先开始吧！</p>
+<h4 id="答案">答案</h4>
+<ol type="1">
+<li>抽到2个红球，1个蓝球和1个绿球的概率是0.18。</li>
+<li>抽到至少1个绿球的概率是0.5904。</li>
+</ol>
+<p>看看你能不能根据这些步骤来理解多项分布的应用和计算过程！</p>
+<h4 id="答案的解释">答案的解释</h4>
+<p>至少抽到1个绿球可转化为：</p>
+<p>在结果abcd中抽取一个结果认为抽到绿球（计作I），其余三中结果随便如何都已经满足情况了（计作U）</p>
+<p><sub>但..........题目有一个致命的陷阱：摸完球后不放回,所以以上解决步骤全部失效........</sub></p>
+<p><mark>这也让我们明白，多项分布仅仅适用于每次摸球后放回的情况，若每次摸球放回，那么上述的所有解答过程再次生效</mark></p>
+<h3 id="应用">应用</h3>
+<p>多项分布在统计学中非常有用，特别是在处理分类数据时。它广泛应用于市场研究、选举预测、生物信息学以及任何需要预测多种类别结果分布的领域。</p>
+<p>多项分布相比于二项分布，提供了更加广泛的视角来观察和分析只有两种结果的试验之外的情形，使得我们能够处理更加复杂的实验数据。</p>
+<hr />
+<h2 id="建立模型的方法">建立模型的方法</h2>
+<p>把统计模型比作一种“地图”是一个形象而贴切的比喻。就像地图帮助我们理解和导航复杂的地理环境一样，统计模型帮助我们理解数据中的复杂关系和模式，以及预测未来事件或结果。</p>
+<p>这里有几个方面，说明了为什么统计模型像是一张地图：</p>
+<ol type="1">
+<li><p><strong>简化复杂性</strong>：地图是现实世界的简化表示，它突出显示重要的特征（如道路、城市、河流）并忽略其他细节。同样，统计模型通过数学表达式和假设简化了现实世界的复杂性，只捕捉关键的数据特征和关系。</p></li>
+<li><p><strong>导航和决策</strong>：地图帮助我们规划路线和做出旅行决策。类似地，统计模型可以基于现有数据指导我们做出预测和决策，比如预测市场趋势或评估新药物的效果。</p></li>
+<li><p><strong>不同的尺度和类型</strong>：就像有不同类型的地图（如政治地图、物理地图、街道地图）以及不同的尺度和详细程度，统计模型也有多种类型，每种类型都适用于不同的数据和问题。例如，线性回归模型用于分析连续变量之间的关系，而逻辑回归用于分类问题。</p></li>
+<li><p><strong>需要解释</strong>：地图需要一定的知识和技能来正确解读。同样，统计模型也需要专业知识来构建、解释和验证。错误的模型或误解模型结果可能导致错误的决策。</p></li>
+<li><p><strong>局限性和假设</strong>：任何地图都无法完美地捕捉地理实际情况的所有细节，它有其局限性。同样，所有统计模型都建立在特定的假设基础上，这些假设的有效性直接影响模型的准确性和适用性。</p></li>
+</ol>
+<p>通过这个比喻，我们可以更容易地理解统计模型的作用和重要性，以及在使用它们时需要考虑的因素。</p>
+<p>要区分一个与统计模型相关的东西是参数还是统计量，你可以依据它们的定义和作用来判断：</p>
+<h3 id="参数">参数</h3>
+<ul>
+<li><strong>定义</strong>：参数是用于定义特定统计模型的固有特性，它们是模型的基础组成部分。在模型中，参数通常是理论上的、固定的值，尽管在实际应用中我们可能不知道它们的确切值。</li>
+<li><strong>作用</strong>：参数描述了总体的特征。在二项分布的例子中，试验的次数
+<span class="math inline">\(n\)</span> 和每次试验成功的概率 <span
+class="math inline">\(p\)</span>
+是总体的参数，它们定义了整个分布的形状和性质。</li>
+<li><strong>特点</strong>：参数是抽象的，不直接从数据中获得，而是通过模型来推断。它们通常用于总体的描述，而不是样本。</li>
+</ul>
+<h3 id="统计量">统计量</h3>
+<ul>
+<li><strong>定义</strong>：统计量是基于样本数据计算得到的值，用于对总体的参数进行估计或描述样本的特征。</li>
+<li><strong>作用</strong>：统计量用于从样本数据中提取信息，以估计总体的参数或描述样本的特征。例如，样本均值、样本方差和样本标准差是常见的统计量，用来估计总体的均值、方差和标准差。</li>
+<li><strong>特点</strong>：统计量是具体的，可以直接从数据中计算得出。它们用于样本的描述，或者作为估计总体参数的基础。</li>
+</ul>
+<h3 id="判断方法">判断方法</h3>
+<ul>
+<li><strong>来源</strong>：参数描述总体，是理论上的；统计量基于样本，是实际计算得到的。</li>
+<li><strong>目的</strong>：参数用于定义模型和描述总体特征；统计量用于从样本中提取信息，以估计参数或描述样本。</li>
+<li><strong>表示</strong>：在讨论时，参数通常用希腊字母表示（如 <span
+class="math inline">\(p\)</span>, <span
+class="math inline">\(\mu\)</span>, <span
+class="math inline">\(\sigma^2\)</span>），而统计量则使用罗马字母（如
+<span class="math inline">\(\bar{x}\)</span>, <span
+class="math inline">\(s^2\)</span>, <span
+class="math inline">\(s\)</span>）。</li>
+</ul>
+<p>通过这些判断依据，你可以更清晰地区分统计模型中的元素是参数还是统计量。</p>
+<h2 id="建立二项分布的统计模型">建立二项分布的统计模型</h2>
+<p>二项分布是一种离散概率分布，它描述了在一系列独立的、相同的试验中，每次试验只有两种可能结果（通常称为“成功”和“失败”），成功的次数的概率分布。这种分布的特性使其在统计分析中非常有用，尤其是在进行伯努利试验（即只有两种可能结果的试验）的场景中。</p>
+<h3 id="参数-1">参数</h3>
+<p>二项分布由两个参数定义：</p>
+<ul>
+<li><span class="math inline">\(n\)</span>:
+试验的次数，即进行了多少次独立的伯努利试验。</li>
+<li><span class="math inline">\(p\)</span>: 单次试验中成功的概率。</li>
+</ul>
+<p>给定这两个参数，我们可以使用二项分布来计算在 <span
+class="math inline">\(n\)</span> 次试验中恰好有 <span
+class="math inline">\(k\)</span>
+次成功的概率。这个概率可以通过二项概率公式计算得到：</p>
+<p>$ P(X=k)=nkp<sup>k(1-p)</sup>{n-k} $</p>
+<p>其中，<span class="math inline">\(P(X = k)\)</span> 表示恰好有 <span
+class="math inline">\(k\)</span> 次成功的概率，<span
+class="math inline">\(\binom{n}{k}\)</span> 是组合数，表示从 <span
+class="math inline">\(n\)</span> 次试验中选择 <span
+class="math inline">\(k\)</span> 次成功的方式数。</p>
+<h3 id="统计量-1">统计量</h3>
+<p>二项分布的统计量主要包括均值（期望值）、方差和标准差。这些统计量提供了二项分布特征的重要信息，比如分布的中心位置（均值）和分布的离散程度（方差和标准差）。以下是它们的计算公式：</p>
+<ol type="1">
+<li>均值（期望值）：<span class="math inline">\(\mu = np\)</span>
+<ul>
+<li>二项分布的均值表示在多次试验中成功的平均次数。其中，<span
+class="math inline">\(n\)</span> 是试验的总次数，<span
+class="math inline">\(p\)</span> 是每次试验成功的概率。</li>
+</ul></li>
+<li>方差：<span class="math inline">\(\sigma^2 =
+np(1-p)\)</span>【定义】
+<ul>
+<li>方差衡量的是成功次数在多次试验中的变异程度，即观测值与均值之间的离散程度。这里，<span
+class="math inline">\(\sigma^2\)</span> 代表方差，<span
+class="math inline">\(n\)</span> 是试验次数，<span
+class="math inline">\(p\)</span> 是每次试验成功的概率，<span
+class="math inline">\(1-p\)</span> 则是失败的概率。</li>
+</ul></li>
+<li>标准差：<span class="math inline">\(\sigma = \sqrt{np(1-p)}\)</span>
+<ul>
+<li>标准差是方差的平方根，它提供了一个与原始数据在同一单位下的离散程度测量。二项分布的标准差计算公式是：</li>
+</ul></li>
+<li>比例的标准误差：<span class="math inline">\(SE_p =
+\sqrt{\frac{p(1-p)}{n}}\)</span></li>
+</ol>
+<p>通过这些统计量，我们可以更深入地理解和分析二项分布的性质，如分布的集中趋势和离散程度。这些信息对于数据分析和统计推断非常有用。</p>
+<details>
+<summary>
+标准误差的类型
+</summary>
+<p>在统计学中，标准误差（Standard
+Error，SE）的计算并不仅限于二项分布的情况。标准误差是一个广泛的概念，用于衡量任何统计量（最常见的是样本均值）的估计精确度。标准误差的计算取决于你关注的统计量。以下是几个常见统计量的标准误差的计算方法：
+<strong>样本均值的标准误差</strong></p>
+<p>样本均值的标准误差（SE）是最常见的标准误差类型，用于衡量样本均值作为总体均值估计的可靠性。其计算公式为：</p>
+<p><span class="math inline">\(SE_{\bar{x}} =
+\frac{\sigma}{\sqrt{n}}\)</span></p>
+<p>其中： - <span class="math inline">\(\sigma\)</span> 是总体的标准差，
+- <span class="math inline">\(n\)</span> 是样本的大小。</p>
+<p>在实际应用中，因为总体标准差 <span
+class="math inline">\(\sigma\)</span> 往往是未知的，我们通常用样本标准差
+<span class="math inline">\(s\)</span> 来代替 <span
+class="math inline">\(\sigma\)</span>，因此公式变为：</p>
+<p><span class="math inline">\(SE_{\bar{x}} =
+\frac{s}{\sqrt{n}}\)</span></p>
+<p><strong>比例的标准误差</strong></p>
+<p>对于比例（例如，成功的比例），标准误差可以用来衡量样本比例作为总体比例的估计精确度。其计算公式为：</p>
+<p><span class="math inline">\(SE_p =
+\sqrt{\frac{p(1-p)}{n}}\)</span></p>
+其中： - <span class="math inline">\(p\)</span> 是样本比例， - <span
+class="math inline">\(n\)</span> 是样本大小。
+</details>
+<h3 id="主要特性">主要特性</h3>
+<ul>
+<li><strong>离散性</strong>：二项分布是一种离散分布，因为它描述的是发生次数（成功的次数），这是整数。</li>
+<li><strong>范围</strong>：成功次数 <span
+class="math inline">\(k\)</span> 的可能值范围是从 0 到 <span
+class="math inline">\(n\)</span>。</li>
+<li><strong>均值和方差</strong>：二项分布的均值（期望值）是 <span
+class="math inline">\(np\)</span>，方差是 <span
+class="math inline">\(np(1-p)\)</span>。</li>
+</ul>
+<h3 id="应用场景">应用场景</h3>
+<p>二项分布适用于很多领域，包括但不限于：</p>
+<ul>
+<li><strong>生物学与医学</strong>：研究特定治疗效果的有效性，或某种基因出现的频率。</li>
+<li><strong>质量控制</strong>：产品缺陷率的测量。</li>
+<li><strong>市场研究</strong>：消费者选择特定产品的概率。</li>
+<li><strong>投票行为分析</strong>：在一定群体中，支持特定候选人或提案的比率。</li>
+</ul>
+<h3 id="举例">举例</h3>
+<p>假设我们抛一枚公平的硬币（即 <span class="math inline">\(p =
+0.5\)</span>）10次，我们想知道正面朝上恰好5次的概率。这可以通过将 <span
+class="math inline">\(n=10\)</span>、<span
+class="math inline">\(p=0.5\)</span> 和 <span
+class="math inline">\(k=5\)</span> 代入二项概率公式来计算。</p>
+<p>二项分布是统计学中的基础，对于理解和分析只有两个可能结果的试验非常重要。</p>
+<link rel="stylesheet" href="/css/folder.css" type="text/css"><script src="/js/folder.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" rel="tag"># 统计学</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/03/11/%E6%B6%88%E5%8C%96%E6%80%A7%E6%BA%83%E7%96%A1%E6%8F%8F%E8%BF%B0%E6%96%87%E4%BB%B6/" rel="prev" title="消化性溃疡">
+      <i class="fa fa-chevron-left"></i> 消化性溃疡
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/03/16/challenges%20of%20Poisson%20Distribution/" rel="next" title="常用概率模型-Poisson分布-碰到的问题">
+      常用概率模型-Poisson分布-碰到的问题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">1.</span> <span class="nav-text">结论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83%E5%8F%98%E9%87%8F-x-%E7%9A%84%E5%9D%87%E5%80%BC%E5%92%8C%E6%A0%87%E5%87%86%E5%B7%AE"><span class="nav-number">1.1.</span> <span class="nav-text">二项分布变量 \(X\) 的均值和标准差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%91%E7%8E%87-p-fracxn-%E7%9A%84%E5%9D%87%E5%80%BC%E5%92%8C%E6%A0%87%E5%87%86%E5%B7%AE"><span class="nav-number">1.2.</span> <span class="nav-text">频率 \(p
+&#x3D; \frac{X}{n}\) 的均值和标准差</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9D%87%E5%80%BC%E7%9A%84%E5%8F%98%E6%8D%A2"><span class="nav-number">1.2.1.</span> <span class="nav-text">均值的变换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E5%B7%AE%E7%9A%84%E5%8F%98%E6%8D%A2"><span class="nav-number">1.2.2.</span> <span class="nav-text">标准差的变换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%85%A5"><span class="nav-number">2.</span> <span class="nav-text">引入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%980"><span class="nav-number">2.1.</span> <span class="nav-text">问题0：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%981"><span class="nav-number">2.2.</span> <span class="nav-text">问题1：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">3.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%88%97%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">排列数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E5%88%97%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3"><span class="nav-number">4.1.</span> <span class="nav-text">排列的基本思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F%E7%9A%84%E6%8E%A8%E5%AF%BC"><span class="nav-number">4.2.</span> <span class="nav-text">公式的推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E9%99%A4%E4%BB%A5-n-k"><span class="nav-number">4.3.</span> <span class="nav-text">为什么需要除以 \((n-k)!\)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text">组合数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E5%88%97%E4%B8%8E%E7%BB%84%E5%90%88%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">5.1.</span> <span class="nav-text">排列与组合的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F%E7%9A%84%E6%9D%A5%E5%8E%86"><span class="nav-number">5.2.</span> <span class="nav-text">公式的来历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E8%A7%82%E7%90%86%E8%A7%A3"><span class="nav-number">5.3.</span> <span class="nav-text">直观理解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="nav-number">6.</span> <span class="nav-text">问题解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA-1"><span class="nav-number">7.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%96%E6%8E%A8"><span class="nav-number">8.</span> <span class="nav-text">外推</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E9%A1%B9%E5%88%86%E5%B8%83%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">8.1.</span> <span class="nav-text">多项分布的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">8.2.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E6%AD%A5%E9%AA%A4"><span class="nav-number">8.2.1.</span> <span class="nav-text">解题步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AD%94%E6%A1%88"><span class="nav-number">8.2.2.</span> <span class="nav-text">答案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AD%94%E6%A1%88%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="nav-number">8.2.3.</span> <span class="nav-text">答案的解释</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8"><span class="nav-number">8.3.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">9.</span> <span class="nav-text">建立模型的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0"><span class="nav-number">9.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%9F%E8%AE%A1%E9%87%8F"><span class="nav-number">9.2.</span> <span class="nav-text">统计量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%96%B9%E6%B3%95"><span class="nav-number">9.3.</span> <span class="nav-text">判断方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83%E7%9A%84%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B"><span class="nav-number">10.</span> <span class="nav-text">建立二项分布的统计模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0-1"><span class="nav-number">10.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%9F%E8%AE%A1%E9%87%8F-1"><span class="nav-number">10.2.</span> <span class="nav-text">统计量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E7%89%B9%E6%80%A7"><span class="nav-number">10.3.</span> <span class="nav-text">主要特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">10.4.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B"><span class="nav-number">10.5.</span> <span class="nav-text">举例</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YSZ"
+      src="/images/IMG_6179.JPG">
+  <p class="site-author-name" itemprop="name">YSZ</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width:100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Harry-Potter/" rel="tag">Harry Potter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BB%E5%AD%A6/" rel="tag">医学</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" rel="tag">统计学</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" rel="tag">高等数学</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YSZ</span>
+
+
+  <script src='https://unpkg.com/mermaid@10.9.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize(JSON.stringify());
+    }
+  </script>
+
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

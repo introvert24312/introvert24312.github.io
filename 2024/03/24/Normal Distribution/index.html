@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/sun-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/sun-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ysz.asia","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="引入 问题0 正态分布分布是什么？它是怎么来的？  中心极限定理 结论：一组随机变量满足独立且同分布，且这个共同的分布具有有限的均值和方差，那么无论这些随机变量本身服从何种分布，当随机变量的数量足够多时（通常认为n&gt;30定理成立，但并不绝对），这些随机变量的和（或它们的平均值）的分布将趋向于正态分布 正态分布是中心极限定理的发展 中心极限定理是什么？ 例1: 假设你有100万人身高的数据，你">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用概率分布-正态分布">
+<meta property="og:url" content="https://ysz.asia/2024/03/24/Normal%20Distribution/index.html">
+<meta property="og:site_name" content="(￣▽￣)ノ">
+<meta property="og:description" content="引入 问题0 正态分布分布是什么？它是怎么来的？  中心极限定理 结论：一组随机变量满足独立且同分布，且这个共同的分布具有有限的均值和方差，那么无论这些随机变量本身服从何种分布，当随机变量的数量足够多时（通常认为n&gt;30定理成立，但并不绝对），这些随机变量的和（或它们的平均值）的分布将趋向于正态分布 正态分布是中心极限定理的发展 中心极限定理是什么？ 例1: 假设你有100万人身高的数据，你">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/introvert24312/image/master/example%202%20of%20normal%20distribution.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/introvert24312/image/master/example%201%20of%20normal%20distribution.png">
+<meta property="article:published_time" content="2024-03-24T10:46:27.000Z">
+<meta property="article:modified_time" content="2024-10-12T10:03:13.865Z">
+<meta property="article:author" content="YSZ">
+<meta property="article:tag" content="统计学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/introvert24312/image/master/example%202%20of%20normal%20distribution.png">
+
+<link rel="canonical" href="https://ysz.asia/2024/03/24/Normal%20Distribution/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>常用概率分布-正态分布 | (￣▽￣)ノ</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <!-- Add GitHub Fork corner stard -->
+    <a target="_blank" rel="noopener" href="https://github.com/introvert24312" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <!-- Add GitHub Fork corner end -->
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">(￣▽￣)ノ</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ysz.asia/2024/03/24/Normal%20Distribution/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_6179.JPG">
+      <meta itemprop="name" content="YSZ">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="(￣▽￣)ノ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          常用概率分布-正态分布
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-03-24 18:46:27" itemprop="dateCreated datePublished" datetime="2024-03-24T18:46:27+08:00">2024-03-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-10-12 18:03:13" itemprop="dateModified" datetime="2024-10-12T18:03:13+08:00">2024-10-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%AB%E7%94%9F%E7%BB%9F%E8%AE%A1%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">卫生统计学</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="引入">引入</h2>
+<h3 id="问题0">问题0</h3>
+<p>正态分布分布是什么？它是怎么来的？</p>
+<hr />
+<h4 id="中心极限定理">中心极限定理</h4>
+<p><code>结论：一组随机变量满足独立且同分布，且这个共同的分布具有有限的均值和方差，那么无论这些随机变量本身服从何种分布，当随机变量的数量足够多时（通常认为n&gt;30定理成立，但并不绝对），这些随机变量的和（或它们的平均值）的分布将趋向于正态分布</code></p>
+<p>正态分布是中心极限定理的发展</p>
+<p>中心极限定理是什么？</p>
+<p>例1:</p>
+<p>假设你有100万人身高的数据，你定义样本X，样本大小为50，命令1000人每人制作一个样本X，当你收取1000人的样本均数<span
+class="math inline">\(X_n\)</span>时，定义变量为<span
+class="math inline">\(X_n\)</span>,绘制<span
+class="math inline">\(X_n\)</span>的频数分布直方图，你会得到一个钟形曲线，也叫高斯曲线</p>
+<p>进化</p>
+<p>假设你从赌场获得了一批偏心骰子，这个骰子掷出1的概率为50%，掷出2、3、4、5、6的概率都为10%，投掷10次为1组，记录下每次的结果，你命令1000人每人产生一组结果同时计算骰子10次投掷结果的算数均数，把这个算数均数为<span
+class="math inline">\(C_n\)</span>,定义变量<span
+class="math inline">\(C_n\)</span>,绘制变量<span
+class="math inline">\(C_n\)</span>的频率分布直方图</p>
+<p><img src="https://raw.githubusercontent.com/introvert24312/image/master/example%202%20of%20normal%20distribution.png" alt="example 2 of normal distribution" style="zoom: 25%;" /></p>
+<p><img src="https://raw.githubusercontent.com/introvert24312/image/master/example%201%20of%20normal%20distribution.png" alt="example 1 of normal distribution" style="zoom:25%;" /></p>
+<h3
+id="目前我的能力限制我无法理解公式的来源先记住它">目前我的能力限制我无法理解公式的来源，先记住它：</h3>
+<p>完成上述步骤后，高斯得到了正态分布的密度函数的标准形式：</p>
+<p>$ f(x) = e^{-} $</p>
+<p>在这里，<span class="math inline">\(\mu\)</span>
+是误差的平均值，<span class="math inline">\(\sigma^2\)</span>
+是方差，它们分别代表了测量误差的中心位置和分布的宽度。</p>
+<p>正态分布的3σ（3西格玛）法则，也称为经验法则，是基于正态分布性质的一个规则，它描述了数据点分布在其平均值周围的情况。这个法则是从正态分布的数学性质中直接推导出来的。</p>
+<h3 id="正态分布的定义">正态分布的定义</h3>
+<p>首先，回顾一下正态分布的数学定义：一个随机变量 <span
+class="math inline">\(X\)</span> 如果服从一个均值为 <span
+class="math inline">\(\mu\)</span>，标准差为 <span
+class="math inline">\(\sigma\)</span>
+的正态分布，其概率密度函数（PDF）为：</p>
+<p>$ f(x) = e^{-} $</p>
+<h3 id="σ法则的来源">3σ法则的来源</h3>
+<p>正态分布的一个关键特性是其对称性和特定的概率分布形状。3σ法则利用了正态分布的这些性质，具体规则如下：</p>
+<ul>
+<li>约68.27%的数据点落在 <span class="math inline">\(\mu -
+\sigma\)</span> 和 <span class="math inline">\(\mu + \sigma\)</span>
+之间（即平均值一个标准差内）。</li>
+<li>约95.45%的数据点落在 <span class="math inline">\(\mu -
+2\sigma\)</span> 和 <span class="math inline">\(\mu + 2\sigma\)</span>
+之间（即平均值两个标准差内）。</li>
+<li>约99.73%的数据点落在 <span class="math inline">\(\mu -
+3\sigma\)</span> 和 <span class="math inline">\(\mu + 3\sigma\)</span>
+之间（即平均值三个标准差内）。</li>
+</ul>
+<h3 id="数学推导">数学推导</h3>
+<p>3σ法则的数学基础来自于正态分布的积分性质。具体地说，对正态分布的概率密度函数在特定区间内积分，可以得到数据点落在这个区间内的概率。例如，计算随机变量
+<span class="math inline">\(X\)</span> 的值落在 <span
+class="math inline">\(\mu - \sigma\)</span> 和 <span
+class="math inline">\(\mu + \sigma\)</span>
+之间的概率，可以通过下面的积分得到：</p>
+<p>$ P(- X + ) = _{- }^{+ } e^{-} dx $</p>
+<p>通过对正态分布进行积分，我们可以得到上述的概率值。实际上，这些具体的概率值（68.27%，95.45%，99.73%）来自于正态分布的累积分布函数（CDF），它提供了随机变量取值小于或等于某个值的概率。</p>
+<p><code>但数据的量化需要一个标准，于是标引入准分布，定义变量Z</code></p>
+<p><span class="math inline">\(Z = \frac{X - \mu}{\sigma}\)</span></p>
+<p><code>绘制变量Z的频率直方图，得到标注的正态分布的曲线</code></p>
+<p>Z值表如下（也叫<span
+class="math inline">\(\phi或\Phi\)</span>,读作fai）</p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/introvert24312/image/master/z.png"
+alt="z" />
+<figcaption aria-hidden="true">z</figcaption>
+</figure>
+<h3 id="正态分布的性质">正态分布的性质</h3>
+<p>- 均值：</p>
+<p>​ <span class="math inline">\(\mu_Z = \mu_X + \mu_Y\)</span></p>
+<p>​ <span class="math inline">\(\mu_W = \mu_X - \mu_Y\)</span></p>
+<p>- 方差：</p>
+<p>​ <span class="math inline">\(\sigma_W^2 = \sigma_X^2 +
+\sigma_Y^2\)</span></p>
+<details>
+<summary>
+为什么正态分布中方差只加不减
+</summary>
+<p>方差的性质 <span class="math inline">\(\sigma_W^2 = \sigma_X^2 +
+\sigma_Y^2\)</span>，当考虑两个随机变量 <span
+class="math inline">\(X\)</span> 和 <span
+class="math inline">\(Y\)</span> 的差 <span class="math inline">\(W = X
+- Y\)</span>
+时，即使是在它们的差的情况下，方差之和而不是方差之差出现在公式中，这背后的原因与随机变量的独立性和方差的数学性质有关。</p>
+<h3 id="独立性">独立性</h3>
+<p>当两个随机变量 <span class="math inline">\(X\)</span> 和 <span
+class="math inline">\(Y\)</span>
+独立时，它们之间没有相互影响。这意味着一个变量的变化不会影响另一个变量的分布。因此，当我们计算它们的和或差的方差时，我们只需要考虑每个变量自身的变异性，而不是它们之间的相互作用。</p>
+<h3 id="方差的定义">方差的定义</h3>
+<p>方差衡量随机变量和其均值的偏差的平方的平均值，是衡量随机变量分散程度的度量。方差的计算公式为
+<span class="math inline">\(\sigma^2 = E[(X - \mu)^2]\)</span>，其中
+<span class="math inline">\(E\)</span> 表示期望值操作符，<span
+class="math inline">\(\mu\)</span> 是随机变量 <span
+class="math inline">\(X\)</span> 的均值。</p>
+<h3 id="方差的加法性质">方差的加法性质</h3>
+<p>对于独立随机变量的和或差，方差的加法性质说明，总的方差是各个随机变量方差的和。数学上，这可以通过方差的定义和随机变量的独立性质推导得出。对于差
+<span class="math inline">\(W = X - Y\)</span>，其方差为：</p>
+<p><span class="math display">\[\begin{align*}
+\sigma_W^2 &amp;= \text{Var}(X - Y) \\
+&amp;= \text{Var}(X) + \text{Var}(-Y) \\
+&amp;= \sigma_X^2 + \text{Var}(-Y)
+\end{align*}\]</span></p>
+<p>由于 <span class="math inline">\(\text{Var}(aY) =
+a^2\text{Var}(Y)\)</span>（这里 <span class="math inline">\(a =
+-1\)</span>），我们有：</p>
+<p><span class="math display">\[\begin{align*}
+\text{Var}(-Y) &amp;= (-1)^2\text{Var}(Y) \\
+&amp;= \text{Var}(Y) \\
+&amp;= \sigma_Y^2
+\end{align*}\]</span></p>
+<p>因此，</p>
+<p><span class="math inline">\(\sigma_W^2 = \sigma_X^2 +
+\sigma_Y^2\)</span></p>
+这显示了，即使是随机变量的差，其方差也是组成随机变量方差的总和。这是因为方差衡量的是变异性，而变异性在随机变量相加或相减时是累积的，不考虑方向（正或负）。
+</details>
+<details>
+<summary>
+为什么正态分布中均值有加有减
+</summary>
+<p>这是因为随机变量的期望值（均值）具有线性性质。具体来说，随机变量的期望值（或均值）遵循以下规则：</p>
+<p>假设 <span class="math inline">\(X\)</span> 和 <span
+class="math inline">\(Y\)</span> 是两个随机变量，且 <span
+class="math inline">\(\mu_X\)</span> 和 <span
+class="math inline">\(\mu_Y\)</span>
+分别是它们的期望值（均值）。如果我们定义一个新的随机变量 <span
+class="math inline">\(W = X - Y\)</span>，那么 <span
+class="math inline">\(W\)</span> 的期望值（均值）是 <span
+class="math inline">\(X\)</span> 和 <span
+class="math inline">\(Y\)</span> 均值的差，即：</p>
+<p><span class="math inline">\(E[W] = E[X - Y]\)</span></p>
+<p>根据期望值的线性性质，我们有：</p>
+<p><span class="math inline">\(E[X - Y] = E[X] - E[Y]\)</span></p>
+<p>这就是说：</p>
+<p><span class="math inline">\(\mu_W = \mu_X - \mu_Y\)</span></p>
+<h3 id="原因解释">原因解释：</h3>
+<ol type="1">
+<li><p><strong>期望值的线性性质</strong>：这个性质说明，任意两个随机变量
+<span class="math inline">\(X\)</span> 和 <span
+class="math inline">\(Y\)</span>
+的线性组合的期望值等于各自期望值的相同线性组合。简单来说，就是你可以将期望值的运算“分发”到随机变量的运算中。</p></li>
+<li><p><strong>独立与非独立随机变量</strong>：值得注意的是，这个性质不依赖于
+<span class="math inline">\(X\)</span> 和 <span
+class="math inline">\(Y\)</span> 是否独立。无论 <span
+class="math inline">\(X\)</span> 和 <span
+class="math inline">\(Y\)</span> 之间的关系如何，<span
+class="math inline">\(W = X - Y\)</span> 的期望值都是 <span
+class="math inline">\(\mu_X - \mu_Y\)</span>。</p></li>
+</ol>
+这个原理是概率论和统计学中的基础概念之一，它在理解随机变量的行为以及它们相互作用的方式中起着关键作用。
+</details>
+<link rel="stylesheet" href="/css/folder.css" type="text/css"><script src="/js/folder.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" rel="tag"># 统计学</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/03/17/%E7%BB%9F%E8%AE%A1%E6%8F%8F%E8%BF%B0%20%E7%90%86%E6%B8%85%E7%BB%93%E6%9E%84%E5%90%8E/" rel="prev" title="PBL-第二次第三次作业">
+      <i class="fa fa-chevron-left"></i> PBL-第二次第三次作业
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/03/25/estimation%20of%20parameter/" rel="next" title="参数估计">
+      参数估计 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%85%A5"><span class="nav-number">1.</span> <span class="nav-text">引入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%980"><span class="nav-number">1.1.</span> <span class="nav-text">问题0</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86"><span class="nav-number">1.1.1.</span> <span class="nav-text">中心极限定理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E5%89%8D%E6%88%91%E7%9A%84%E8%83%BD%E5%8A%9B%E9%99%90%E5%88%B6%E6%88%91%E6%97%A0%E6%B3%95%E7%90%86%E8%A7%A3%E5%85%AC%E5%BC%8F%E7%9A%84%E6%9D%A5%E6%BA%90%E5%85%88%E8%AE%B0%E4%BD%8F%E5%AE%83"><span class="nav-number">1.2.</span> <span class="nav-text">目前我的能力限制我无法理解公式的来源，先记住它：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.3.</span> <span class="nav-text">正态分布的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%CF%83%E6%B3%95%E5%88%99%E7%9A%84%E6%9D%A5%E6%BA%90"><span class="nav-number">1.4.</span> <span class="nav-text">3σ法则的来源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC"><span class="nav-number">1.5.</span> <span class="nav-text">数学推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">1.6.</span> <span class="nav-text">正态分布的性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8B%AC%E7%AB%8B%E6%80%A7"><span class="nav-number">1.7.</span> <span class="nav-text">独立性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E5%B7%AE%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.8.</span> <span class="nav-text">方差的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E5%B7%AE%E7%9A%84%E5%8A%A0%E6%B3%95%E6%80%A7%E8%B4%A8"><span class="nav-number">1.9.</span> <span class="nav-text">方差的加法性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0%E8%A7%A3%E9%87%8A"><span class="nav-number">1.10.</span> <span class="nav-text">原因解释：</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YSZ"
+      src="/images/IMG_6179.JPG">
+  <p class="site-author-name" itemprop="name">YSZ</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width:100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Harry-Potter/" rel="tag">Harry Potter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BB%E5%AD%A6/" rel="tag">医学</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" rel="tag">统计学</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" rel="tag">高等数学</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YSZ</span>
+
+
+  <script src='https://unpkg.com/mermaid@10.9.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize(JSON.stringify());
+    }
+  </script>
+
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
